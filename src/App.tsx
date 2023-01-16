@@ -86,6 +86,7 @@ function App(): JSX.Element {
     return (
         <Center
             h="100%"
+            minH="100vh"
             w="full"
             p={10}
             className="background"
