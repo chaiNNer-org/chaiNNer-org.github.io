@@ -114,9 +114,8 @@ function App(): JSX.Element {
                             <Button
                                 colorScheme="blue"
                                 leftIcon={<BsGithub />}
-                                onClick={() => {
-                                    window.open('https://github.com/chaiNNer-org/chaiNNer');
-                                }}
+                                as={Link}
+                                href="https://github.com/chaiNNer-org/chaiNNer"
                             >
                                 <HStack spacing={2}>
                                     <Text>GitHub</Text>
@@ -131,18 +130,16 @@ function App(): JSX.Element {
                             <Button
                                 colorScheme="purple"
                                 leftIcon={<SiDiscord />}
-                                onClick={() => {
-                                    window.open('https://discord.gg/pzvAKPKyHM');
-                                }}
+                                as={Link}
+                                href="https://discord.gg/pzvAKPKyHM"
                             >
                                 Discord
                             </Button>
                             <Button
                                 colorScheme="pink"
                                 leftIcon={<SiKofi />}
-                                onClick={() => {
-                                    window.open('https://ko-fi.com/T6T46KTTW');
-                                }}
+                                as={Link}
+                                href="https://ko-fi.com/T6T46KTTW"
                             >
                                 Ko-fi
                             </Button>
