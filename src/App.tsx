@@ -5,9 +5,10 @@ import { Box, Button, Center, HStack, Icon, Image, Link, Spacer, Tag, Text, VSta
 import { getAllVersions, getLatestVersion, getRepoInfo } from './api/api';
 import { IGithubRelease, IReleaseAsset } from './types/githubTypes';
 import { isSupportedOS, OS } from './utils';
-import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill } from 'react-icons/bs';
+import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill, BsDownload } from 'react-icons/bs';
 import { FaLinux } from 'react-icons/fa';
-import { SiKofi } from 'react-icons/si';
+import { SiKofi, SiDiscord } from 'react-icons/si';
+import { MdDownload } from 'react-icons/md';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
@@ -86,7 +87,6 @@ function App(): JSX.Element {
         <Center
             h="100vh"
             w="100vw"
-            // bgColor="gray.900"
             p={10}
             className="background"
         >
@@ -127,6 +127,15 @@ function App(): JSX.Element {
                                 </HStack>
                             </Button>
                             <Button
+                                colorScheme="purple"
+                                leftIcon={<SiDiscord />}
+                                onClick={() => {
+                                    window.open('https://discord.gg/pzvAKPKyHM');
+                                }}
+                            >
+                                Discord
+                            </Button>
+                            <Button
                                 colorScheme="pink"
                                 leftIcon={<SiKofi />}
                                 onClick={() => {
@@ -150,12 +159,18 @@ function App(): JSX.Element {
                                 }}
                             >
                                 <VStack>
-                                    <Text
-                                        fontSize={36}
-                                        fontWeight="bold"
-                                    >
-                                        {data != null ? `Download ${data?.name}` : 'Loading...'}
-                                    </Text>
+                                    <HStack>
+                                        <Icon
+                                            boxSize={8}
+                                            as={MdDownload}
+                                        ></Icon>
+                                        <Text
+                                            fontSize={36}
+                                            fontWeight="bold"
+                                        >
+                                            {data != null ? `Download ${data?.name}` : 'Loading...'}
+                                        </Text>
+                                    </HStack>
                                     <HStack>
                                         <Icon as={icon}></Icon>
                                         <Text fontSize={18}>{OS.name}</Text>
