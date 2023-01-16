@@ -22,5 +22,8 @@ jobs:
             - name: Install dependencies
               uses: bahmutov/npm-install@v1
 
+            - name: Setup Git
+              uses: fregante/setup-git-user@v1
+
             - name: Run Deploy script
               run: ./deploy.sh

@@ -15,13 +15,13 @@ echo > .nojekyll
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
 
-git init
-git checkout -B main
+# git init
+git checkout -B gh-pages
 git add -A
 git commit -m 'deploy'
 
 # if you are deploying to https://<USERNAME>.github.io
-git push -f git@github.com:chaiNNer-org/chaiNNer-org.github.io.git main
+git push -f git@github.com:chaiNNer-org/chaiNNer-org.github.io.git gh-pages
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
