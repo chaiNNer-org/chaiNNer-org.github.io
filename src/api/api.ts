@@ -1,6 +1,16 @@
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const getLatestVersion = async () => {
+import { IGithubRelease } from '../types/githubTypes';
+
+export const getLatestVersion = async (): Promise<IGithubRelease> => {
     const res = await fetch('https://api.github.com/repos/chaiNNer-org/chaiNNer/releases/latest');
-    console.log('🚀 ~ file: api.ts:4 ~ getLatestVersion ~ res', res);
+    return await res.json();
+};
+
+export const getAllVersions = async (): Promise<IGithubRelease[]> => {
+    const res = await fetch('https://api.github.com/repos/chaiNNer-org/chaiNNer/releases');
+    return await res.json();
+};
+
+export const getRepoInfo = async (): Promise<any> => {
+    const res = await fetch('https://api.github.com/repos/chaiNNer-org/chaiNNer');
     return await res.json();
 };

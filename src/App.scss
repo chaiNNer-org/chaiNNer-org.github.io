@@ -39,3 +39,17 @@
 .read-the-docs {
   color: #888;
 } */
+
+// Colors
+$bg-color: var(--chakra-colors-gray-900);
+$dot-color: var(--chakra-colors-gray-600);
+
+// Dimensions
+$dot-size: 2px;
+$dot-space: 22px;
+
+.background {
+    background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
+    background-size: $dot-space $dot-space;
+}
