@@ -5,7 +5,7 @@ import { Box, Button, Center, HStack, Icon, Image, Link, Spacer, Tag, Text, VSta
 import { getAllVersions, getLatestVersion, getRepoInfo } from './api/api';
 import { IGithubRelease, IReleaseAsset } from './types/githubTypes';
 import { isSupportedOS, OS } from './utils';
-import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill, BsDownload } from 'react-icons/bs';
+import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill } from 'react-icons/bs';
 import { FaLinux } from 'react-icons/fa';
 import { SiKofi, SiDiscord } from 'react-icons/si';
 import { MdDownload } from 'react-icons/md';
@@ -85,14 +85,15 @@ function App(): JSX.Element {
 
     return (
         <Center
-            h="100vh"
-            w="100vw"
+            h="100%"
+            w="full"
             p={10}
             className="background"
         >
             <Box
                 h="full"
-                w="1500px"
+                w="1200px"
+                minW="1200px"
                 bgColor="gray.800"
                 p={10}
                 m={10}
@@ -192,13 +193,14 @@ function App(): JSX.Element {
                             w="full"
                             bgColor="gray.700"
                             borderRadius="lg"
+                            h="100%"
                         >
                             <Box
                                 mx={2}
                                 p={4}
-                                h="700px"
+                                h="full"
                                 w="full"
-                                overflowY="scroll"
+                                // overflowY="scroll"
                             >
                                 <ReactMarkdown
                                     components={ChakraUIRenderer()}
