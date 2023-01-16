@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import banner from '../public/banner.png';
+import banner from './assets/banner.png';
 import './App.scss';
 import { Box, Button, Center, HStack, Icon, Image, Link, Spacer, Tag, Text, VStack } from '@chakra-ui/react';
 import { getAllVersions, getLatestVersion, getRepoInfo } from './api/api';
@@ -118,7 +118,7 @@ function App(): JSX.Element {
                             >
                                 <HStack spacing={2}>
                                     <Text>GitHub</Text>
-                                    <Tag>
+                                    <Tag colorScheme="gray">
                                         <HStack spacing={1}>
                                             <Icon as={BsFillStarFill}></Icon>
                                             <Text>{new Intl.NumberFormat('en', { notation: 'compact' }).format(stars)}</Text>
