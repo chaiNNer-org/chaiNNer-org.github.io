@@ -11,6 +11,10 @@ import { SiKofi, SiDiscord } from 'react-icons/si';
 import { MdDownload } from 'react-icons/md';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { Header } from './components/Header';
+import { GitHubButton } from './components/GitHubButton';
+import { DiscordButton } from './components/DiscordButton';
+import { KofiButton } from './components/KofiButton';
 
 function App(): JSX.Element {
     const [data, setData] = useState<IGithubRelease>();
@@ -84,136 +88,114 @@ function App(): JSX.Element {
     }
 
     return (
-        <Center
-            h="100%"
-            minH="100vh"
+        <VStack
             w="full"
-            p={10}
-            className="background"
+            h="full"
+            spacing={0}
         >
-            <Box
-                h="full"
-                w="1200px"
-                minW="1200px"
-                bgColor="gray.800"
-                p={10}
-                m={10}
-                borderRadius="lg"
+            <Header />
+            <Center
+                h="100%"
+                minH="100vh"
+                w="full"
+                p={2}
+                className="background"
             >
-                {isSupportedOS ? (
-                    <VStack spacing={8}>
-                        <HStack
-                            spacing={6}
-                            w="full"
-                        >
-                            <Image
-                                src={banner}
-                                w="512px"
-                            />
-                            <Spacer></Spacer>
-                            <Button
-                                colorScheme="blue"
-                                leftIcon={<BsGithub />}
-                                as={Link}
-                                href="https://github.com/chaiNNer-org/chaiNNer"
-                            >
-                                <HStack spacing={2}>
-                                    <Text>GitHub</Text>
-                                    <Tag colorScheme="gray">
-                                        <HStack spacing={1}>
-                                            <Icon as={BsFillStarFill}></Icon>
-                                            <Text>{new Intl.NumberFormat('en', { notation: 'compact' }).format(stars)}</Text>
-                                        </HStack>
-                                    </Tag>
-                                </HStack>
-                            </Button>
-                            <Button
-                                colorScheme="purple"
-                                leftIcon={<SiDiscord />}
-                                as={Link}
-                                href="https://discord.gg/pzvAKPKyHM"
-                            >
-                                Discord
-                            </Button>
-                            <Button
-                                colorScheme="pink"
-                                leftIcon={<SiKofi />}
-                                as={Link}
-                                href="https://ko-fi.com/T6T46KTTW"
-                            >
-                                Ko-fi
-                            </Button>
-                        </HStack>
-                        <VStack>
-                            <Button
-                                colorScheme="green"
-                                w={512}
-                                h={32}
-                                borderRadius="2xl"
-                                isLoading={loading}
-                                onClick={() => {
-                                    if (currentBuild != null) {
-                                        window.location.href = currentBuild?.browser_download_url;
-                                    }
-                                }}
-                            >
-                                <VStack>
-                                    <HStack>
-                                        <Icon
-                                            boxSize={8}
-                                            as={MdDownload}
-                                        ></Icon>
-                                        <Text
-                                            fontSize={36}
-                                            fontWeight="bold"
-                                        >
-                                            {data != null ? `Download ${data?.name}` : 'Loading...'}
-                                        </Text>
-                                    </HStack>
-                                    <HStack>
-                                        <Icon as={icon}></Icon>
-                                        <Text fontSize={18}>{OS.name}</Text>
-                                    </HStack>
-                                </VStack>
-                            </Button>
-                            <Text color="white">
-                                Or download the{' '}
-                                <Link
-                                    color="blue.300"
-                                    href={zipBuild?.browser_download_url}
-                                >
-                                    portable version (zip)
-                                </Link>
-                            </Text>
-                        </VStack>
-                        <Box
-                            color="white"
-                            w="full"
-                            bgColor="gray.700"
-                            borderRadius="lg"
-                            h="100%"
-                        >
-                            <Box
-                                mx={2}
-                                p={4}
-                                h="full"
+                <Box
+                    h="full"
+                    w="1200px"
+                    minW="1200px"
+                    bgColor="gray.800"
+                    p={10}
+                    m={10}
+                    borderRadius="lg"
+                >
+                    {isSupportedOS ? (
+                        <VStack spacing={8}>
+                            <HStack
+                                spacing={6}
                                 w="full"
-                                // overflowY="scroll"
                             >
-                                <ReactMarkdown
-                                    components={ChakraUIRenderer()}
-                                    skipHtml
+                                <Image
+                                    src={banner}
+                                    w="512px"
+                                />
+                                <Spacer></Spacer>
+                                <GitHubButton stars={stars} />
+                                <DiscordButton />
+                                <KofiButton />
+                            </HStack>
+                            <VStack>
+                                <Button
+                                    colorScheme="green"
+                                    w={512}
+                                    h={32}
+                                    borderRadius="2xl"
+                                    isLoading={loading}
+                                    onClick={() => {
+                                        if (currentBuild != null) {
+                                            window.location.href = currentBuild?.browser_download_url;
+                                        }
+                                    }}
                                 >
-                                    {changeLog}
-                                </ReactMarkdown>
+                                    <VStack>
+                                        <HStack>
+                                            <Icon
+                                                boxSize={8}
+                                                as={MdDownload}
+                                            ></Icon>
+                                            <Text
+                                                fontSize={36}
+                                                fontWeight="bold"
+                                            >
+                                                {data != null ? `Download ${data?.name}` : 'Loading...'}
+                                            </Text>
+                                        </HStack>
+                                        <HStack>
+                                            <Icon as={icon}></Icon>
+                                            <Text fontSize={18}>{OS.name}</Text>
+                                        </HStack>
+                                    </VStack>
+                                </Button>
+                                <Text color="white">
+                                    Or download the{' '}
+                                    <Link
+                                        color="blue.300"
+                                        href={zipBuild?.browser_download_url}
+                                    >
+                                        portable version (zip)
+                                    </Link>
+                                </Text>
+                            </VStack>
+                            <Box
+                                color="white"
+                                w="full"
+                                bgColor="gray.700"
+                                borderRadius="lg"
+                                h="100%"
+                            >
+                                <Box
+                                    mx={2}
+                                    p={4}
+                                    h="full"
+                                    w="full"
+                                    // overflowY="scroll"
+                                >
+                                    <ReactMarkdown
+                                        components={ChakraUIRenderer()}
+                                        skipHtml
+                                    >
+                                        {changeLog}
+                                    </ReactMarkdown>
+                                </Box>
                             </Box>
-                        </Box>
-                    </VStack>
-                ) : (
-                    <Text>Sorry, chaiNNer is not supported by your current platform</Text>
-                )}
-            </Box>
-        </Center>
+                        </VStack>
+                    ) : (
+                        <Text>Sorry, chaiNNer is not supported by your current platform</Text>
+                    )}
+                </Box>
+            </Center>
+        </VStack>
     );
 }
 
