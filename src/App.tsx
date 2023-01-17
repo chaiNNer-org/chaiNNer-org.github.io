@@ -106,9 +106,9 @@ function App(): JSX.Element {
                     w="1200px"
                     minW="1200px"
                     bgColor="gray.800"
-                    p={10}
+                    p={6}
                     m={10}
-                    borderRadius="lg"
+                    borderRadius="2xl"
                 >
                     {isSupportedOS ? (
                         <VStack spacing={8}>
@@ -118,7 +118,7 @@ function App(): JSX.Element {
                             >
                                 <Image
                                     src={banner}
-                                    w="512px"
+                                    w="360px"
                                 />
                                 <Spacer></Spacer>
                                 <GitHubButton stars={stars} />
@@ -191,7 +191,7 @@ function App(): JSX.Element {
                             </Box>
                         </VStack>
                     ) : (
-                        <Text>Sorry, chaiNNer is not supported by your current platform</Text>
+                        <Text color="white">Sorry, chaiNNer is not supported by your current platform</Text>
                     )}
                 </Box>
             </Center>
