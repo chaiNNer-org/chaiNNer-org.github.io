@@ -17,3 +17,27 @@
 // .navitem.is-active {
 //     background-color: #eee;
 // }
+
+// Colors
+$bg-color: var(--chakra-colors-gray-900);
+$dot-color: var(--chakra-colors-gray-600);
+
+// Dimensions
+$dot-size: 2px;
+$dot-space: 22px;
+
+.background {
+    background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
+    background-size: $dot-space $dot-space;
+    animation: moveDots 4s linear infinite;
+}
+
+@keyframes moveDots {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: $dot-space $dot-space;
+    }
+}

@@ -6,7 +6,7 @@ import type { PageContext } from './types';
 import './PageShell.scss';
 import { Link } from './Link';
 import { Header } from './components/Header';
-import { ChakraProvider, VStack, Theme, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, VStack, Theme, extendTheme, Box, Center } from '@chakra-ui/react';
 
 const config = {
     initialColorMode: 'light', // TODO: Fix this
@@ -26,7 +26,31 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
                         spacing={0}
                     >
                         <Header />
-                        {children}
+                        <Center
+                            h="100%"
+                            minH="100vh"
+                            w="full"
+                            p={2}
+                            className="background"
+                        >
+                            <Box
+                                h="100%"
+                                minH="100vh"
+                                mt="0.5rem"
+                            >
+                                <Box
+                                    h="full"
+                                    w="1200px"
+                                    minH="calc(100vh - 7rem)"
+                                    minW="1200px"
+                                    bgColor="gray.800"
+                                    p={6}
+                                    borderRadius="2xl"
+                                >
+                                    {children}
+                                </Box>
+                            </Box>
+                        </Center>
                     </VStack>
                 </PageContextProvider>
             </ChakraProvider>

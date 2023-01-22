@@ -42,20 +42,22 @@ export const Header = memo(() => {
                     >
                         <Flex align="center">
                             <HStack
-                                spacing="5"
+                                spacing="1"
                                 display={{
                                     base: 'none',
                                     md: 'flex',
                                 }}
                             >
-                                <Link href="/">
-                                    <HStack>
-                                        <Image
-                                            src={Logo}
-                                            boxSize="48px"
-                                        />
-                                    </HStack>
-                                </Link>
+                                <chakra.div mr={9}>
+                                    <Link href="/">
+                                        <HStack>
+                                            <Image
+                                                src={Logo}
+                                                boxSize="48px"
+                                            />
+                                        </HStack>
+                                    </Link>
+                                </chakra.div>
                                 <Button
                                     bg={bg}
                                     color="gray.400"
@@ -72,6 +74,23 @@ export const Header = memo(() => {
                                     href="/"
                                 >
                                     Home
+                                </Button>
+                                <Button
+                                    bg={bg}
+                                    color="gray.400"
+                                    display="inline-flex"
+                                    alignItems="center"
+                                    fontSize="md"
+                                    _hover={{
+                                        color: 'gray.600',
+                                    }}
+                                    _focus={{
+                                        boxShadow: 'none',
+                                    }}
+                                    as={Link}
+                                    href="/download"
+                                >
+                                    Download
                                 </Button>
                             </HStack>
                         </Flex>
