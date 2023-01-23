@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { VStack, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 
 function Page({ is404 }: { is404: boolean }) {
     if (is404) {
         return (
-            <>
-                <h1>404 Page Not Found</h1>
-                <p>This page could not be found.</p>
-            </>
+            <VStack>
+                <Heading color="white">404 Page Not Found</Heading>
+                <Text color="white">This page could not be found.</Text>
+            </VStack>
         );
     } else {
         return (
-            <>
-                <h1>500 Internal Server Error</h1>
-                <p>Something went wrong.</p>
-            </>
+            <VStack>
+                <Heading color="white">500 Internal Server Error</Heading>
+                <Text color="white">Something went wrong.</Text>
+            </VStack>
         );
     }
 }
