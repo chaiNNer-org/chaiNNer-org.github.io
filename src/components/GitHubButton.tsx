@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { BsFillStarFill, BsGithub } from 'react-icons/bs/index.js';
 import { githubLink } from '../utils/links';
 
-export const GitHubButton = memo(({ stars }: { stars: number }) => {
+export const GitHubButton = memo(({ stars }: { stars?: number }) => {
     return (
         <Button
             colorScheme="blue"

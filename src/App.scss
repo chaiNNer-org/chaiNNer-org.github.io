@@ -48,6 +48,17 @@ $dot-color: var(--chakra-colors-gray-600);
 $dot-size: 2px;
 $dot-space: 22px;
 
+body {
+    background: $bg-color;
+    // min-height: 100vh;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // font-family: 'Roboto', sans-serif;
+    // font-size: 1.5rem;
+    // color: #fff;
+}
+
 .background {
     background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
         linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;

@@ -22,37 +22,45 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
                         w="full"
                         h="full"
                         spacing={0}
+                        minH="100vh"
+                        className="background"
                     >
                         <Header />
                         <Center
                             h="100%"
-                            minH="100vh"
+                            minH="calc(100vh - 7rem)"
                             w="full"
                             p={2}
-                            className="background"
+                            // className="background"
                         >
-                            <Box
+                            <Center
                                 h="100%"
-                                minH="100vh"
+                                // minH="100vh"
                                 mt="0.5rem"
                             >
-                                <Box
-                                    h="full"
-                                    w="1200px"
-                                    minH="calc(100vh - 7rem)"
-                                    minW="1200px"
-                                    bgColor="gray.800"
-                                    p={6}
-                                    borderRadius="2xl"
-                                >
-                                    {children}
-                                </Box>
-                            </Box>
+                                {children}
+                            </Center>
                         </Center>
                     </VStack>
                 </PageContextProvider>
             </ChakraProvider>
         </React.StrictMode>
+    );
+}
+
+function ShellWrapper({ children }: { children: React.ReactNode }) {
+    return (
+        <Box
+            h="full"
+            w="1200px"
+            minH="calc(100vh - 7rem)"
+            minW="1200px"
+            bgColor="gray.800"
+            p={6}
+            borderRadius="2xl"
+        >
+            {children}
+        </Box>
     );
 }
 
@@ -122,4 +130,4 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
 //     );
 // }
 
-export { PageShell };
+export { PageShell, ShellWrapper };
