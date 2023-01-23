@@ -2,38 +2,49 @@
 import { useEffect, useState } from 'react';
 import banner from '../assets/banner.png';
 import '../App.scss';
-import { Box, Button, Center, HStack, Icon, Image, Link, Spacer, Tag, Text, VStack } from '@chakra-ui/react';
-import { getAllVersions, getLatestVersion, getRepoInfo } from '../api/api';
+import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack } from '@chakra-ui/react';
+import { getRepoInfo } from '../api/api';
 import { IGithubRelease, IReleaseAsset } from '../types/githubTypes';
 import { isSupportedOS, OS } from '../utils';
-import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill } from 'react-icons/bs';
-import { FaLinux } from 'react-icons/fa';
-import { SiKofi, SiDiscord } from 'react-icons/si';
-import { MdDownload } from 'react-icons/md';
+import { BsWindows, BsApple, BsFillQuestionDiamondFill } from 'react-icons/bs/index.js';
+import { FaLinux } from 'react-icons/fa/index.js';
+import { MdDownload } from 'react-icons/md/index.js';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
-import { Header } from '../components/Header';
 import { GitHubButton } from '../components/GitHubButton';
 import { DiscordButton } from '../components/DiscordButton';
 import { KofiButton } from '../components/KofiButton';
 
-function Page() {
-    const [data, setData] = useState<IGithubRelease>();
-    const [changeLog, setChangeLog] = useState('');
+function Page(pageProps: {
+    latestVersion: IGithubRelease;
+    dmgBuild: IReleaseAsset | undefined;
+    exeBuild: IReleaseAsset | undefined;
+    debBuild: IReleaseAsset | undefined;
+    rpmBuild: IReleaseAsset | undefined;
+    winZip: IReleaseAsset | undefined;
+    macZip: IReleaseAsset | undefined;
+    linuxZip: IReleaseAsset | undefined;
+    computedChangelog: string;
+}) {
+    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, computedChangelog } = pageProps;
+    console.log('🚀 ~ file: download.page.tsx:33 ~ latestVersion', latestVersion);
+
+    // const [data, setData] = useState<IGithubRelease>();
+    // const [changeLog, setChangeLog] = useState('');
     const [stars, setStars] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         (async () => {
-            const latestVersion = await getLatestVersion();
-            setData(latestVersion);
-            const allVersions = await getAllVersions();
-            const computedChangelog = allVersions.reduce((acc: string, curr: IGithubRelease) => {
-                return `${acc}\n# ${curr.name}\n${curr.body}`;
-            }, '');
+            // const latestVersion = await getLatestVersion();
+            // setData(latestVersion);
+            // const allVersions = await getAllVersions();
+            // const computedChangelog = allVersions.reduce((acc: string, curr: IGithubRelease) => {
+            //     return `${acc}\n# ${curr.name}\n${curr.body}`;
+            // }, '');
             const repoInfo = await getRepoInfo();
             setStars(repoInfo.stargazers_count);
-            setChangeLog(computedChangelog);
+            // setChangeLog(computedChangelog);
         })()
             .then(() => {
                 setLoading(false);
@@ -44,15 +55,15 @@ function Page() {
             });
     }, []);
 
-    const dmgBuild = data?.assets.find((asset) => asset.name.endsWith('.dmg'));
-    const exeBuild = data?.assets.find((asset) => asset.name.endsWith('.exe'));
-    const debBuild = data?.assets.find((asset) => asset.name.endsWith('.deb'));
-    const rpmBuild = data?.assets.find((asset) => asset.name.endsWith('.rpm'));
+    // const dmgBuild = data?.assets.find((asset) => asset.name.endsWith('.dmg'));
+    // const exeBuild = data?.assets.find((asset) => asset.name.endsWith('.exe'));
+    // const debBuild = data?.assets.find((asset) => asset.name.endsWith('.deb'));
+    // const rpmBuild = data?.assets.find((asset) => asset.name.endsWith('.rpm'));
 
-    const zipBuilds = data?.assets.filter((asset) => asset.name.endsWith('.zip'));
-    const winZip = zipBuilds?.find((asset) => asset.name.includes('win'));
-    const macZip = zipBuilds?.find((asset) => asset.name.includes('mac'));
-    const linuxZip = zipBuilds?.find((asset) => asset.name.includes('linux'));
+    // const zipBuilds = data?.assets.filter((asset) => asset.name.endsWith('.zip'));
+    // const winZip = zipBuilds?.find((asset) => asset.name.includes('win'));
+    // const macZip = zipBuilds?.find((asset) => asset.name.includes('mac'));
+    // const linuxZip = zipBuilds?.find((asset) => asset.name.includes('linux'));
 
     let currentBuild: IReleaseAsset | undefined;
     let zipBuild: IReleaseAsset | undefined;
@@ -126,7 +137,7 @@ function Page() {
                                 fontSize={36}
                                 fontWeight="bold"
                             >
-                                {data != null ? `Download ${data?.name}` : 'Loading...'}
+                                {latestVersion != null ? `Download ${latestVersion?.name}` : 'Loading...'}
                             </Text>
                         </HStack>
                         <HStack>
@@ -162,7 +173,7 @@ function Page() {
                         components={ChakraUIRenderer()}
                         skipHtml
                     >
-                        {changeLog}
+                        {computedChangelog}
                     </ReactMarkdown>
                 </Box>
             </Box>

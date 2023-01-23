@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { Button, Link } from '@chakra-ui/react';
 import { memo } from 'react';
-import { SiKofi } from 'react-icons/si';
+import { SiKofi } from 'react-icons/si/index.js';
 
 export const KofiButton = memo(() => {
     return (

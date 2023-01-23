@@ -5,10 +5,10 @@ import { Box, Button, Center, HStack, Icon, Image, Link, Spacer, Tag, Text, VSta
 import { getAllVersions, getLatestVersion, getRepoInfo } from './api/api';
 import { IGithubRelease, IReleaseAsset } from './types/githubTypes';
 import { isSupportedOS, OS } from './utils';
-import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill } from 'react-icons/bs';
-import { FaLinux } from 'react-icons/fa';
-import { SiKofi, SiDiscord } from 'react-icons/si';
-import { MdDownload } from 'react-icons/md';
+import { BsWindows, BsApple, BsFillQuestionDiamondFill, BsGithub, BsFillStarFill } from 'react-icons/bs/index.js';
+import { FaLinux } from 'react-icons/fa/index.js';
+import { SiKofi, SiDiscord } from 'react-icons/si/index.js';
+import { MdDownload } from 'react-icons/md/index.js';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import { Header } from './components/Header';

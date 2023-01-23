@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
-import logo from './assets/128x128.png';
 import { PageContextProvider } from './usePageContext';
 import type { PageContext } from './types';
 import './PageShell.scss';
-import { Link } from './Link';
 import { Header } from './components/Header';
 import { ChakraProvider, VStack, Theme, extendTheme, Box, Center } from '@chakra-ui/react';
 

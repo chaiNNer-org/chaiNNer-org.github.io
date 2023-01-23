@@ -2,10 +2,10 @@
 // https://choc-ui.com/docs/elements/headers
 import { Button, Box, Icon, chakra, Flex, HStack, Link, Image } from '@chakra-ui/react';
 import { memo } from 'react';
-import { AiFillGithub } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai/index.js';
 import Logo from '../assets/128x128.png';
 import { discordLink, githubLink, kofiLink } from '../utils/links';
-import { SiDiscord, SiKofi } from 'react-icons/si';
+import { SiDiscord, SiKofi } from 'react-icons/si/index.js';
 
 export const Header = memo(() => {
     const bg = 'gray.800';

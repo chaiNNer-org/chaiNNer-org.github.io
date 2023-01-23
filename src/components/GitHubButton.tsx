@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { Button, Link, HStack, Text, Tag, Icon } from '@chakra-ui/react';
 import { memo } from 'react';
-import { BsFillStarFill, BsGithub } from 'react-icons/bs';
+import { BsFillStarFill, BsGithub } from 'react-icons/bs/index.js';
 import { githubLink } from '../utils/links';
 
 export const GitHubButton = memo(({ stars }: { stars: number }) => {
