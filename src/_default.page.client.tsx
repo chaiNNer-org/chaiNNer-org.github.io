@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import { PageShell } from './PageShell';
+import { PageShell } from './components/PageShell/PageShell';
 import type { PageContextClient } from './types';
 
 async function render(pageContext: PageContextClient) {

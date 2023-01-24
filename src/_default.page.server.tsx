@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import { PageShell } from './PageShell';
+import { PageShell } from './components/PageShell/PageShell';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr';
 import logoUrl from './assets/128x128.png';
 import type { PageContextServer } from './types';
@@ -16,8 +16,8 @@ async function render(pageContext: PageContextServer) {
 
     // See https://vite-plugin-ssr.com/head
     const { documentProps } = pageContext.exports;
-    const title = documentProps?.title ?? 'Vite SSR app';
-    const desc = documentProps?.description ?? 'App using Vite + vite-plugin-ssr';
+    const title = documentProps?.title ?? 'chaiNNer';
+    const desc = documentProps?.description ?? "chaiNNer's website";
 
     const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">

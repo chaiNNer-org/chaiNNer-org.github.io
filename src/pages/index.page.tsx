@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Button, Center, Flex, HStack, Image, Spacer, VStack } from '@chakra-ui/react';
-import '../App.scss';
+import { Button, Center, HStack, Image, Link, VStack } from '@chakra-ui/react';
+import '../index.scss';
 import { PageProps } from '../types';
 import Banner from '../assets/banner.png';
 
@@ -13,7 +13,12 @@ function Page(pageProps: PageProps) {
                     w="738px"
                 />
                 <HStack>
-                    <Button>Download</Button>
+                    <Button
+                        as={Link}
+                        href="/download"
+                    >
+                        Download
+                    </Button>
                 </HStack>
             </VStack>
         </Center>
