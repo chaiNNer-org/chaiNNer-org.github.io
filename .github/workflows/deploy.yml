@@ -1,32 +1,3 @@
-# name: Deploy
-
-# on:
-#     push:
-#         branches:
-#             - main
-
-# jobs:
-#     build:
-#         name: Build
-#         runs-on: ubuntu-latest
-
-#         steps:
-#             - name: Checkout repo
-#               uses: actions/checkout@v2
-
-#             - name: Setup Node
-#               uses: actions/setup-node@v1
-#               with:
-#                   node-version: 16
-
-#             - name: Install dependencies
-#               uses: bahmutov/npm-install@v1
-
-#             - name: Setup Git
-#               uses: fregante/setup-git-user@v1
-
-#             - name: Run Deploy script
-#               run: ./deploy.sh
 name: Deploy
 
 on:
@@ -46,7 +17,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v1
               with:
-                  node-version: 16
+                  node-version: 18
 
             - name: Install dependencies
               uses: bahmutov/npm-install@v1
