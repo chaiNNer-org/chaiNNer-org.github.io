@@ -2,10 +2,10 @@
 // https://choc-ui.com/docs/elements/headers
 import { Button, Box, Icon, chakra, Flex, HStack, Link, Image } from '@chakra-ui/react';
 import { memo } from 'react';
-import { AiFillGithub } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai/index.js';
 import Logo from '../assets/128x128.png';
 import { discordLink, githubLink, kofiLink } from '../utils/links';
-import { SiDiscord, SiKofi } from 'react-icons/si';
+import { SiDiscord, SiKofi } from 'react-icons/si/index.js';
 
 export const Header = memo(() => {
     const bg = 'gray.800';
@@ -42,20 +42,22 @@ export const Header = memo(() => {
                     >
                         <Flex align="center">
                             <HStack
-                                spacing="5"
+                                spacing="1"
                                 display={{
                                     base: 'none',
                                     md: 'flex',
                                 }}
                             >
-                                <Link href="/">
-                                    <HStack>
-                                        <Image
-                                            src={Logo}
-                                            boxSize="48px"
-                                        />
-                                    </HStack>
-                                </Link>
+                                <chakra.div mr={9}>
+                                    <Link href="/">
+                                        <HStack>
+                                            <Image
+                                                src={Logo}
+                                                boxSize="48px"
+                                            />
+                                        </HStack>
+                                    </Link>
+                                </chakra.div>
                                 <Button
                                     bg={bg}
                                     color="gray.400"
@@ -72,6 +74,23 @@ export const Header = memo(() => {
                                     href="/"
                                 >
                                     Home
+                                </Button>
+                                <Button
+                                    bg={bg}
+                                    color="gray.400"
+                                    display="inline-flex"
+                                    alignItems="center"
+                                    fontSize="md"
+                                    _hover={{
+                                        color: 'gray.600',
+                                    }}
+                                    _focus={{
+                                        boxShadow: 'none',
+                                    }}
+                                    as={Link}
+                                    href="/download"
+                                >
+                                    Download
                                 </Button>
                             </HStack>
                         </Flex>
