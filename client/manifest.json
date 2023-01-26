@@ -26,6 +26,16 @@
       "_chunk-839d2dab.js"
     ]
   },
+  "src/_error.page.tsx": {
+    "file": "assets/src/_error.page.868c203b.js",
+    "src": "src/_error.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-22d226bf.js",
+      "_chunk-83ac24a5.js"
+    ]
+  },
   "_chunk-839d2dab.js": {
     "file": "assets/chunk-839d2dab.js",
     "imports": [
@@ -38,26 +48,8 @@
       "_chunk-22d226bf.js"
     ]
   },
-  "src/_error.page.tsx": {
-    "file": "assets/src/_error.page.868c203b.js",
-    "src": "src/_error.page.tsx",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-83ac24a5.js"
-    ]
-  },
-  "src/pages/index.page.tsx": {
-    "file": "assets/src/pages/index.page.efb70fc5.js",
-    "src": "src/pages/index.page.tsx",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-52ed265a.js",
-      "_chunk-839d2dab.js"
-    ]
+  "_chunk-22d226bf.js": {
+    "file": "assets/chunk-22d226bf.js"
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
     "file": "assets/entry-client-routing.a7eef708.js",
@@ -71,15 +63,6 @@
       "src/pages/download.page.tsx",
       "src/pages/index.page.tsx",
       "src/_default.page.client.tsx"
-    ]
-  },
-  "_chunk-52ed265a.js": {
-    "file": "assets/chunk-52ed265a.js",
-    "css": [
-      "assets/index.d3c24ab0.css"
-    ],
-    "assets": [
-      "assets/banner.18ad9783.png"
     ]
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
@@ -99,8 +82,25 @@
   "_chunk-b6214203.js": {
     "file": "assets/chunk-b6214203.js"
   },
-  "_chunk-22d226bf.js": {
-    "file": "assets/chunk-22d226bf.js"
+  "_chunk-52ed265a.js": {
+    "file": "assets/chunk-52ed265a.js",
+    "css": [
+      "assets/index.d3c24ab0.css"
+    ],
+    "assets": [
+      "assets/banner.18ad9783.png"
+    ]
+  },
+  "src/pages/index.page.tsx": {
+    "file": "assets/src/pages/index.page.efb70fc5.js",
+    "src": "src/pages/index.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-22d226bf.js",
+      "_chunk-52ed265a.js",
+      "_chunk-839d2dab.js"
+    ]
   },
   "src/pages/download.page.tsx": {
     "file": "assets/src/pages/download.page.e32b31b2.js",
