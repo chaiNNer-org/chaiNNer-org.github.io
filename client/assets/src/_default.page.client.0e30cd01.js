@@ -1,0 +1,1 @@
+import{j as e}from"../chunk-22d226bf.js";import{r as m,P as n}from"../chunk-34240d26.js";import"../chunk-839d2dab.js";var t,o=m;o.createRoot,t=o.hydrateRoot;async function d(r){const{Page:a,pageProps:s}=r;t(document.getElementById("page-view"),e.jsx(n,{pageContext:r,children:e.jsx(a,{...s})}))}export{d as render};
