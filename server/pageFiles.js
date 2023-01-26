@@ -23,7 +23,7 @@ const __vite_glob_3_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
   __proto__: null,
   exportNames: exportNames$1
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames = ["render"];
+const exportNames = ["clientRouting", "render"];
 const __vite_glob_5_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames
