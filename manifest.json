@@ -26,24 +26,8 @@
       "_chunk-839d2dab.js"
     ]
   },
-  "src/_error.page.tsx": {
-    "file": "assets/src/_error.page.868c203b.js",
-    "src": "src/_error.page.tsx",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-83ac24a5.js"
-    ]
-  },
   "_chunk-839d2dab.js": {
     "file": "assets/chunk-839d2dab.js",
-    "imports": [
-      "_chunk-22d226bf.js"
-    ]
-  },
-  "_chunk-83ac24a5.js": {
-    "file": "assets/chunk-83ac24a5.js",
     "imports": [
       "_chunk-22d226bf.js"
     ]
@@ -65,6 +49,16 @@
       "src/_default.page.client.tsx"
     ]
   },
+  "src/_error.page.tsx": {
+    "file": "assets/src/_error.page.868c203b.js",
+    "src": "src/_error.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-22d226bf.js",
+      "_chunk-83ac24a5.js"
+    ]
+  },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
     "file": "assets/entry-server-routing.3fb2d91b.js",
     "src": "node_modules/vite-plugin-ssr/dist/esm/client/entry.js",
@@ -79,16 +73,10 @@
       "src/_default.page.client.tsx"
     ]
   },
-  "_chunk-b6214203.js": {
-    "file": "assets/chunk-b6214203.js"
-  },
-  "_chunk-52ed265a.js": {
-    "file": "assets/chunk-52ed265a.js",
-    "css": [
-      "assets/index.d3c24ab0.css"
-    ],
-    "assets": [
-      "assets/banner.18ad9783.png"
+  "_chunk-83ac24a5.js": {
+    "file": "assets/chunk-83ac24a5.js",
+    "imports": [
+      "_chunk-22d226bf.js"
     ]
   },
   "src/pages/index.page.tsx": {
@@ -100,6 +88,18 @@
       "_chunk-22d226bf.js",
       "_chunk-52ed265a.js",
       "_chunk-839d2dab.js"
+    ]
+  },
+  "_chunk-b6214203.js": {
+    "file": "assets/chunk-b6214203.js"
+  },
+  "_chunk-52ed265a.js": {
+    "file": "assets/chunk-52ed265a.js",
+    "css": [
+      "assets/index.d3c24ab0.css"
+    ],
+    "assets": [
+      "assets/banner.18ad9783.png"
     ]
   },
   "src/pages/download.page.tsx": {
