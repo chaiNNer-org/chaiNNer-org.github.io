@@ -8,11 +8,11 @@ import { BsWindows, BsApple, BsFillQuestionDiamondFill } from 'react-icons/bs/in
 import { FaLinux } from 'react-icons/fa/index.js';
 import { MdDownload } from 'react-icons/md/index.js';
 import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import { GitHubButton } from '../components/buttons/GitHubButton';
 import { DiscordButton } from '../components/buttons/DiscordButton';
 import { KofiButton } from '../components/buttons/KofiButton';
 import { ShellWrapper } from '../components/PageShell/PageShell';
+import ChakraUIRenderer from '../utils/chakra-ui-markdown-renderer';
 
 function Page(pageProps: {
     latestVersion: IGithubRelease;
