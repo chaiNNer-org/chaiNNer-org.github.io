@@ -13,7 +13,7 @@ export const DiscordButton = memo(() => {
             as={Link}
             href={discordLink}
         >
-            <Text> Discord</Text>
+            <Text>Discord</Text>
         </Button>
     );
 });

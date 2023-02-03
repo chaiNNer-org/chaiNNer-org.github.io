@@ -12,7 +12,7 @@ export const KofiButton = memo(() => {
             as={Link}
             href="https://ko-fi.com/T6T46KTTW"
         >
-            <Text> Ko-fi</Text>
+            <Text>Ko-fi</Text>
         </Button>
     );
 });
