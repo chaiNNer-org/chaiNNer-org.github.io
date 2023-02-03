@@ -17,6 +17,7 @@ async function fetchCached<T>(url: string): Promise<T | undefined> {
                 ) {
                     return undefined;
                 }
+                return json;
             });
         cache.set(url, cached);
     }
