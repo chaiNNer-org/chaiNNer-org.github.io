@@ -17,7 +17,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
     const macZip = zipBuilds?.find((asset) => asset.name.includes('mac'));
     const linuxZip = zipBuilds?.find((asset) => asset.name.includes('linux'));
 
-    const allVersions = await getAllVersions();
+    const allVersions = (await getAllVersions()) ?? [];
     const computedChangelog = allVersions.reduce((acc: string, curr: IGithubRelease) => {
         return `${acc}\n# ${curr.name}\n${curr.body}`;
     }, '');
