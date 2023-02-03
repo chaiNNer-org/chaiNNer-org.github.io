@@ -25,3 +25,14 @@ body {
         background-position: $dot-space $dot-space;
     }
 }
+
+@media screen and (max-width: 62em) {
+    .external-link-button {
+        p {
+            display: none;
+        }
+        .chakra-button__icon {
+            margin-right: 0;
+        }
+    }
+}

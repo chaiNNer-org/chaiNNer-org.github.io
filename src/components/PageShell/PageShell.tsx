@@ -51,8 +51,8 @@ function ShellWrapper({ children }: { children: React.ReactNode }) {
         <Box
             h="100%"
             minH="100%"
-            w="1200px"
-            minW="1200px"
+            maxW="1200px"
+            minW="380px"
             bgColor="gray.800"
             p={6}
             borderRadius="2xl"

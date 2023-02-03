@@ -67,30 +67,37 @@ function Page(pageProps: {
                 spacing={8}
                 mb="auto"
             >
-                <HStack
-                    spacing={6}
-                    w="full"
-                >
+                <HStack w="full">
+                    <Spacer display={{ base: 'block', sm: 'none' }} />
                     <Image
                         src={banner}
-                        w="360px"
+                        w={{
+                            base: '240px',
+                            md: '360px',
+                        }}
                     />
-                    <Spacer></Spacer>
-                    <GitHubButton />
-                    <DiscordButton />
-                    <KofiButton />
+                    <Spacer />
+                    <HStack
+                        spacing={{ base: 2, lg: 6 }}
+                        display={{ base: 'none', sm: 'flex' }}
+                    >
+                        <GitHubButton />
+                        <DiscordButton />
+                        <KofiButton />
+                    </HStack>
                 </HStack>
                 <VStack>
                     <Button
                         colorScheme="green"
-                        w={512}
-                        h={32}
                         borderRadius="2xl"
                         onClick={() => {
                             if (currentBuild != null) {
                                 window.location.href = currentBuild?.browser_download_url;
                             }
                         }}
+                        height="auto"
+                        px={8}
+                        py={7}
                     >
                         <VStack>
                             <HStack>
@@ -99,7 +106,11 @@ function Page(pageProps: {
                                     as={MdDownload}
                                 ></Icon>
                                 <Text
-                                    fontSize={36}
+                                    fontSize={{
+                                        base: 20,
+                                        sm: 26,
+                                        md: 36,
+                                    }}
                                     fontWeight="bold"
                                 >
                                     {latestVersion != null ? `Download ${latestVersion?.name}` : 'Loading...'}
