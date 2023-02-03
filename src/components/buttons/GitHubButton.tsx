@@ -7,6 +7,7 @@ import { githubLink } from '../../utils/links';
 export const GitHubButton = memo(({ stars }: { stars?: number }) => {
     return (
         <Button
+            className="external-link-button"
             colorScheme="blue"
             leftIcon={<BsGithub />}
             as={Link}

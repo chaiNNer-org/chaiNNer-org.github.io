@@ -41,19 +41,14 @@ export const Header = memo(() => {
                         justify="space-between"
                     >
                         <Flex align="center">
-                            <HStack
-                                spacing="1"
-                                display={{
-                                    base: 'none',
-                                    md: 'flex',
-                                }}
-                            >
-                                <chakra.div mr={9}>
+                            <HStack spacing="1">
+                                <chakra.div mr={{ base: 3, sm: 9 }}>
                                     <Link href="/">
                                         <HStack>
                                             <Image
                                                 src={Logo}
                                                 boxSize="48px"
+                                                maxW="none"
                                             />
                                         </HStack>
                                     </Link>
@@ -70,6 +65,7 @@ export const Header = memo(() => {
                                     _focus={{
                                         boxShadow: 'none',
                                     }}
+                                    px={{ base: 2, sm: 4 }}
                                     as={Link}
                                     href="/"
                                 >
@@ -81,6 +77,7 @@ export const Header = memo(() => {
                                     display="inline-flex"
                                     alignItems="center"
                                     fontSize="md"
+                                    px={{ base: 2, sm: 4 }}
                                     _hover={{
                                         color: 'gray.600',
                                     }}
@@ -102,13 +99,7 @@ export const Header = memo(() => {
                             align="center"
                             color="gray.400"
                         >
-                            <HStack
-                                spacing="5"
-                                display={{
-                                    base: 'none',
-                                    md: 'flex',
-                                }}
-                            >
+                            <HStack spacing="5">
                                 <Link
                                     isExternal
                                     aria-label="Go to the chaiNNer GitHub page"
