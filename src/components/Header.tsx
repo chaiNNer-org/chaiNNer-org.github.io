@@ -41,7 +41,10 @@ export const Header = memo(() => {
                         justify="space-between"
                     >
                         <Flex align="center">
-                            <HStack spacing="1">
+                            <HStack
+                                spacing="1"
+                                as={'nav'}
+                            >
                                 <chakra.div mr={{ base: 3, sm: 9 }}>
                                     <Link href="/">
                                         <HStack>
