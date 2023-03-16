@@ -1,4 +1,4 @@
-OKI/* eslint-disable react/display-name */
+/* eslint-disable react/display-name */
 // https://choc-ui.com/docs/elements/headers
 import { Button, Box, Icon, chakra, Flex, HStack, Link, Image } from '@chakra-ui/react';
 import { memo } from 'react';
