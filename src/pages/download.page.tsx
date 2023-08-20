@@ -123,7 +123,7 @@ function Page(pageProps: {
                             </HStack>
                         </VStack>
                     </Button>
-                    {zipBuild != null && (
+                    {zipBuild != null && isSupportedOS && (
                         <Text color="white">
                             Or download the{' '}
                             <Link
