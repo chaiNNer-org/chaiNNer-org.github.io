@@ -123,15 +123,17 @@ function Page(pageProps: {
                             </HStack>
                         </VStack>
                     </Button>
-                    <Text color="white">
-                        Or download the{' '}
-                        <Link
-                            color="blue.300"
-                            href={zipBuild?.browser_download_url}
-                        >
-                            portable version (zip)
-                        </Link>
-                    </Text>
+                    {zipBuild != null && (
+                        <Text color="white">
+                            Or download the{' '}
+                            <Link
+                                color="blue.300"
+                                href={zipBuild?.browser_download_url}
+                            >
+                                portable version (zip)
+                            </Link>
+                        </Text>
+                    )}
                 </VStack>
                 <Box
                     color="white"
