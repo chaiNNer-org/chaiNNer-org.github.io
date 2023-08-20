@@ -3,7 +3,7 @@ import banner from '../assets/banner.png';
 import '../index.scss';
 import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack } from '@chakra-ui/react';
 import { IGithubRelease, IReleaseAsset } from '../types/githubTypes';
-import { OS } from '../utils';
+import { OS, isSupportedOS } from '../utils';
 import { BsWindows, BsApple, BsFillQuestionDiamondFill } from 'react-icons/bs/index.js';
 import { FaLinux } from 'react-icons/fa/index.js';
 import { MdDownload } from 'react-icons/md/index.js';
@@ -91,13 +91,14 @@ function Page(pageProps: {
                         colorScheme="green"
                         borderRadius="2xl"
                         onClick={() => {
-                            if (currentBuild != null) {
+                            if (currentBuild != null && isSupportedOS) {
                                 window.location.href = currentBuild?.browser_download_url;
                             }
                         }}
                         height="auto"
                         px={8}
                         py={7}
+                        disabled={!isSupportedOS}
                     >
                         <VStack>
                             <HStack>
@@ -118,7 +119,7 @@ function Page(pageProps: {
                             </HStack>
                             <HStack>
                                 <Icon as={icon}></Icon>
-                                <Text fontSize={18}>{OS.name}</Text>
+                                <Text fontSize={18}>{isSupportedOS ? OS.name : 'Unsupported OS'}</Text>
                             </HStack>
                         </VStack>
                     </Button>
