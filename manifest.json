@@ -26,6 +26,18 @@
       "_chunk-839d2dab.js"
     ]
   },
+  "_chunk-83ac24a5.js": {
+    "file": "assets/chunk-83ac24a5.js",
+    "imports": [
+      "_chunk-22d226bf.js"
+    ]
+  },
+  "_chunk-839d2dab.js": {
+    "file": "assets/chunk-839d2dab.js",
+    "imports": [
+      "_chunk-22d226bf.js"
+    ]
+  },
   "src/_error.page.tsx": {
     "file": "assets/src/_error.page.868c203b.js",
     "src": "src/_error.page.tsx",
@@ -45,12 +57,6 @@
       "assets/banner.18ad9783.png"
     ]
   },
-  "_chunk-83ac24a5.js": {
-    "file": "assets/chunk-83ac24a5.js",
-    "imports": [
-      "_chunk-22d226bf.js"
-    ]
-  },
   "src/pages/index.page.tsx": {
     "file": "assets/src/pages/index.page.868e01ed.js",
     "src": "src/pages/index.page.tsx",
@@ -60,29 +66,6 @@
       "_chunk-22d226bf.js",
       "_chunk-795f0196.js",
       "_chunk-839d2dab.js"
-    ]
-  },
-  "_chunk-839d2dab.js": {
-    "file": "assets/chunk-839d2dab.js",
-    "imports": [
-      "_chunk-22d226bf.js"
-    ]
-  },
-  "_chunk-b6214203.js": {
-    "file": "assets/chunk-b6214203.js"
-  },
-  "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
-    "file": "assets/entry-client-routing.79908067.js",
-    "src": "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js",
-    "isEntry": true,
-    "imports": [
-      "_chunk-b6214203.js"
-    ],
-    "dynamicImports": [
-      "src/_error.page.tsx",
-      "src/pages/download.page.tsx",
-      "src/pages/index.page.tsx",
-      "src/_default.page.client.tsx"
     ]
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
@@ -101,6 +84,23 @@
   },
   "_chunk-22d226bf.js": {
     "file": "assets/chunk-22d226bf.js"
+  },
+  "_chunk-b6214203.js": {
+    "file": "assets/chunk-b6214203.js"
+  },
+  "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
+    "file": "assets/entry-client-routing.79908067.js",
+    "src": "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_chunk-b6214203.js"
+    ],
+    "dynamicImports": [
+      "src/_error.page.tsx",
+      "src/pages/download.page.tsx",
+      "src/pages/index.page.tsx",
+      "src/_default.page.client.tsx"
+    ]
   },
   "src/pages/download.page.tsx": {
     "file": "assets/src/pages/download.page.61ee6ae0.js",
