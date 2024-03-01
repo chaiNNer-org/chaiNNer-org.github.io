@@ -7,13 +7,13 @@
     "file": "assets/128x128.da537210.png",
     "src": "src/assets/128x128.png"
   },
-  "PageShell.css": {
-    "file": "assets/PageShell.3a1b8951.css",
-    "src": "PageShell.css"
-  },
   "index.css": {
     "file": "assets/index.db851485.css",
     "src": "index.css"
+  },
+  "PageShell.css": {
+    "file": "assets/PageShell.3a1b8951.css",
+    "src": "PageShell.css"
   },
   "src/_default.page.client.tsx": {
     "file": "assets/src/_default.page.client.edc7c4eb.js",
@@ -26,6 +26,12 @@
       "_chunk-839d2dab.js"
     ]
   },
+  "_chunk-839d2dab.js": {
+    "file": "assets/chunk-839d2dab.js",
+    "imports": [
+      "_chunk-22d226bf.js"
+    ]
+  },
   "src/_error.page.tsx": {
     "file": "assets/src/_error.page.868c203b.js",
     "src": "src/_error.page.tsx",
@@ -34,12 +40,6 @@
     "imports": [
       "_chunk-22d226bf.js",
       "_chunk-83ac24a5.js"
-    ]
-  },
-  "_chunk-839d2dab.js": {
-    "file": "assets/chunk-839d2dab.js",
-    "imports": [
-      "_chunk-22d226bf.js"
     ]
   },
   "_chunk-83ac24a5.js": {
@@ -59,6 +59,15 @@
       "_chunk-839d2dab.js"
     ]
   },
+  "_chunk-795f0196.js": {
+    "file": "assets/chunk-795f0196.js",
+    "css": [
+      "assets/index.db851485.css"
+    ],
+    "assets": [
+      "assets/banner.18ad9783.png"
+    ]
+  },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
     "file": "assets/entry-server-routing.6c5a80eb.js",
     "src": "node_modules/vite-plugin-ssr/dist/esm/client/entry.js",
@@ -72,6 +81,9 @@
       "src/pages/index.page.tsx",
       "src/_default.page.client.tsx"
     ]
+  },
+  "_chunk-b6214203.js": {
+    "file": "assets/chunk-b6214203.js"
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
     "file": "assets/entry-client-routing.79908067.js",
@@ -87,20 +99,8 @@
       "src/_default.page.client.tsx"
     ]
   },
-  "_chunk-795f0196.js": {
-    "file": "assets/chunk-795f0196.js",
-    "css": [
-      "assets/index.db851485.css"
-    ],
-    "assets": [
-      "assets/banner.18ad9783.png"
-    ]
-  },
   "_chunk-22d226bf.js": {
     "file": "assets/chunk-22d226bf.js"
-  },
-  "_chunk-b6214203.js": {
-    "file": "assets/chunk-b6214203.js"
   },
   "src/pages/download.page.tsx": {
     "file": "assets/src/pages/download.page.61ee6ae0.js",
