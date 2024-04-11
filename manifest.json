@@ -73,9 +73,6 @@
       "src/_default.page.client.tsx"
     ]
   },
-  "_chunk-b6214203.js": {
-    "file": "assets/chunk-b6214203.js"
-  },
   "_chunk-795f0196.js": {
     "file": "assets/chunk-795f0196.js",
     "css": [
@@ -84,6 +81,9 @@
     "assets": [
       "assets/banner.18ad9783.png"
     ]
+  },
+  "_chunk-b6214203.js": {
+    "file": "assets/chunk-b6214203.js"
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
     "file": "assets/entry-client-routing.79908067.js",
