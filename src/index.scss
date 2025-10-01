@@ -1,28 +1,58 @@
 // Colors
-$bg-color: var(--chakra-colors-gray-900);
-$dot-color: var(--chakra-colors-gray-600);
+$bg-color: #0a0a0a;
+$dot-color: #1a1a1a;
+$accent-color: #3b82f6;
+$gradient-start: #0f172a;
+$gradient-end: #1e293b;
 
 // Dimensions
-$dot-size: 2px;
-$dot-space: 22px;
+$dot-size: 1px;
+$dot-space: 24px;
 
 body {
     background: $bg-color;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .background {
-    background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
-    background-size: $dot-space $dot-space;
-    animation: moveDots 4s linear infinite;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, 
+        $dot-color;
+    background-size: 100% 100%, 100% 100%, $dot-space $dot-space, $dot-space $dot-space;
+    animation: moveDots 8s linear infinite, gradientShift 12s ease-in-out infinite;
+    position: relative;
+}
+
+.background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+    opacity: 0.3;
+    z-index: -1;
 }
 
 @keyframes moveDots {
     from {
-        background-position: 0 0;
+        background-position: 0 0, 0 0, 0 0, 0 0;
     }
     to {
-        background-position: $dot-space $dot-space;
+        background-position: 0 0, 0 0, $dot-space $dot-space, $dot-space $dot-space;
+    }
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 0%, 100% 100%, 0 0, 0 0;
+    }
+    50% {
+        background-position: 100% 100%, 0% 0%, $dot-space $dot-space, $dot-space $dot-space;
     }
 }
 
