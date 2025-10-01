@@ -64,9 +64,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
         return body.length > 0 ? `# ${dateHeading}\n\n${body}` : `# ${dateHeading}`;
     };
 
-    const computedChangelog = ordered.reduce((acc: string, curr: IGithubRelease) => {
-        return `${acc}\n${releaseToMarkdown(curr)}`;
-    }, '');
+    const computedChangelog = ordered.map(releaseToMarkdown).join('\n');
 
     const pageProps = {
         dmgBuild,
