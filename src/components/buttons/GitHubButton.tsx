@@ -8,7 +8,7 @@ export const GitHubButton = memo(({ stars }: { stars?: number }) => {
     return (
         <Button
             className="external-link-button"
-            bg="rgba(30, 41, 59, 0.8)"
+            bg="gray.800"
             color="white"
             border="1px solid"
             borderColor="rgba(255, 255, 255, 0.2)"
@@ -33,16 +33,22 @@ export const GitHubButton = memo(({ stars }: { stars?: number }) => {
             <HStack spacing={2}>
                 <Text>GitHub</Text>
                 {stars !== undefined && (
-                    <Tag 
-                        bg="rgba(59, 130, 246, 0.2)" 
+                    <Tag
+                        bg="rgba(59, 130, 246, 0.2)"
                         color="brand.300"
                         border="1px solid"
                         borderColor="brand.400"
                         borderRadius="md"
                     >
                         <HStack spacing={1}>
-                            <Icon as={BsFillStarFill} boxSize={3} />
-                            <Text fontSize="sm" fontWeight="600">
+                            <Icon
+                                as={BsFillStarFill}
+                                boxSize={3}
+                            />
+                            <Text
+                                fontSize="sm"
+                                fontWeight="600"
+                            >
                                 {new Intl.NumberFormat('en', { notation: 'compact' }).format(stars)}
                             </Text>
                         </HStack>

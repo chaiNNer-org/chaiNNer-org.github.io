@@ -227,7 +227,7 @@ function Page(pageProps: {
                     overflow="hidden"
                 >
                     <Box
-                        bg="rgba(15, 23, 42, 0.8)"
+                        bg="gray.900"
                         px={6}
                         py={4}
                         borderBottom="1px solid"

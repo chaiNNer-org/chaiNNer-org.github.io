@@ -7,7 +7,10 @@ import Banner from '../assets/banner.png';
 function Page(pageProps: PageProps) {
     return (
         <Center h="100%">
-            <VStack h="100%" spacing={8}>
+            <VStack
+                h="100%"
+                spacing={8}
+            >
                 <Image
                     src={Banner}
                     w="738px"

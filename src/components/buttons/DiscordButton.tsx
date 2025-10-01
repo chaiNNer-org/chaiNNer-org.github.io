@@ -8,7 +8,7 @@ export const DiscordButton = memo(() => {
     return (
         <Button
             className="external-link-button"
-            bg="rgba(30, 41, 59, 0.8)"
+            bg="gray.800"
             color="white"
             border="1px solid"
             borderColor="rgba(255, 255, 255, 0.2)"

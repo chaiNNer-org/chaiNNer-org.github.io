@@ -8,7 +8,7 @@ import { discordLink, githubLink, kofiLink } from '../utils/links';
 import { SiDiscord, SiKofi } from 'react-icons/si/index.js';
 
 export const Header = memo(() => {
-    const bg = 'rgba(15, 23, 42, 0.8)';
+    const bg = 'gray.800';
 
     return (
         <Box
@@ -25,8 +25,6 @@ export const Header = memo(() => {
                 backdropFilter="blur(20px)"
                 borderTop="4px solid"
                 borderTopColor="brand.500"
-                borderBottom="1px solid"
-                borderBottomColor="rgba(255, 255, 255, 0.1)"
                 w="full"
                 overflowY="hidden"
                 zIndex={10}
@@ -75,7 +73,6 @@ export const Header = memo(() => {
                                     transition="all 0.2s ease"
                                     _hover={{
                                         color: 'white',
-                                        bg: 'rgba(255, 255, 255, 0.1)',
                                         transform: 'translateY(-1px)',
                                     }}
                                     _focus={{
@@ -102,7 +99,6 @@ export const Header = memo(() => {
                                     transition="all 0.2s ease"
                                     _hover={{
                                         color: 'white',
-                                        bg: 'rgba(255, 255, 255, 0.1)',
                                         transform: 'translateY(-1px)',
                                     }}
                                     _focus={{
@@ -135,7 +131,6 @@ export const Header = memo(() => {
                                     borderRadius="lg"
                                     transition="all 0.2s ease"
                                     _hover={{
-                                        bg: 'rgba(255, 255, 255, 0.1)',
                                         transform: 'translateY(-2px)',
                                     }}
                                 >
@@ -160,7 +155,6 @@ export const Header = memo(() => {
                                     borderRadius="lg"
                                     transition="all 0.2s ease"
                                     _hover={{
-                                        bg: 'rgba(255, 255, 255, 0.1)',
                                         transform: 'translateY(-2px)',
                                     }}
                                 >
@@ -185,7 +179,6 @@ export const Header = memo(() => {
                                     borderRadius="lg"
                                     transition="all 0.2s ease"
                                     _hover={{
-                                        bg: 'rgba(255, 255, 255, 0.1)',
                                         transform: 'translateY(-2px)',
                                     }}
                                 >
