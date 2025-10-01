@@ -34,7 +34,40 @@ function Page(pageProps: {
         if (Number.isNaN(date.getTime())) return undefined;
         return date.toISOString().split('T')[0];
     };
-    const releaseToMarkdown = (release: IGithubRelease) => `# ${formatReleaseDate(release) ?? release.tag_name}\n${release.body ?? ''}`;
+    const cleanReleaseBody = (release: IGithubRelease) => {
+        const body = release.body;
+        const dateLabel = formatReleaseDate(release);
+        if (body == null) return '';
+
+        const normalized = body
+            .replace(/\r\n/g, '\n')
+            .replace(/'\s+'/g, '\n')
+            .replace(/'\s*\n/g, '\n')
+            .replace(/\n\s*'/g, '\n');
+
+        const lines = normalized
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line.length > 0)
+            .filter((line) => !/^Built on\s+\d{4}-\d{2}-\d{2}$/i.test(line))
+            .filter((line) => (dateLabel == null ? true : line !== dateLabel));
+
+        const cleaned = lines
+            .map((line) => {
+                const withoutDate = line.replace(/Built on\s+\d{4}-\d{2}-\d{2}/gi, '').trim();
+                return withoutDate.replace(/\s{2,}/g, ' ').trim();
+            })
+            .filter((line) => line.length > 0);
+
+        if (cleaned.length === 0) return '';
+        return cleaned.map((line) => `- ${line}`).join('\n');
+    };
+
+    const releaseToMarkdown = (release: IGithubRelease) => {
+        const dateHeading = formatReleaseDate(release) ?? release.tag_name ?? 'Nightly build';
+        const body = cleanReleaseBody(release);
+        return body.length > 0 ? `# ${dateHeading}\n\n${body}` : `# ${dateHeading}`;
+    };
     const nightlyDateLabel = formatReleaseDate(latestVersion);
 
     let currentBuild: IReleaseAsset | undefined;
