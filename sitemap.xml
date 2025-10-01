@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://chainner.app/</loc>
-        <lastmod>2024-06-07T21:38:35.635Z</lastmod>
+        <lastmod>2025-10-01T04:58:30.534Z</lastmod>
     </url>
     <url>
         <loc>https://chainner.app/download</loc>
-        <lastmod>2024-06-07T21:38:35.635Z</lastmod>
+        <lastmod>2025-10-01T04:58:30.536Z</lastmod>
+    </url>
+    <url>
+        <loc>https://chainner.app/nightly</loc>
+        <lastmod>2025-10-01T04:58:30.534Z</lastmod>
     </url>
 </urlset>

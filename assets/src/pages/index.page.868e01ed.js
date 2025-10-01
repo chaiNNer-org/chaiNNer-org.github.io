@@ -1,1 +1,0 @@
-import{j as r,V as s}from"../../chunk-22d226bf.js";import{B as a}from"../../chunk-795f0196.js";import{C as n,I as o,H as e,B as t,L as i}from"../../chunk-839d2dab.js";function d(x){return r.jsx(n,{h:"100%",children:r.jsxs(s,{h:"100%",children:[r.jsx(o,{src:a,w:"738px"}),r.jsx(e,{children:r.jsx(t,{as:i,href:"/download",children:"Download"})})]})})}export{d as Page};
