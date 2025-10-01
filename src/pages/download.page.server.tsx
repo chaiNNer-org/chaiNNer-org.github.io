@@ -4,7 +4,11 @@ import { PageContextServer } from '../types';
 import { IGithubRelease } from '../types/githubTypes';
 
 async function onBeforeRender(pageContext: PageContextServer) {
-    // `.page.server.js` files always run in Node.js; we could use SQL/ORM queries here.
+    const allVersions = (await getAllVersions()) ?? [];
+    const ordered = allVersions
+        .filter((r) => !r.draft)
+        .sort((a, b) => new Date(b.published_at || b.created_at).getTime() - new Date(a.published_at || a.created_at).getTime());
+
     const data = await getLatestVersion();
 
     const dmgBuild = data?.assets.find((asset) => asset.name.endsWith('.dmg'));
@@ -17,13 +21,12 @@ async function onBeforeRender(pageContext: PageContextServer) {
     const macZip = zipBuilds?.find((asset) => asset.name.includes('mac'));
     const linuxZip = zipBuilds?.find((asset) => asset.name.includes('linux'));
 
-    const allVersions = (await getAllVersions()) ?? [];
     const computedChangelog = allVersions.reduce((acc: string, curr: IGithubRelease) => {
         return `${acc}\n# ${curr.name}\n${curr.body}`;
     }, '');
 
     // available as `pageContext.pageProps`
-    const pageProps = { dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, computedChangelog, latestVersion: data };
+    const pageProps = { dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, latestVersion: data, computedChangelog };
     return {
         pageContext: {
             pageProps,

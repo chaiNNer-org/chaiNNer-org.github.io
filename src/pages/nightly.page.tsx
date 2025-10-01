@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import banner from '../assets/banner.png';
 import '../index.scss';
-import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack, Alert, AlertIcon } from '@chakra-ui/react';
 import { IGithubRelease, IReleaseAsset } from '../types/githubTypes';
 import { OS, isSupportedOS } from '../utils';
 import { BsWindows, BsApple, BsFillQuestionDiamondFill } from 'react-icons/bs/index.js';
@@ -23,9 +23,10 @@ function Page(pageProps: {
     winZip: IReleaseAsset | undefined;
     macZip: IReleaseAsset | undefined;
     linuxZip: IReleaseAsset | undefined;
+    releaseDate: string | undefined;
     computedChangelog: string;
 }) {
-    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, computedChangelog } = pageProps;
+    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, releaseDate, computedChangelog } = pageProps;
 
     let currentBuild: IReleaseAsset | undefined;
     let zipBuild: IReleaseAsset | undefined;
@@ -86,6 +87,18 @@ function Page(pageProps: {
                         <KofiButton />
                     </HStack>
                 </HStack>
+
+                <Alert
+                    status="warning"
+                    borderRadius="md"
+                    w="full"
+                    bgColor="yellow.700"
+                    color="white"
+                >
+                    <AlertIcon />
+                    Nightly builds are experimental and may be unstable.
+                </Alert>
+
                 <VStack>
                     <Button
                         colorScheme="green"
@@ -114,7 +127,7 @@ function Page(pageProps: {
                                     }}
                                     fontWeight="bold"
                                 >
-                                    {latestVersion != null ? `Download ${latestVersion?.name}` : 'No stable release found'}
+                                    {latestVersion != null ? `Download Nightly${releaseDate != null ? ` (${releaseDate})` : ''}` : 'No nightly release found'}
                                 </Text>
                             </HStack>
                             <HStack>
@@ -130,17 +143,17 @@ function Page(pageProps: {
                                 color="blue.300"
                                 href={zipBuild?.browser_download_url}
                             >
-                                portable version (zip)
+                                portable nightly (zip)
                             </Link>
                         </Text>
                     )}
                     <Text color="white">
-                        Want cutting-edge features?{' '}
+                        Prefer stability?{' '}
                         <Link
                             color="blue.300"
-                            href="/nightly"
+                            href="/download"
                         >
-                            Try Nightly builds
+                            Go to stable downloads
                         </Link>
                     </Text>
                 </VStack>
