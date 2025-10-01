@@ -64,8 +64,9 @@ function Page(pageProps: {
     return (
         <ShellWrapper>
             <VStack
-                spacing={8}
+                spacing={10}
                 mb="auto"
+                py={4}
             >
                 <HStack w="full">
                     <Spacer display={{ base: 'block', sm: 'none' }} />
@@ -86,7 +87,10 @@ function Page(pageProps: {
                         <KofiButton />
                     </HStack>
                 </HStack>
-                <VStack>
+                <VStack
+                    spacing={4}
+                    mb={6}
+                >
                     <Button
                         bg="linear-gradient(135deg, #10b981 0%, #059669 100%)"
                         color="white"
@@ -168,16 +172,40 @@ function Page(pageProps: {
                             </HStack>
                         </VStack>
                     </Button>
-                    {zipBuild != null && isSupportedOS && (
+                    <VStack spacing={2}>
+                        {zipBuild != null && isSupportedOS && (
+                            <Text
+                                color="gray.300"
+                                fontSize="lg"
+                                textAlign="center"
+                            >
+                                Or download the{' '}
+                                <Link
+                                    color="brand.400"
+                                    href={zipBuild?.browser_download_url}
+                                    fontWeight="600"
+                                    textDecoration="underline"
+                                    textDecorationColor="brand.400"
+                                    textUnderlineOffset="3px"
+                                    transition="all 0.2s ease"
+                                    _hover={{
+                                        color: 'brand.300',
+                                        textDecorationColor: 'brand.300',
+                                    }}
+                                >
+                                    portable version (zip)
+                                </Link>
+                            </Text>
+                        )}
                         <Text
                             color="gray.300"
                             fontSize="lg"
                             textAlign="center"
                         >
-                            Or download the{' '}
+                            Want cutting-edge features?{' '}
                             <Link
                                 color="brand.400"
-                                href={zipBuild?.browser_download_url}
+                                href="/nightly"
                                 fontWeight="600"
                                 textDecoration="underline"
                                 textDecorationColor="brand.400"
@@ -188,32 +216,10 @@ function Page(pageProps: {
                                     textDecorationColor: 'brand.300',
                                 }}
                             >
-                                portable version (zip)
+                                Try Nightly builds
                             </Link>
                         </Text>
-                    )}
-                    <Text
-                        color="gray.300"
-                        fontSize="lg"
-                        textAlign="center"
-                    >
-                        Want cutting-edge features?{' '}
-                        <Link
-                            color="brand.400"
-                            href="/nightly"
-                            fontWeight="600"
-                            textDecoration="underline"
-                            textDecorationColor="brand.400"
-                            textUnderlineOffset="3px"
-                            transition="all 0.2s ease"
-                            _hover={{
-                                color: 'brand.300',
-                                textDecorationColor: 'brand.300',
-                            }}
-                        >
-                            Try Nightly builds
-                        </Link>
-                    </Text>
+                    </VStack>
                 </VStack>
                 <Box
                     color="white"

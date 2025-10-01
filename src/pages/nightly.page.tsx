@@ -65,8 +65,9 @@ function Page(pageProps: {
     return (
         <ShellWrapper>
             <VStack
-                spacing={8}
+                spacing={10}
                 mb="auto"
+                py={4}
             >
                 <HStack w="full">
                     <Spacer display={{ base: 'block', sm: 'none' }} />
@@ -103,7 +104,10 @@ function Page(pageProps: {
                     <Text fontWeight="500">Nightly builds are experimental and may be unstable.</Text>
                 </Alert>
 
-                <VStack>
+                <VStack
+                    spacing={4}
+                    mb={6}
+                >
                     <Button
                         bg="linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)"
                         color="white"
@@ -185,16 +189,40 @@ function Page(pageProps: {
                             </HStack>
                         </VStack>
                     </Button>
-                    {zipBuild != null && isSupportedOS && (
+                    <VStack spacing={2}>
+                        {zipBuild != null && isSupportedOS && (
+                            <Text
+                                color="gray.300"
+                                fontSize="lg"
+                                textAlign="center"
+                            >
+                                Or download the{' '}
+                                <Link
+                                    color="purple.400"
+                                    href={zipBuild?.browser_download_url}
+                                    fontWeight="600"
+                                    textDecoration="underline"
+                                    textDecorationColor="purple.400"
+                                    textUnderlineOffset="3px"
+                                    transition="all 0.2s ease"
+                                    _hover={{
+                                        color: 'purple.300',
+                                        textDecorationColor: 'purple.300',
+                                    }}
+                                >
+                                    portable nightly (zip)
+                                </Link>
+                            </Text>
+                        )}
                         <Text
                             color="gray.300"
                             fontSize="lg"
                             textAlign="center"
                         >
-                            Or download the{' '}
+                            Prefer stability?{' '}
                             <Link
                                 color="purple.400"
-                                href={zipBuild?.browser_download_url}
+                                href="/download"
                                 fontWeight="600"
                                 textDecoration="underline"
                                 textDecorationColor="purple.400"
@@ -205,32 +233,10 @@ function Page(pageProps: {
                                     textDecorationColor: 'purple.300',
                                 }}
                             >
-                                portable nightly (zip)
+                                Go to stable downloads
                             </Link>
                         </Text>
-                    )}
-                    <Text
-                        color="gray.300"
-                        fontSize="lg"
-                        textAlign="center"
-                    >
-                        Prefer stability?{' '}
-                        <Link
-                            color="purple.400"
-                            href="/download"
-                            fontWeight="600"
-                            textDecoration="underline"
-                            textDecorationColor="purple.400"
-                            textUnderlineOffset="3px"
-                            transition="all 0.2s ease"
-                            _hover={{
-                                color: 'purple.300',
-                                textDecorationColor: 'purple.300',
-                            }}
-                        >
-                            Go to stable downloads
-                        </Link>
-                    </Text>
+                    </VStack>
                 </VStack>
                 <Box
                     color="white"

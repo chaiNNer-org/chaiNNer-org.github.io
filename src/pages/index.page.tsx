@@ -9,7 +9,7 @@ function Page(pageProps: PageProps) {
         <Center h="100%">
             <VStack
                 h="100%"
-                spacing={8}
+                spacing={12}
             >
                 <Image
                     src={Banner}
