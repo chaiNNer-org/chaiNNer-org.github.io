@@ -27,10 +27,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
         if (body == null) return '';
 
         const normalized = body
-            .replace(/\r\n/g, '\n')
-            .replace(/'\s+'/g, '\n')
-            .replace(/'\s*\n/g, '\n')
-            .replace(/\n\s*'/g, '\n');
+            .replace(/\r\n/g, '\n');
 
         const lines = normalized
             .split('\n')
