@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import banner from '../assets/banner.png';
 import '../index.scss';
-import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack, Alert, AlertIcon } from '@chakra-ui/react';
 import { IGithubRelease, IReleaseAsset } from '../types/githubTypes';
 import { OS, isSupportedOS } from '../utils';
 import { BsWindows, BsApple, BsFillQuestionDiamondFill } from 'react-icons/bs/index.js';
@@ -64,10 +64,7 @@ function Page(pageProps: {
 
     return (
         <ShellWrapper>
-            <VStack
-                spacing={8}
-                mb="auto"
-            >
+            <VStack spacing={8} mb="auto">
                 <HStack w="full">
                     <Spacer display={{ base: 'block', sm: 'none' }} />
                     <Image
@@ -78,15 +75,18 @@ function Page(pageProps: {
                         }}
                     />
                     <Spacer />
-                    <HStack
-                        spacing={{ base: 2, lg: 6 }}
-                        display={{ base: 'none', sm: 'flex' }}
-                    >
+                    <HStack spacing={{ base: 2, lg: 6 }} display={{ base: 'none', sm: 'flex' }}>
                         <GitHubButton />
                         <DiscordButton />
                         <KofiButton />
                     </HStack>
                 </HStack>
+
+                <Alert status="warning" borderRadius="md" w="full" bgColor="yellow.700" color="white">
+                    <AlertIcon />
+                    Nightly builds are experimental and may be unstable.
+                </Alert>
+
                 <VStack>
                     <Button
                         colorScheme="green"
@@ -103,10 +103,7 @@ function Page(pageProps: {
                     >
                         <VStack>
                             <HStack>
-                                <Icon
-                                    boxSize={8}
-                                    as={MdDownload}
-                                ></Icon>
+                                <Icon boxSize={8} as={MdDownload}></Icon>
                                 <Text
                                     fontSize={{
                                         base: 20,
@@ -115,7 +112,7 @@ function Page(pageProps: {
                                     }}
                                     fontWeight="bold"
                                 >
-                                    {latestVersion != null ? `Download ${latestVersion?.name}` : 'No stable release found'}
+                                    {latestVersion != null ? `Download Nightly (${latestVersion?.name})` : 'No nightly release found'}
                                 </Text>
                             </HStack>
                             <HStack>
@@ -127,18 +124,15 @@ function Page(pageProps: {
                     {zipBuild != null && isSupportedOS && (
                         <Text color="white">
                             Or download the{' '}
-                            <Link
-                                color="blue.300"
-                                href={zipBuild?.browser_download_url}
-                            >
-                                portable version (zip)
+                            <Link color="blue.300" href={zipBuild?.browser_download_url}>
+                                portable nightly (zip)
                             </Link>
                         </Text>
                     )}
                     <Text color="white">
-                        Want cutting-edge features?{' '}
-                        <Link color="blue.300" href="/nightly">
-                            Try Nightly builds
+                        Prefer stability?{' '}
+                        <Link color="blue.300" href="/download">
+                            Go to stable downloads
                         </Link>
                     </Text>
                 </VStack>
