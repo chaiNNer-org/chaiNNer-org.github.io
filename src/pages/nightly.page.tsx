@@ -23,10 +23,19 @@ function Page(pageProps: {
     winZip: IReleaseAsset | undefined;
     macZip: IReleaseAsset | undefined;
     linuxZip: IReleaseAsset | undefined;
-    latestChangelog: string;
-    previousChangelog: string;
+    previousReleases: IGithubRelease[];
 }) {
-    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, latestChangelog, previousChangelog } = pageProps;
+    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, previousReleases } = pageProps;
+    const previous = previousReleases ?? [];
+    const formatReleaseDate = (release?: IGithubRelease) => {
+        const dateString = release?.published_at ?? release?.created_at;
+        if (dateString == null) return undefined;
+        const date = new Date(dateString);
+        if (Number.isNaN(date.getTime())) return undefined;
+        return date.toISOString().split('T')[0];
+    };
+    const releaseToMarkdown = (release: IGithubRelease) => `# ${formatReleaseDate(release) ?? release.tag_name}\n${release.body ?? ''}`;
+    const nightlyDateLabel = formatReleaseDate(latestVersion);
 
     let currentBuild: IReleaseAsset | undefined;
     let zipBuild: IReleaseAsset | undefined;
@@ -64,7 +73,10 @@ function Page(pageProps: {
 
     return (
         <ShellWrapper>
-            <VStack spacing={8} mb="auto">
+            <VStack
+                spacing={8}
+                mb="auto"
+            >
                 <HStack w="full">
                     <Spacer display={{ base: 'block', sm: 'none' }} />
                     <Image
@@ -75,14 +87,23 @@ function Page(pageProps: {
                         }}
                     />
                     <Spacer />
-                    <HStack spacing={{ base: 2, lg: 6 }} display={{ base: 'none', sm: 'flex' }}>
+                    <HStack
+                        spacing={{ base: 2, lg: 6 }}
+                        display={{ base: 'none', sm: 'flex' }}
+                    >
                         <GitHubButton />
                         <DiscordButton />
                         <KofiButton />
                     </HStack>
                 </HStack>
 
-                <Alert status="warning" borderRadius="md" w="full" bgColor="yellow.700" color="white">
+                <Alert
+                    status="warning"
+                    borderRadius="md"
+                    w="full"
+                    bgColor="yellow.700"
+                    color="white"
+                >
                     <AlertIcon />
                     Nightly builds are experimental and may be unstable.
                 </Alert>
@@ -103,7 +124,10 @@ function Page(pageProps: {
                     >
                         <VStack>
                             <HStack>
-                                <Icon boxSize={8} as={MdDownload}></Icon>
+                                <Icon
+                                    boxSize={8}
+                                    as={MdDownload}
+                                ></Icon>
                                 <Text
                                     fontSize={{
                                         base: 20,
@@ -112,7 +136,9 @@ function Page(pageProps: {
                                     }}
                                     fontWeight="bold"
                                 >
-                                    {latestVersion != null ? `Download Nightly (${latestVersion?.name})` : 'No nightly release found'}
+                                    {latestVersion != null
+                                        ? `Download Nightly${nightlyDateLabel != null ? ` (${nightlyDateLabel})` : ''}`
+                                        : 'No nightly release found'}
                                 </Text>
                             </HStack>
                             <HStack>
@@ -124,34 +150,75 @@ function Page(pageProps: {
                     {zipBuild != null && isSupportedOS && (
                         <Text color="white">
                             Or download the{' '}
-                            <Link color="blue.300" href={zipBuild?.browser_download_url}>
+                            <Link
+                                color="blue.300"
+                                href={zipBuild?.browser_download_url}
+                            >
                                 portable nightly (zip)
                             </Link>
                         </Text>
                     )}
                     <Text color="white">
                         Prefer stability?{' '}
-                        <Link color="blue.300" href="/download">
+                        <Link
+                            color="blue.300"
+                            href="/download"
+                        >
                             Go to stable downloads
                         </Link>
                     </Text>
                 </VStack>
-                <Box color="white" w="full" bgColor="gray.700" borderRadius="lg">
-                    <Box mx={2} p={4} h="49rem" w="full" overflowY="scroll">
-                        {latestVersion ? (
+                <Box
+                    color="white"
+                    w="full"
+                    bgColor="gray.700"
+                    borderRadius="lg"
+                >
+                    <Box
+                        mx={2}
+                        p={4}
+                        h="49rem"
+                        w="full"
+                        overflowY="scroll"
+                    >
+                        {latestVersion != null ? (
                             <>
-                                <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
-                                    {latestChangelog}
+                                <Text
+                                    fontWeight="bold"
+                                    mb={2}
+                                >
+                                    Latest changes
+                                </Text>
+                                <ReactMarkdown
+                                    components={ChakraUIRenderer()}
+                                    skipHtml
+                                >
+                                    {releaseToMarkdown(latestVersion)}
                                 </ReactMarkdown>
-                                {previousChangelog && (
+                                {previous.length > 0 && (
                                     <>
                                         <Box h={4} />
-                                        <Text fontWeight="bold" mb={2}>
+                                        <Text
+                                            fontWeight="bold"
+                                            mb={2}
+                                        >
                                             Previous changes
                                         </Text>
-                                        <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
-                                            {previousChangelog}
-                                        </ReactMarkdown>
+                                        <VStack
+                                            align="stretch"
+                                            spacing={6}
+                                        >
+                                            {previous.map((release) => (
+                                                <Box key={release.id}>
+                                                    <ReactMarkdown
+                                                        components={ChakraUIRenderer()}
+                                                        skipHtml
+                                                    >
+                                                        {releaseToMarkdown(release)}
+                                                    </ReactMarkdown>
+                                                </Box>
+                                            ))}
+                                        </VStack>
                                     </>
                                 )}
                             </>

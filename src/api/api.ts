@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import fetch from 'cross-fetch';
 import { IGithubRelease } from '../types/githubTypes';
 
@@ -39,12 +40,4 @@ export const getRepoInfo = async (): Promise<any | undefined> => {
 // Nightly (separate repository)
 export const getAllNightlyVersions = async (): Promise<IGithubRelease[] | undefined> => {
     return await fetchCached('https://api.github.com/repos/chaiNNer-org/chaiNNer-nightly/releases');
-};
-
-export const getLatestNightly = async (): Promise<IGithubRelease | undefined> => {
-    const all = await getAllNightlyVersions();
-    if (all == null) return undefined;
-    const candidates = all.filter((r) => !r.draft);
-    candidates.sort((a, b) => new Date(b.published_at || b.created_at).getTime() - new Date(a.published_at || a.created_at).getTime());
-    return candidates[0];
 };

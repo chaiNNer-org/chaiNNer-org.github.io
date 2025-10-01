@@ -23,10 +23,11 @@ function Page(pageProps: {
     winZip: IReleaseAsset | undefined;
     macZip: IReleaseAsset | undefined;
     linuxZip: IReleaseAsset | undefined;
-    latestChangelog: string;
-    previousChangelog: string;
+    previousReleases: IGithubRelease[];
 }) {
-    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, latestChangelog, previousChangelog } = pageProps;
+    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, previousReleases } = pageProps;
+    const previous = previousReleases ?? [];
+    const releaseToMarkdown = (release: IGithubRelease) => `# ${release.name ?? release.tag_name}\n${release.body ?? ''}`;
 
     let currentBuild: IReleaseAsset | undefined;
     let zipBuild: IReleaseAsset | undefined;
@@ -137,27 +138,65 @@ function Page(pageProps: {
                     )}
                     <Text color="white">
                         Want cutting-edge features?{' '}
-                        <Link color="blue.300" href="/nightly">
+                        <Link
+                            color="blue.300"
+                            href="/nightly"
+                        >
                             Try Nightly builds
                         </Link>
                     </Text>
                 </VStack>
-                <Box color="white" w="full" bgColor="gray.700" borderRadius="lg">
-                    <Box mx={2} p={4} h="49rem" w="full" overflowY="scroll">
-                        {latestVersion ? (
+                <Box
+                    color="white"
+                    w="full"
+                    bgColor="gray.700"
+                    borderRadius="lg"
+                >
+                    <Box
+                        mx={2}
+                        p={4}
+                        h="49rem"
+                        w="full"
+                        overflowY="scroll"
+                    >
+                        {latestVersion != null ? (
                             <>
-                                <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
-                                    {latestChangelog}
+                                <Text
+                                    fontWeight="bold"
+                                    mb={2}
+                                >
+                                    Latest changes
+                                </Text>
+                                <ReactMarkdown
+                                    components={ChakraUIRenderer()}
+                                    skipHtml
+                                >
+                                    {releaseToMarkdown(latestVersion)}
                                 </ReactMarkdown>
-                                {previousChangelog && (
+                                {previous.length > 0 && (
                                     <>
                                         <Box h={4} />
-                                        <Text fontWeight="bold" mb={2}>
+                                        <Text
+                                            fontWeight="bold"
+                                            mb={2}
+                                        >
                                             Previous changes
                                         </Text>
-                                        <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
-                                            {previousChangelog}
-                                        </ReactMarkdown>
+                                        <VStack
+                                            align="stretch"
+                                            spacing={6}
+                                        >
+                                            {previous.map((release) => (
+                                                <Box key={release.id}>
+                                                    <ReactMarkdown
+                                                        components={ChakraUIRenderer()}
+                                                        skipHtml
+                                                    >
+                                                        {releaseToMarkdown(release)}
+                                                    </ReactMarkdown>
+                                                </Box>
+                                            ))}
+                                        </VStack>
                                     </>
                                 )}
                             </>
