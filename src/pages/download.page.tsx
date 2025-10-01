@@ -23,11 +23,9 @@ function Page(pageProps: {
     winZip: IReleaseAsset | undefined;
     macZip: IReleaseAsset | undefined;
     linuxZip: IReleaseAsset | undefined;
-    previousReleases: IGithubRelease[];
+    computedChangelog: string;
 }) {
-    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, previousReleases } = pageProps;
-    const previous = previousReleases ?? [];
-    const releaseToMarkdown = (release: IGithubRelease) => `# ${release.name ?? release.tag_name}\n${release.body ?? ''}`;
+    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, computedChangelog } = pageProps;
 
     let currentBuild: IReleaseAsset | undefined;
     let zipBuild: IReleaseAsset | undefined;
@@ -159,50 +157,12 @@ function Page(pageProps: {
                         w="full"
                         overflowY="scroll"
                     >
-                        {latestVersion != null ? (
-                            <>
-                                <Text
-                                    fontWeight="bold"
-                                    mb={2}
-                                >
-                                    Latest changes
-                                </Text>
-                                <ReactMarkdown
-                                    components={ChakraUIRenderer()}
-                                    skipHtml
-                                >
-                                    {releaseToMarkdown(latestVersion)}
-                                </ReactMarkdown>
-                                {previous.length > 0 && (
-                                    <>
-                                        <Box h={4} />
-                                        <Text
-                                            fontWeight="bold"
-                                            mb={2}
-                                        >
-                                            Previous changes
-                                        </Text>
-                                        <VStack
-                                            align="stretch"
-                                            spacing={6}
-                                        >
-                                            {previous.map((release) => (
-                                                <Box key={release.id}>
-                                                    <ReactMarkdown
-                                                        components={ChakraUIRenderer()}
-                                                        skipHtml
-                                                    >
-                                                        {releaseToMarkdown(release)}
-                                                    </ReactMarkdown>
-                                                </Box>
-                                            ))}
-                                        </VStack>
-                                    </>
-                                )}
-                            </>
-                        ) : (
-                            <Text>No changelog available.</Text>
-                        )}
+                        <ReactMarkdown
+                            components={ChakraUIRenderer()}
+                            skipHtml
+                        >
+                            {computedChangelog}
+                        </ReactMarkdown>
                     </Box>
                 </Box>
             </VStack>
