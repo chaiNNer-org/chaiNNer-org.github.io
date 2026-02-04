@@ -8,97 +8,116 @@
     "src": "src/assets/128x128.png"
   },
   "index.css": {
-    "file": "assets/index.db851485.css",
+    "file": "assets/index.2bc85f2f.css",
     "src": "index.css"
   },
   "PageShell.css": {
     "file": "assets/PageShell.3a1b8951.css",
     "src": "PageShell.css"
   },
-  "src/_error.page.tsx": {
-    "file": "assets/src/_error.page.868c203b.js",
-    "src": "src/_error.page.tsx",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-83ac24a5.js"
-    ]
-  },
   "src/_default.page.client.tsx": {
-    "file": "assets/src/_default.page.client.d133d715.js",
+    "file": "assets/src/_default.page.client.3a54f667.js",
     "src": "src/_default.page.client.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-e795c4e0.js",
-      "_chunk-839d2dab.js"
+      "_chunk-dd8790e5.js",
+      "_chunk-c0a103c3.js",
+      "_chunk-3d31ef09.js"
     ]
   },
-  "_chunk-839d2dab.js": {
-    "file": "assets/chunk-839d2dab.js",
+  "_chunk-3d31ef09.js": {
+    "file": "assets/chunk-3d31ef09.js",
     "imports": [
-      "_chunk-22d226bf.js"
+      "_chunk-dd8790e5.js"
     ]
   },
-  "_chunk-83ac24a5.js": {
-    "file": "assets/chunk-83ac24a5.js",
+  "src/_error.page.tsx": {
+    "file": "assets/src/_error.page.20ff05d1.js",
+    "src": "src/_error.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
-      "_chunk-22d226bf.js"
+      "_chunk-dd8790e5.js",
+      "_chunk-0b70e790.js"
+    ]
+  },
+  "_chunk-0b70e790.js": {
+    "file": "assets/chunk-0b70e790.js",
+    "imports": [
+      "_chunk-dd8790e5.js"
     ]
   },
   "src/pages/download.page.tsx": {
-    "file": "assets/src/pages/download.page.ab3f8884.js",
+    "file": "assets/src/pages/download.page.247d0aac.js",
     "src": "src/pages/download.page.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-693a7bd5.js",
-      "_chunk-253a0480.js",
-      "_chunk-e795c4e0.js",
-      "_chunk-83ac24a5.js",
-      "_chunk-839d2dab.js"
+      "_chunk-dd8790e5.js",
+      "_chunk-69fa51b0.js",
+      "_chunk-2e0751ca.js",
+      "_chunk-c0a103c3.js",
+      "_chunk-0b70e790.js",
+      "_chunk-3d31ef09.js"
     ]
   },
   "src/pages/index.page.tsx": {
-    "file": "assets/src/pages/index.page.4b1e12bf.js",
+    "file": "assets/src/pages/index.page.b43a3492.js",
     "src": "src/pages/index.page.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-693a7bd5.js",
-      "_chunk-839d2dab.js"
+      "_chunk-dd8790e5.js",
+      "_chunk-69fa51b0.js",
+      "_chunk-0b70e790.js",
+      "_chunk-3d31ef09.js"
     ]
   },
-  "src/pages/nightly.page.tsx": {
-    "file": "assets/src/pages/nightly.page.26fb3b61.js",
-    "src": "src/pages/nightly.page.tsx",
-    "isEntry": true,
-    "isDynamicEntry": true,
+  "_chunk-69fa51b0.js": {
+    "file": "assets/chunk-69fa51b0.js",
     "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-693a7bd5.js",
-      "_chunk-253a0480.js",
-      "_chunk-e795c4e0.js",
-      "_chunk-839d2dab.js",
-      "_chunk-83ac24a5.js"
-    ]
-  },
-  "_chunk-693a7bd5.js": {
-    "file": "assets/chunk-693a7bd5.js",
+      "_chunk-3d31ef09.js"
+    ],
     "css": [
-      "assets/index.db851485.css"
+      "assets/index.2bc85f2f.css"
     ],
     "assets": [
       "assets/banner.18ad9783.png"
     ]
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
-    "file": "assets/entry-server-routing.6832e295.js",
+    "file": "assets/entry-server-routing.069ae7e4.js",
     "src": "node_modules/vite-plugin-ssr/dist/esm/client/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_chunk-b6214203.js"
+    ],
+    "dynamicImports": [
+      "src/_error.page.tsx",
+      "src/pages/download.page.tsx",
+      "src/pages/index.page.tsx",
+      "src/pages/nightly.page.tsx",
+      "src/_default.page.client.tsx"
+    ]
+  },
+  "src/pages/nightly.page.tsx": {
+    "file": "assets/src/pages/nightly.page.85c8501b.js",
+    "src": "src/pages/nightly.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-dd8790e5.js",
+      "_chunk-69fa51b0.js",
+      "_chunk-2e0751ca.js",
+      "_chunk-c0a103c3.js",
+      "_chunk-3d31ef09.js",
+      "_chunk-0b70e790.js"
+    ]
+  },
+  "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
+    "file": "assets/entry-client-routing.071940ce.js",
+    "src": "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js",
     "isEntry": true,
     "imports": [
       "_chunk-b6214203.js"
@@ -114,38 +133,23 @@
   "_chunk-b6214203.js": {
     "file": "assets/chunk-b6214203.js"
   },
-  "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
-    "file": "assets/entry-client-routing.f78b364d.js",
-    "src": "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js",
-    "isEntry": true,
+  "_chunk-dd8790e5.js": {
+    "file": "assets/chunk-dd8790e5.js"
+  },
+  "_chunk-2e0751ca.js": {
+    "file": "assets/chunk-2e0751ca.js",
     "imports": [
-      "_chunk-b6214203.js"
-    ],
-    "dynamicImports": [
-      "src/_error.page.tsx",
-      "src/pages/download.page.tsx",
-      "src/pages/index.page.tsx",
-      "src/pages/nightly.page.tsx",
-      "src/_default.page.client.tsx"
+      "_chunk-dd8790e5.js",
+      "_chunk-3d31ef09.js",
+      "_chunk-c0a103c3.js",
+      "_chunk-0b70e790.js"
     ]
   },
-  "_chunk-22d226bf.js": {
-    "file": "assets/chunk-22d226bf.js"
-  },
-  "_chunk-253a0480.js": {
-    "file": "assets/chunk-253a0480.js",
+  "_chunk-c0a103c3.js": {
+    "file": "assets/chunk-c0a103c3.js",
     "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-e795c4e0.js",
-      "_chunk-839d2dab.js",
-      "_chunk-83ac24a5.js"
-    ]
-  },
-  "_chunk-e795c4e0.js": {
-    "file": "assets/chunk-e795c4e0.js",
-    "imports": [
-      "_chunk-22d226bf.js",
-      "_chunk-839d2dab.js"
+      "_chunk-dd8790e5.js",
+      "_chunk-3d31ef09.js"
     ],
     "css": [
       "assets/PageShell.3a1b8951.css"
