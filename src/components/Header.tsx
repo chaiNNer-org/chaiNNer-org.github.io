@@ -15,22 +15,16 @@ export const Header = memo(() => {
             pos="sticky"
             w={'full'}
             top={0}
-            shadow={'0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'}
             zIndex={10}
         >
             <chakra.header
                 shadow={'0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'}
-                transition="all 0.3s ease"
                 bg={bg}
-                backdropFilter="blur(20px)"
                 borderTop="4px solid"
                 borderTopColor="brand.500"
                 w="full"
                 overflowY="hidden"
                 zIndex={10}
-                _hover={{
-                    shadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                }}
             >
                 <chakra.div
                     h="4.5rem"

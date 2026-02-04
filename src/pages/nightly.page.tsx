@@ -206,8 +206,6 @@ function Page() {
                     border="1px solid"
                     borderColor="rgba(245, 158, 11, 0.3)"
                     color="yellow.200"
-                    backdropFilter="blur(10px)"
-                    boxShadow="0 4px 12px rgba(245, 158, 11, 0.2)"
                 >
                     <AlertIcon color="yellow.400" />
                     <Text fontWeight="500">Nightly builds are experimental and may be unstable.</Text>
@@ -222,7 +220,6 @@ function Page() {
                         border="1px solid"
                         borderColor="rgba(239, 68, 68, 0.3)"
                         color="red.200"
-                        backdropFilter="blur(10px)"
                     >
                         <AlertIcon color="red.400" />
                         <Text fontWeight="500">Failed to load nightly releases. Please try again later.</Text>
@@ -246,15 +243,12 @@ function Page() {
                                 px={10}
                                 py={8}
                                 disabled={isLoading || !isSupportedOS || currentBuild == null}
-                                boxShadow="0 10px 25px -5px rgba(139, 92, 246, 0.4), 0 4px 6px -2px rgba(139, 92, 246, 0.1)"
+                                boxShadow="0 10px 25px -5px rgba(139, 92, 246, 0.4)"
                                 transition="all 0.3s ease"
                                 _hover={{
                                     transform: 'translateY(-2px)',
-                                    boxShadow: '0 20px 40px -5px rgba(139, 92, 246, 0.5), 0 8px 12px -2px rgba(139, 92, 246, 0.2)',
+                                    boxShadow: '0 20px 40px -5px rgba(139, 92, 246, 0.5)',
                                     bg: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
-                                    _before: {
-                                        left: '100%',
-                                    },
                                 }}
                                 _active={{
                                     transform: 'translateY(0)',
@@ -267,18 +261,6 @@ function Page() {
                                         transform: 'none',
                                         boxShadow: 'none',
                                     },
-                                }}
-                                position="relative"
-                                overflow="hidden"
-                                _before={{
-                                    content: '""',
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: '-100%',
-                                    width: '100%',
-                                    height: '100%',
-                                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
-                                    transition: 'left 0.5s',
                                 }}
                             >
                                 <VStack spacing={2}>
@@ -376,12 +358,10 @@ function Page() {
                         <Box
                             color="white"
                             w="full"
-                            bg="rgba(30, 41, 59, 0.6)"
-                            backdropFilter="blur(10px)"
+                            bg="gray.800"
                             border="1px solid"
                             borderColor="rgba(255, 255, 255, 0.1)"
                             borderRadius="xl"
-                            boxShadow="0 8px 32px rgba(0, 0, 0, 0.3)"
                             overflow="hidden"
                         >
                             <Box

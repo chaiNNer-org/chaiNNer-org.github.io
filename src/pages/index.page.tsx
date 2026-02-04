@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Button, Center, HStack, Image, Link, VStack, Box, Text, Heading, SimpleGrid, Icon, Container, Divider } from '@chakra-ui/react';
-import { FaCogs, FaBrain, FaLayerGroup, FaRocket, FaImage, FaVideo, FaDownload, FaMagic } from 'react-icons/fa';
+import { Button, Center, HStack, Image, Link, VStack, Box, Text, Heading, SimpleGrid, Icon, Container } from '@chakra-ui/react';
+import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop } from 'react-icons/fa';
 import '../index.scss';
 import { PageProps } from '../types';
 import Banner from '../assets/banner.png';
 
-// @ts-expect-error - Complex union types in Chakra UI
 function Page(pageProps: PageProps) {
     return (
         <Box w="100%">
@@ -20,11 +19,6 @@ function Page(pageProps: PageProps) {
                         w="738px"
                         maxW="90vw"
                         filter="drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))"
-                        transition="all 0.3s ease"
-                        _hover={{
-                            transform: 'scale(1.02)',
-                            filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4))',
-                        }}
                     />
                     <HStack spacing={4}>
                         <Button
@@ -38,11 +32,11 @@ function Page(pageProps: PageProps) {
                             borderRadius="xl"
                             fontWeight="600"
                             fontSize="lg"
-                            boxShadow="0 10px 25px -5px rgba(16, 185, 129, 0.4), 0 4px 6px -2px rgba(16, 185, 129, 0.1)"
+                            boxShadow="0 10px 25px -5px rgba(16, 185, 129, 0.4)"
                             transition="all 0.3s ease"
                             _hover={{
                                 transform: 'translateY(-2px)',
-                                boxShadow: '0 20px 40px -5px rgba(16, 185, 129, 0.5), 0 8px 12px -2px rgba(16, 185, 129, 0.2)',
+                                boxShadow: '0 20px 40px -5px rgba(16, 185, 129, 0.5)',
                                 bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
                             }}
                             _active={{
@@ -98,8 +92,6 @@ function Page(pageProps: PageProps) {
                                 size="2xl"
                                 color="white"
                                 fontWeight="700"
-                                bgGradient="linear(to-r, brand.500, purple.400)"
-                                bgClip="text"
                             >
                                 What is chaiNNer?
                             </Heading>
@@ -109,8 +101,10 @@ function Page(pageProps: PageProps) {
                                 maxW="4xl"
                                 lineHeight="1.6"
                             >
-                                chaiNNer is a powerful node-based image processing application that lets you create custom workflows through an intuitive visual
-                                editor. Build complex processing pipelines by connecting nodes for image manipulation, enhancement, and batch processing.
+                                A node-based image processing GUI aimed at making chaining image processing tasks easy and customizable. Born as an AI upscaling
+                                application, chaiNNer has grown into an extremely flexible and powerful programmatic image processing application. ChaiNNer gives
+                                you a level of customization of your image processing workflow that very few others do. Cross-platform for Windows, macOS, and
+                                Linux.
                             </Text>
                         </VStack>
 
@@ -134,43 +128,41 @@ function Page(pageProps: PageProps) {
                                 <FeatureCard
                                     icon={FaCogs}
                                     title="Visual Node Editor"
-                                    description="Build processing pipelines by dragging and connecting nodes in an intuitive visual interface."
+                                    description="Build processing pipelines by dragging and connecting nodes in an intuitive visual interface. Full control over your workflow with incredibly complex tasks just by connecting a few nodes together."
                                     color="brand.500"
                                 />
                                 <FeatureCard
-                                    icon={FaImage}
-                                    title="Image Processing"
-                                    description="Comprehensive image manipulation tools including resize, crop, rotate, filter, and color adjustment."
-                                    color="blue.400"
+                                    icon={FaMagic}
+                                    title="AI Upscaling"
+                                    description="Leverage AI models for image upscaling with support for PyTorch, NCNN, ONNX, and TensorRT. Use architectures like ESRGAN, Real-ESRGAN, and many more via Spandrel."
+                                    color="purple.400"
                                 />
                                 <FeatureCard
-                                    icon={FaLayerGroup}
-                                    title="Node Library"
-                                    description="Extensive collection of processing nodes for filters, transforms, effects, and format conversions."
-                                    color="green.400"
+                                    icon={FaImage}
+                                    title="GPU Accelerated"
+                                    description="Full GPU support for Nvidia (CUDA/TensorRT), AMD (ROCm/NCNN), Apple Silicon (MPS), and Intel (NCNN). CPU fallback for all frameworks."
+                                    color="blue.400"
                                 />
                                 <FeatureCard
                                     icon={FaRocket}
                                     title="Batch Processing"
-                                    description="Process multiple images or video frames simultaneously for efficient large-scale operations."
+                                    description="Process entire folders of images or video frames. Chain together complex operations for large-scale automated workflows."
                                     color="orange.400"
                                 />
                                 <FeatureCard
                                     icon={FaDownload}
                                     title="Self-Contained"
-                                    description="Integrated dependency management with isolated Python environment - no system conflicts."
+                                    description="No Python installation needed. ChaiNNer downloads an isolated integrated Python build and manages all dependencies automatically."
                                     color="cyan.400"
                                 />
                                 <FeatureCard
-                                    icon={FaMagic}
-                                    title="AI Upscaling"
-                                    description="Leverage AI models for image upscaling with support for PyTorch, NCNN, and ONNX frameworks. Use models like ESRGAN, Real-ESRGAN, and GFPGAN."
-                                    color="purple.400"
+                                    icon={FaDesktop}
+                                    title="Cross-Platform"
+                                    description="Runs on Windows, macOS, and Linux. Available as an installer or portable zip for all platforms."
+                                    color="green.400"
                                 />
                             </SimpleGrid>
                         </VStack>
-
-                        <Divider borderColor="gray.600" />
 
                         {/* Visual Demo Section */}
                         <VStack
@@ -210,78 +202,9 @@ function Page(pageProps: PageProps) {
                                         border="1px solid"
                                         borderColor="gray.600"
                                         filter="drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))"
-                                        transition="all 0.3s ease"
-                                        _hover={{
-                                            transform: 'scale(1.01)',
-                                            filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4))',
-                                        }}
                                     />
                                 </VStack>
                             </Box>
-                        </VStack>
-
-                        <Divider borderColor="gray.600" />
-
-                        {/* Use Cases */}
-                        <VStack
-                            spacing={12}
-                            w="100%"
-                        >
-                            <Heading
-                                size="xl"
-                                color="white"
-                                textAlign="center"
-                            >
-                                Popular Use Cases
-                            </Heading>
-                            <SimpleGrid
-                                columns={{ base: 1, md: 2, lg: 3 }}
-                                spacing={8}
-                                w="100%"
-                            >
-                                <UseCaseCard
-                                    icon={FaMagic}
-                                    title="AI Upscaling"
-                                    description="Enhance image and video resolution using AI models like ESRGAN, Real-ESRGAN, and GFPGAN with support for PyTorch, NCNN, and ONNX frameworks."
-                                    examples={['4x upscaling', 'Face restoration', 'Video enhancement', 'Super resolution']}
-                                    color="purple.400"
-                                />
-                                <UseCaseCard
-                                    icon={FaImage}
-                                    title="Image Enhancement"
-                                    description="Apply filters, adjust colors, sharpen details, and enhance image quality using traditional and advanced processing techniques."
-                                    examples={['Color correction', 'Noise reduction', 'Sharpening', 'Contrast adjustment']}
-                                    color="blue.400"
-                                />
-                                <UseCaseCard
-                                    icon={FaVideo}
-                                    title="Batch Processing"
-                                    description="Automate repetitive tasks like resizing, cropping, format conversion, and organizing large image datasets efficiently."
-                                    examples={['Format conversion', 'Batch resizing', 'Watermarking', 'Metadata processing']}
-                                    color="green.400"
-                                />
-                                <UseCaseCard
-                                    icon={FaCogs}
-                                    title="Video Processing"
-                                    description="Apply image processing operations to video files frame-by-frame, enabling comprehensive video enhancement workflows."
-                                    examples={['Frame extraction', 'Video upscaling', 'Color grading', 'Stabilization']}
-                                    color="orange.400"
-                                />
-                                <UseCaseCard
-                                    icon={FaLayerGroup}
-                                    title="Data Augmentation"
-                                    description="Generate variations of training data for machine learning by applying transformations, filters, and effects to image datasets."
-                                    examples={['Rotation', 'Cropping', 'Color jitter', 'Noise addition']}
-                                    color="cyan.400"
-                                />
-                                <UseCaseCard
-                                    icon={FaRocket}
-                                    title="Creative Effects"
-                                    description="Apply artistic filters, style transfer, and creative transformations to images for digital art and creative projects."
-                                    examples={['Style transfer', 'Artistic filters', 'Colorization', 'Creative compositing']}
-                                    color="pink.400"
-                                />
-                            </SimpleGrid>
                         </VStack>
                     </VStack>
                 </Container>
@@ -303,7 +226,6 @@ function FeatureCard({ icon, title, description, color }: { icon: any; title: st
             _hover={{
                 transform: 'translateY(-2px)',
                 borderColor: color,
-                boxShadow: `0 4px 12px rgba(59, 130, 246, 0.3)`,
             }}
         >
             <VStack
@@ -327,74 +249,6 @@ function FeatureCard({ icon, title, description, color }: { icon: any; title: st
                 >
                     {description}
                 </Text>
-            </VStack>
-        </Box>
-    );
-}
-
-// Use Case Card Component
-function UseCaseCard({ icon, title, description, examples, color }: { icon: any; title: string; description: string; examples: string[]; color: string }) {
-    return (
-        <Box
-            p={8}
-            bg="gray.800"
-            borderRadius="xl"
-            border="1px solid"
-            borderColor="rgba(255, 255, 255, 0.1)"
-            transition="all 0.3s ease"
-            _hover={{
-                transform: 'translateY(-2px)',
-                borderColor: color,
-                boxShadow: `0 4px 12px rgba(59, 130, 246, 0.3)`,
-            }}
-        >
-            <VStack
-                spacing={6}
-                align="start"
-            >
-                <HStack spacing={4}>
-                    <Icon
-                        as={icon}
-                        boxSize={10}
-                        color={color}
-                    />
-                    <Heading
-                        size="lg"
-                        color="white"
-                    >
-                        {title}
-                    </Heading>
-                </HStack>
-                <Text
-                    color="gray.300"
-                    lineHeight="1.6"
-                    fontSize="lg"
-                >
-                    {description}
-                </Text>
-                <VStack
-                    spacing={2}
-                    align="start"
-                    w="100%"
-                >
-                    <Text
-                        color="gray.400"
-                        fontSize="sm"
-                        fontWeight="600"
-                        textTransform="uppercase"
-                    >
-                        Examples:
-                    </Text>
-                    {examples.map((example, index) => (
-                        <Text
-                            key={index}
-                            color="gray.300"
-                            fontSize="sm"
-                        >
-                            • {example}
-                        </Text>
-                    ))}
-                </VStack>
             </VStack>
         </Box>
     );

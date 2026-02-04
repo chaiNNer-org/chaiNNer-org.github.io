@@ -73,10 +73,8 @@ function ShellWrapper({ children }: { children: React.ReactNode }) {
             minH="100%"
             maxW="1200px"
             minW="380px"
-            bg="rgba(30, 41, 59, 0.8)"
-            backdropFilter="blur(20px)"
             borderRadius="2xl"
-            boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)"
+            boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5)"
             position="relative"
             bgColor="gray.800"
             p={6}

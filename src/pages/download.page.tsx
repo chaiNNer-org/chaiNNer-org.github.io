@@ -104,15 +104,12 @@ function Page(pageProps: {
                         px={10}
                         py={8}
                         disabled={!isSupportedOS || currentBuild == null}
-                        boxShadow="0 10px 25px -5px rgba(16, 185, 129, 0.4), 0 4px 6px -2px rgba(16, 185, 129, 0.1)"
+                        boxShadow="0 10px 25px -5px rgba(16, 185, 129, 0.4)"
                         transition="all 0.3s ease"
                         _hover={{
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 20px 40px -5px rgba(16, 185, 129, 0.5), 0 8px 12px -2px rgba(16, 185, 129, 0.2)',
+                            boxShadow: '0 20px 40px -5px rgba(16, 185, 129, 0.5)',
                             bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
-                            _before: {
-                                left: '100%',
-                            },
                         }}
                         _active={{
                             transform: 'translateY(0)',
@@ -125,18 +122,6 @@ function Page(pageProps: {
                                 transform: 'none',
                                 boxShadow: 'none',
                             },
-                        }}
-                        position="relative"
-                        overflow="hidden"
-                        _before={{
-                            content: '""',
-                            position: 'absolute',
-                            top: 0,
-                            left: '-100%',
-                            width: '100%',
-                            height: '100%',
-                            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
-                            transition: 'left 0.5s',
                         }}
                     >
                         <VStack spacing={2}>
@@ -224,12 +209,10 @@ function Page(pageProps: {
                 <Box
                     color="white"
                     w="full"
-                    bg="rgba(30, 41, 59, 0.6)"
-                    backdropFilter="blur(10px)"
+                    bg="gray.800"
                     border="1px solid"
                     borderColor="rgba(255, 255, 255, 0.1)"
                     borderRadius="xl"
-                    boxShadow="0 8px 32px rgba(0, 0, 0, 0.3)"
                     overflow="hidden"
                 >
                     <Box
