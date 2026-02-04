@@ -7,11 +7,31 @@ import { Header } from '../Header';
 import { ChakraProvider, VStack, Theme, extendTheme, Box, Center } from '@chakra-ui/react';
 
 const config = {
-    initialColorMode: 'light', // TODO: Fix this
+    initialColorMode: 'dark',
     useSystemColorMode: false,
 } as const;
 
-export const theme = extendTheme({ config } as const) as Theme;
+export const theme = extendTheme({
+    config,
+    colors: {
+        brand: {
+            50: '#eff6ff',
+            100: '#dbeafe',
+            200: '#bfdbfe',
+            300: '#93c5fd',
+            400: '#60a5fa',
+            500: '#3b82f6',
+            600: '#2563eb',
+            700: '#1d4ed8',
+            800: '#1e40af',
+            900: '#1e3a8a',
+        },
+    },
+    fonts: {
+        heading: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        body: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    },
+} as const) as Theme;
 
 function PageShell({ children, pageContext }: { children: React.ReactNode; pageContext: PageContext }) {
     return (
@@ -53,9 +73,11 @@ function ShellWrapper({ children }: { children: React.ReactNode }) {
             minH="100%"
             maxW="1200px"
             minW="380px"
+            borderRadius="2xl"
+            boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+            position="relative"
             bgColor="gray.800"
             p={6}
-            borderRadius="2xl"
         >
             {children}
         </Box>

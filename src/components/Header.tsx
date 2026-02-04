@@ -15,15 +15,13 @@ export const Header = memo(() => {
             pos="sticky"
             w={'full'}
             top={0}
-            shadow={'lg'}
             zIndex={10}
         >
             <chakra.header
-                shadow={'lg'}
-                transition="box-shadow 0.2s"
+                shadow={'0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'}
                 bg={bg}
-                borderTop="6px solid"
-                borderTopColor="brand.400"
+                borderTop="4px solid"
+                borderTopColor="brand.500"
                 w="full"
                 overflowY="hidden"
                 zIndex={10}
@@ -57,35 +55,51 @@ export const Header = memo(() => {
                                     </Link>
                                 </chakra.div>
                                 <Button
-                                    bg={bg}
-                                    color="gray.400"
+                                    bg="transparent"
+                                    color="gray.300"
                                     display="inline-flex"
                                     alignItems="center"
                                     fontSize="md"
+                                    fontWeight="500"
+                                    borderRadius="lg"
+                                    px={{ base: 3, sm: 6 }}
+                                    py={2}
+                                    transition="all 0.2s ease"
                                     _hover={{
-                                        color: 'gray.600',
+                                        color: 'white',
+                                        transform: 'translateY(-1px)',
                                     }}
                                     _focus={{
-                                        boxShadow: 'none',
+                                        boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.3)',
                                     }}
-                                    px={{ base: 2, sm: 4 }}
+                                    _active={{
+                                        transform: 'translateY(0)',
+                                    }}
                                     as={Link}
                                     href="/"
                                 >
                                     Home
                                 </Button>
                                 <Button
-                                    bg={bg}
-                                    color="gray.400"
+                                    bg="transparent"
+                                    color="gray.300"
                                     display="inline-flex"
                                     alignItems="center"
                                     fontSize="md"
-                                    px={{ base: 2, sm: 4 }}
+                                    fontWeight="500"
+                                    borderRadius="lg"
+                                    px={{ base: 3, sm: 6 }}
+                                    py={2}
+                                    transition="all 0.2s ease"
                                     _hover={{
-                                        color: 'gray.600',
+                                        color: 'white',
+                                        transform: 'translateY(-1px)',
                                     }}
                                     _focus={{
-                                        boxShadow: 'none',
+                                        boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.3)',
+                                    }}
+                                    _active={{
+                                        transform: 'translateY(0)',
                                     }}
                                     as={Link}
                                     href="/download"
@@ -102,20 +116,27 @@ export const Header = memo(() => {
                             align="center"
                             color="gray.400"
                         >
-                            <HStack spacing="5">
+                            <HStack spacing="4">
                                 <Link
                                     isExternal
                                     aria-label="Go to the chaiNNer GitHub page"
                                     href={githubLink}
+                                    p={2}
+                                    borderRadius="lg"
+                                    transition="all 0.2s ease"
+                                    _hover={{
+                                        transform: 'translateY(-1px)',
+                                    }}
                                 >
                                     <Icon
                                         as={AiFillGithub}
                                         display="block"
-                                        transition="color 0.2s"
-                                        w="5"
-                                        h="5"
+                                        transition="all 0.2s ease"
+                                        w="6"
+                                        h="6"
+                                        color="gray.300"
                                         _hover={{
-                                            color: 'gray.600',
+                                            color: 'brand.400',
                                         }}
                                     />
                                 </Link>
@@ -123,15 +144,22 @@ export const Header = memo(() => {
                                     isExternal
                                     aria-label="Go to the chaiNNer Discord server"
                                     href={discordLink}
+                                    p={2}
+                                    borderRadius="lg"
+                                    transition="all 0.2s ease"
+                                    _hover={{
+                                        transform: 'translateY(-1px)',
+                                    }}
                                 >
                                     <Icon
                                         as={SiDiscord}
                                         display="block"
-                                        transition="color 0.2s"
-                                        w="5"
-                                        h="5"
+                                        transition="all 0.2s ease"
+                                        w="6"
+                                        h="6"
+                                        color="gray.300"
                                         _hover={{
-                                            color: 'gray.600',
+                                            color: 'purple.400',
                                         }}
                                     />
                                 </Link>
@@ -139,15 +167,22 @@ export const Header = memo(() => {
                                     isExternal
                                     aria-label="Go to the chaiNNer Ko-fi donation page"
                                     href={kofiLink}
+                                    p={2}
+                                    borderRadius="lg"
+                                    transition="all 0.2s ease"
+                                    _hover={{
+                                        transform: 'translateY(-1px)',
+                                    }}
                                 >
                                     <Icon
                                         as={SiKofi}
                                         display="block"
-                                        transition="color 0.2s"
-                                        w="5"
-                                        h="5"
+                                        transition="all 0.2s ease"
+                                        w="6"
+                                        h="6"
+                                        color="gray.300"
                                         _hover={{
-                                            color: 'gray.600',
+                                            color: 'pink.400',
                                         }}
                                     />
                                 </Link>

@@ -29,7 +29,7 @@ function Page(pageProps: {
 
     let currentBuild: IReleaseAsset | undefined;
     let zipBuild: IReleaseAsset | undefined;
-    let icon;
+    let icon: React.ComponentType;
     switch (OS.name) {
         case 'Windows':
             currentBuild = exeBuild;
@@ -64,8 +64,9 @@ function Page(pageProps: {
     return (
         <ShellWrapper>
             <VStack
-                spacing={8}
+                spacing={10}
                 mb="auto"
+                py={4}
             >
                 <HStack w="full">
                     <Spacer display={{ base: 'block', sm: 'none' }} />
@@ -86,9 +87,13 @@ function Page(pageProps: {
                         <KofiButton />
                     </HStack>
                 </HStack>
-                <VStack>
+                <VStack
+                    spacing={4}
+                    mb={6}
+                >
                     <Button
-                        colorScheme="green"
+                        bg="linear-gradient(135deg, #10b981 0%, #059669 100%)"
+                        color="white"
                         borderRadius="2xl"
                         onClick={() => {
                             if (currentBuild != null && isSupportedOS) {
@@ -96,16 +101,35 @@ function Page(pageProps: {
                             }
                         }}
                         height="auto"
-                        px={8}
-                        py={7}
+                        px={10}
+                        py={8}
                         disabled={!isSupportedOS || currentBuild == null}
+                        boxShadow="0 4px 12px -2px rgba(16, 185, 129, 0.3)"
+                        transition="all 0.3s ease"
+                        _hover={{
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.4)',
+                            bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                        }}
+                        _active={{
+                            transform: 'translateY(0)',
+                        }}
+                        _disabled={{
+                            bg: 'gray.600',
+                            color: 'gray.400',
+                            cursor: 'not-allowed',
+                            _hover: {
+                                transform: 'none',
+                                boxShadow: 'none',
+                            },
+                        }}
                     >
-                        <VStack>
-                            <HStack>
+                        <VStack spacing={2}>
+                            <HStack spacing={3}>
                                 <Icon
                                     boxSize={8}
                                     as={MdDownload}
-                                ></Icon>
+                                />
                                 <Text
                                     fontSize={{
                                         base: 20,
@@ -113,49 +137,120 @@ function Page(pageProps: {
                                         md: 36,
                                     }}
                                     fontWeight="bold"
+                                    letterSpacing="tight"
                                 >
                                     {latestVersion != null ? `Download ${latestVersion?.name}` : 'No stable release found'}
                                 </Text>
                             </HStack>
-                            <HStack>
-                                <Icon as={icon}></Icon>
-                                <Text fontSize={18}>{isSupportedOS ? OS.name : 'Unsupported OS'}</Text>
+                            <HStack spacing={2}>
+                                <Icon
+                                    as={icon}
+                                    boxSize={5}
+                                />
+                                <Text
+                                    fontSize={18}
+                                    fontWeight="500"
+                                    opacity={0.9}
+                                >
+                                    {isSupportedOS ? OS.name : 'Unsupported OS'}
+                                </Text>
                             </HStack>
                         </VStack>
                     </Button>
-                    {zipBuild != null && isSupportedOS && (
-                        <Text color="white">
-                            Or download the{' '}
-                            <Link
-                                color="blue.300"
-                                href={zipBuild?.browser_download_url}
+                    <VStack spacing={2}>
+                        {zipBuild != null && isSupportedOS && (
+                            <Text
+                                color="gray.300"
+                                fontSize="lg"
+                                textAlign="center"
                             >
-                                portable version (zip)
+                                Or download the{' '}
+                                <Link
+                                    color="brand.400"
+                                    href={zipBuild?.browser_download_url}
+                                    fontWeight="600"
+                                    textDecoration="underline"
+                                    textDecorationColor="brand.400"
+                                    textUnderlineOffset="3px"
+                                    transition="all 0.2s ease"
+                                    _hover={{
+                                        color: 'brand.300',
+                                        textDecorationColor: 'brand.300',
+                                    }}
+                                >
+                                    portable version (zip)
+                                </Link>
+                            </Text>
+                        )}
+                        <Text
+                            color="gray.300"
+                            fontSize="lg"
+                            textAlign="center"
+                        >
+                            Want cutting-edge features?{' '}
+                            <Link
+                                color="brand.400"
+                                href="/nightly"
+                                fontWeight="600"
+                                textDecoration="underline"
+                                textDecorationColor="brand.400"
+                                textUnderlineOffset="3px"
+                                transition="all 0.2s ease"
+                                _hover={{
+                                    color: 'brand.300',
+                                    textDecorationColor: 'brand.300',
+                                }}
+                            >
+                                Try Nightly builds
                             </Link>
                         </Text>
-                    )}
-                    <Text color="white">
-                        Want cutting-edge features?{' '}
-                        <Link
-                            color="blue.300"
-                            href="/nightly"
-                        >
-                            Try Nightly builds
-                        </Link>
-                    </Text>
+                    </VStack>
                 </VStack>
                 <Box
                     color="white"
                     w="full"
-                    bgColor="gray.700"
-                    borderRadius="lg"
+                    bg="gray.800"
+                    border="1px solid"
+                    borderColor="rgba(255, 255, 255, 0.1)"
+                    borderRadius="xl"
+                    overflow="hidden"
                 >
                     <Box
-                        mx={2}
-                        p={4}
+                        bg="gray.900"
+                        px={6}
+                        py={4}
+                        borderBottom="1px solid"
+                        borderBottomColor="rgba(255, 255, 255, 0.1)"
+                    >
+                        <Text
+                            fontSize="lg"
+                            fontWeight="600"
+                            color="white"
+                        >
+                            Release Notes
+                        </Text>
+                    </Box>
+                    <Box
+                        p={6}
                         h="49rem"
                         w="full"
                         overflowY="scroll"
+                        css={{
+                            '&::-webkit-scrollbar': {
+                                width: '8px',
+                            },
+                            '&::-webkit-scrollbar-track': {
+                                background: 'rgba(255, 255, 255, 0.1)',
+                                borderRadius: '4px',
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                background: 'rgba(59, 130, 246, 0.5)',
+                                borderRadius: '4px',
+                            },
+                            '&::-webkit-scrollbar-thumb:hover': {
+                                background: 'rgba(59, 130, 246, 0.7)',
+                            },
+                        }}
                     >
                         <ReactMarkdown
                             components={ChakraUIRenderer()}
@@ -171,3 +266,10 @@ function Page(pageProps: {
 }
 
 export { Page };
+
+export const documentProps = {
+    title: 'Download chaiNNer - Free Image Processing Software',
+    description: 'Download the latest stable version of chaiNNer for Windows, macOS, and Linux. Free, open-source node-based image processing software with batch processing and GPU acceleration.',
+    keywords: 'download chaiNNer, free image processing software, node editor download, Windows macOS Linux, batch image processing',
+    image: 'https://chainner.app/banner.png',
+};

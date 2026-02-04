@@ -8,6 +8,7 @@ $dot-space: 22px;
 
 body {
     background: $bg-color;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .background {
@@ -19,10 +20,19 @@ body {
 
 @keyframes moveDots {
     from {
-        background-position: 0 0;
+        background-position: 0 0, 0 0, 0 0, 0 0;
     }
     to {
-        background-position: $dot-space $dot-space;
+        background-position: 0 0, 0 0, $dot-space $dot-space, $dot-space $dot-space;
+    }
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 0%, 100% 100%, 0 0, 0 0;
+    }
+    50% {
+        background-position: 100% 100%, 0% 0%, $dot-space $dot-space, $dot-space $dot-space;
     }
 }
 
