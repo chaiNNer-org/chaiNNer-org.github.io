@@ -170,13 +170,13 @@ function Page(pageProps: PageProps) {
                                 <FeatureCard
                                     icon={FaMagic}
                                     title="AI Upscaling"
-                                    description="Leverage AI models for image upscaling with support for PyTorch, NCNN, ONNX, and TensorRT. Use architectures like ESRGAN, Real-ESRGAN, and many more via Spandrel."
+                                    description="Leverage community-trained AI upscaling models with support for PyTorch, NCNN, ONNX, and TensorRT. Use architectures like ESRGAN, SPAN, OmniSR, and many more."
                                     color="purple.400"
                                 />
                                 <FeatureCard
                                     icon={FaCheckCircle}
                                     title="Smart Validation"
-                                    description="Built-in type system, real-time validation, and conditional logic ensure your chains are correct. Catch errors before processing while maintaining flexibility for complex workflows."
+                                    description="Built-in type system and real-time validation ensure your chains are correct. Catch errors before processing while maintaining flexibility."
                                     color="yellow.400"
                                 />
                                 <FeatureCard
@@ -188,13 +188,13 @@ function Page(pageProps: PageProps) {
                                 <FeatureCard
                                     icon={FaRocket}
                                     title="Batch Processing"
-                                    description="Process entire folders of images or video frames. Chain together complex operations for large-scale automated workflows."
+                                    description="Process entire folders of images or video frames through your chains, or automate with command-line interface (CLI) support for integration into larger workflows."
                                     color="orange.400"
                                 />
                                 <FeatureCard
                                     icon={FaDownload}
                                     title="Self-Contained"
-                                    description="No Python installation needed. ChaiNNer downloads an isolated integrated Python build and manages all dependencies automatically."
+                                    description="No existing Python installation needed. ChaiNNer downloads an isolated integrated Python build and manages all dependencies automatically."
                                     color="cyan.400"
                                 />
                                 <FeatureCard
