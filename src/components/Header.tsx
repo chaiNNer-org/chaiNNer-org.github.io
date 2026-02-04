@@ -125,7 +125,7 @@ export const Header = memo(() => {
                                     borderRadius="lg"
                                     transition="all 0.2s ease"
                                     _hover={{
-                                        transform: 'translateY(-2px)',
+                                        transform: 'translateY(-1px)',
                                     }}
                                 >
                                     <Icon
@@ -136,8 +136,7 @@ export const Header = memo(() => {
                                         h="6"
                                         color="gray.300"
                                         _hover={{
-                                            color: 'white',
-                                            transform: 'scale(1.1)',
+                                            color: 'brand.400',
                                         }}
                                     />
                                 </Link>
@@ -149,7 +148,7 @@ export const Header = memo(() => {
                                     borderRadius="lg"
                                     transition="all 0.2s ease"
                                     _hover={{
-                                        transform: 'translateY(-2px)',
+                                        transform: 'translateY(-1px)',
                                     }}
                                 >
                                     <Icon
@@ -160,8 +159,7 @@ export const Header = memo(() => {
                                         h="6"
                                         color="gray.300"
                                         _hover={{
-                                            color: 'white',
-                                            transform: 'scale(1.1)',
+                                            color: 'purple.400',
                                         }}
                                     />
                                 </Link>
@@ -173,7 +171,7 @@ export const Header = memo(() => {
                                     borderRadius="lg"
                                     transition="all 0.2s ease"
                                     _hover={{
-                                        transform: 'translateY(-2px)',
+                                        transform: 'translateY(-1px)',
                                     }}
                                 >
                                     <Icon
@@ -184,8 +182,7 @@ export const Header = memo(() => {
                                         h="6"
                                         color="gray.300"
                                         _hover={{
-                                            color: 'white',
-                                            transform: 'scale(1.1)',
+                                            color: 'pink.400',
                                         }}
                                     />
                                 </Link>
