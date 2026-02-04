@@ -255,3 +255,10 @@ function FeatureCard({ icon, title, description, color }: { icon: any; title: st
 }
 
 export { Page };
+
+export const documentProps = {
+    title: 'chaiNNer - Node-Based Image Processing Software',
+    description: 'A powerful node-based image processing GUI for batch processing and custom workflows. Features GPU acceleration, visual node editor, and cross-platform support for Windows, macOS, and Linux.',
+    keywords: 'chaiNNer, image processing, node editor, batch processing, GPU acceleration, visual programming, workflow automation, cross-platform, Windows, macOS, Linux',
+    image: 'https://chainner.app/banner.png',
+};

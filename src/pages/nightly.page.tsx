@@ -435,3 +435,10 @@ function Page() {
 }
 
 export { Page };
+
+export const documentProps = {
+    title: 'chaiNNer Nightly Builds - Latest Development Releases',
+    description: 'Download the latest nightly builds of chaiNNer with cutting-edge features and improvements. Experimental builds for Windows, macOS, and Linux with the newest image processing capabilities.',
+    keywords: 'chaiNNer nightly, development builds, experimental features, beta version, latest updates',
+    image: 'https://chainner.app/banner.png',
+};

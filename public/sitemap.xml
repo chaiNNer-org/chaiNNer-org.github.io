@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://chainner.app/</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://chainner.app/banner.png</image:loc>
+      <image:title>chaiNNer - Node-Based Image Processing</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainner.app/download</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://chainner.app/banner.png</image:loc>
+      <image:title>Download chaiNNer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainner.app/nightly</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://chainner.app/banner.png</image:loc>
+      <image:title>chaiNNer Nightly Builds</image:title>
+    </image:image>
+  </url>
+</urlset>

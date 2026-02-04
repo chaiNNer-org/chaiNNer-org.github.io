@@ -14,6 +14,8 @@ export interface PageContextCustom {
         documentProps?: {
             title?: string;
             description?: string;
+            keywords?: string;
+            image?: string;
         };
     };
 }
