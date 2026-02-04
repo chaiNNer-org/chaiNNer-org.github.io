@@ -32,11 +32,11 @@ function Page(pageProps: PageProps) {
                             borderRadius="xl"
                             fontWeight="600"
                             fontSize="lg"
-                            boxShadow="0 10px 25px -5px rgba(16, 185, 129, 0.4)"
+                            boxShadow="0 4px 12px -2px rgba(16, 185, 129, 0.3)"
                             transition="all 0.3s ease"
                             _hover={{
                                 transform: 'translateY(-2px)',
-                                boxShadow: '0 20px 40px -5px rgba(16, 185, 129, 0.5)',
+                                boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.4)',
                                 bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
                             }}
                             _active={{
@@ -63,7 +63,7 @@ function Page(pageProps: PageProps) {
                                 bg: 'rgba(139, 92, 246, 0.1)',
                                 borderColor: 'purple.400',
                                 transform: 'translateY(-2px)',
-                                boxShadow: '0 10px 25px -5px rgba(139, 92, 246, 0.3)',
+                                boxShadow: '0 4px 12px -2px rgba(139, 92, 246, 0.25)',
                             }}
                             _active={{
                                 transform: 'translateY(0)',

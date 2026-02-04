@@ -243,11 +243,11 @@ function Page() {
                                 px={10}
                                 py={8}
                                 disabled={isLoading || !isSupportedOS || currentBuild == null}
-                                boxShadow="0 10px 25px -5px rgba(139, 92, 246, 0.4)"
+                                boxShadow="0 4px 12px -2px rgba(139, 92, 246, 0.3)"
                                 transition="all 0.3s ease"
                                 _hover={{
                                     transform: 'translateY(-2px)',
-                                    boxShadow: '0 20px 40px -5px rgba(139, 92, 246, 0.5)',
+                                    boxShadow: '0 8px 20px -4px rgba(139, 92, 246, 0.4)',
                                     bg: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
                                 }}
                                 _active={{
