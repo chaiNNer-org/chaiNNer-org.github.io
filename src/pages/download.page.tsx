@@ -269,7 +269,8 @@ export { Page };
 
 export const documentProps = {
     title: 'Download chaiNNer - Free Image Processing Software',
-    description: 'Download the latest stable version of chaiNNer for Windows, macOS, and Linux. Free, open-source node-based image processing software with batch processing and GPU acceleration.',
+    description:
+        'Download the latest stable version of chaiNNer for Windows, macOS, and Linux. Free, open-source node-based image processing software with batch processing and GPU acceleration.',
     keywords: 'download chaiNNer, free image processing software, node editor download, Windows macOS Linux, batch image processing',
     image: 'https://chainner.app/banner.png',
 };

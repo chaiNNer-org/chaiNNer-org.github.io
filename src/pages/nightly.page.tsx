@@ -114,8 +114,12 @@ function useNightlyData() {
                 if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
                 return (await res.json()) as IGithubRelease[];
             })
-            .then((releases) => setData(processReleases(releases)))
-            .catch(() => setError(true));
+            .then((releases) => {
+                setData(processReleases(releases));
+            })
+            .catch(() => {
+                setError(true);
+            });
     }, []);
 
     return { data, error };
@@ -285,8 +289,8 @@ function Page() {
                                             {isLoading
                                                 ? 'Loading...'
                                                 : latestVersion != null
-                                                  ? `Download Nightly${releaseDate != null ? ` (${releaseDate})` : ''}`
-                                                  : 'No nightly release found'}
+                                                ? `Download Nightly${releaseDate != null ? ` (${releaseDate})` : ''}`
+                                                : 'No nightly release found'}
                                         </Text>
                                     </HStack>
                                     {!isLoading && (
@@ -438,7 +442,8 @@ export { Page };
 
 export const documentProps = {
     title: 'chaiNNer Nightly Builds - Latest Development Releases',
-    description: 'Download the latest nightly builds of chaiNNer with cutting-edge features and improvements. Experimental builds for Windows, macOS, and Linux with the newest image processing capabilities.',
+    description:
+        'Download the latest nightly builds of chaiNNer with cutting-edge features and improvements. Experimental builds for Windows, macOS, and Linux with the newest image processing capabilities.',
     keywords: 'chaiNNer nightly, development builds, experimental features, beta version, latest updates',
     image: 'https://chainner.app/banner.png',
 };

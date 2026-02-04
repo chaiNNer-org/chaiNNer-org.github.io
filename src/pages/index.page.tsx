@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, Center, HStack, Image, Link, VStack, Box, Text, Heading, SimpleGrid, Icon, Container } from '@chakra-ui/react';
-import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop, FaChevronDown } from 'react-icons/fa/index.js';
+import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop, FaChevronDown, FaPalette, FaCheckCircle } from 'react-icons/fa/index.js';
 import '../index.scss';
 import { PageProps } from '../types';
 import Banner from '../assets/banner.png';
@@ -111,7 +111,7 @@ function Page(pageProps: PageProps) {
                 bg="transparent"
                 py={20}
             >
-                <Container maxW="6xl">
+                <Container maxW="1400px">
                     <VStack spacing={16}>
                         {/* Introduction */}
                         <VStack
@@ -132,9 +132,9 @@ function Page(pageProps: PageProps) {
                                 lineHeight="1.6"
                             >
                                 A node-based image processing GUI aimed at making chaining image processing tasks easy and customizable. Born as an AI upscaling
-                                application, chaiNNer has grown into an extremely flexible and powerful programmatic image processing application. ChaiNNer gives
-                                you a level of customization of your image processing workflow that very few others do. Cross-platform for Windows, macOS, and
-                                Linux.
+                                application, chaiNNer has grown into an extremely flexible and powerful programmatic image processing application. ChaiNNer
+                                gives you a level of customization of your image processing workflow that very few others do. Cross-platform for Windows, macOS,
+                                and Linux.
                             </Text>
                         </VStack>
 
@@ -151,7 +151,7 @@ function Page(pageProps: PageProps) {
                                 Key Features
                             </Heading>
                             <SimpleGrid
-                                columns={{ base: 1, md: 2, lg: 3 }}
+                                columns={{ base: 1, md: 2, lg: 4 }}
                                 spacing={8}
                                 w="100%"
                             >
@@ -162,10 +162,22 @@ function Page(pageProps: PageProps) {
                                     color="brand.500"
                                 />
                                 <FeatureCard
+                                    icon={FaPalette}
+                                    title="Comprehensive Processing"
+                                    description="Full suite of image processing operations including filters, color adjustments, transforms, blending, and effects. Automate any task you can do in traditional image editing software."
+                                    color="pink.400"
+                                />
+                                <FeatureCard
                                     icon={FaMagic}
                                     title="AI Upscaling"
                                     description="Leverage AI models for image upscaling with support for PyTorch, NCNN, ONNX, and TensorRT. Use architectures like ESRGAN, Real-ESRGAN, and many more via Spandrel."
                                     color="purple.400"
+                                />
+                                <FeatureCard
+                                    icon={FaCheckCircle}
+                                    title="Smart Validation"
+                                    description="Built-in type system, real-time validation, and conditional logic ensure your chains are correct. Catch errors before processing while maintaining flexibility for complex workflows."
+                                    color="yellow.400"
                                 />
                                 <FeatureCard
                                     icon={FaImage}
@@ -288,7 +300,9 @@ export { Page };
 
 export const documentProps = {
     title: 'chaiNNer - Node-Based Image Processing Software',
-    description: 'A powerful node-based image processing GUI for batch processing and custom workflows. Features GPU acceleration, visual node editor, and cross-platform support for Windows, macOS, and Linux.',
-    keywords: 'chaiNNer, image processing, node editor, batch processing, GPU acceleration, visual programming, workflow automation, cross-platform, Windows, macOS, Linux',
+    description:
+        'A powerful node-based image processing GUI for batch processing and custom workflows. Features GPU acceleration, visual node editor, and cross-platform support for Windows, macOS, and Linux.',
+    keywords:
+        'chaiNNer, image processing, node editor, batch processing, GPU acceleration, visual programming, workflow automation, cross-platform, Windows, macOS, Linux',
     image: 'https://chainner.app/banner.png',
 };
