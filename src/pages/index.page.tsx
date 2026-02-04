@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, Center, HStack, Image, Link, VStack, Box, Text, Heading, SimpleGrid, Icon, Container } from '@chakra-ui/react';
-import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop } from 'react-icons/fa/index.js';
+import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop, FaChevronDown } from 'react-icons/fa/index.js';
 import '../index.scss';
 import { PageProps } from '../types';
 import Banner from '../assets/banner.png';
@@ -10,8 +10,9 @@ function Page(pageProps: PageProps) {
         <Box w="100%">
             {/* Hero Section */}
             <Center
-                h="100vh"
+                h="calc(100vh - 4.5rem)"
                 w="100%"
+                position="relative"
             >
                 <VStack spacing={12}>
                     <Image
@@ -72,6 +73,35 @@ function Page(pageProps: PageProps) {
                             Nightly
                         </Button>
                     </HStack>
+                </VStack>
+                <VStack
+                    position="absolute"
+                    bottom={16}
+                    spacing={2}
+                >
+                    <Text
+                        color="gray.400"
+                        fontSize="sm"
+                        fontWeight="500"
+                    >
+                        Scroll to learn more
+                    </Text>
+                    <Icon
+                        as={FaChevronDown}
+                        color="gray.400"
+                        boxSize={6}
+                        sx={{
+                            '@keyframes bounce': {
+                                '0%, 100%': {
+                                    transform: 'translateY(0)',
+                                },
+                                '50%': {
+                                    transform: 'translateY(8px)',
+                                },
+                            },
+                            animation: 'bounce 2s ease-in-out infinite',
+                        }}
+                    />
                 </VStack>
             </Center>
 
