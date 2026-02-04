@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, Center, HStack, Image, Link, VStack, Box, Text, Heading, SimpleGrid, Icon, Container } from '@chakra-ui/react';
-import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop } from 'react-icons/fa';
+import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop } from 'react-icons/fa/index.js';
 import '../index.scss';
 import { PageProps } from '../types';
 import Banner from '../assets/banner.png';
