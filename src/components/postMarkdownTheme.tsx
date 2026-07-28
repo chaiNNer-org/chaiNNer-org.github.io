@@ -1,6 +1,35 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Box, Code, Heading, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react';
 import type { Components } from 'react-markdown';
+import { ImageCompare, ImageCompareProps } from './ImageCompare';
+
+const COMPARE = 'language-compare';
+
+/**
+ * Posts stay plain markdown, but a fenced ```compare block carries the JSON for
+ * a before/after wipe. One convention is cheaper than an MDX toolchain, and the
+ * files remain readable and portable. Malformed JSON throws during pre-render,
+ * so a broken block fails the build rather than the page.
+ */
+function CompareBlock({ source, file }: { source: string; file: string }) {
+    let parsed: Partial<ImageCompareProps>;
+    try {
+        parsed = JSON.parse(source) as Partial<ImageCompareProps>;
+    } catch (error) {
+        throw new Error(`${file}: compare block is not valid JSON — ${String(error)}`);
+    }
+
+    for (const key of ['before', 'after', 'beforeLabel', 'afterLabel', 'width', 'height', 'alt'] as const) {
+        if (parsed[key] === undefined) throw new Error(`${file}: compare block is missing "${key}"`);
+    }
+
+    return <ImageCompare {...(parsed as ImageCompareProps)} />;
+}
+
+const hasCompareClass = (node: unknown): boolean => {
+    const className = (node as { props?: { className?: unknown } } | null)?.props?.className;
+    return typeof className === 'string' && className.includes(COMPARE);
+};
 
 /**
  * Body copy for a blog post: bigger and looser than the release notes theme,
@@ -79,18 +108,47 @@ export const postMarkdownTheme: Components = {
         </OrderedList>
     ),
     li: (props) => <ListItem>{props.children}</ListItem>,
-    code: (props) => (
-        <Code
-            bg="whiteAlpha.100"
-            color="inkMuted"
-            fontSize="0.85em"
-            px={1.5}
-            py={0.5}
-            borderRadius="md"
-        >
-            {props.children}
-        </Code>
-    ),
+    code: (props) => {
+        const className = typeof props.className === 'string' ? props.className : '';
+        if (className.includes(COMPARE)) {
+            return (
+                <CompareBlock
+                    file="post"
+                    source={String(props.children)}
+                />
+            );
+        }
+        return (
+            <Code
+                bg="whiteAlpha.100"
+                color="inkMuted"
+                fontSize="0.85em"
+                px={1.5}
+                py={0.5}
+                borderRadius="md"
+            >
+                {props.children}
+            </Code>
+        );
+    },
+    // A compare block renders a figure, which cannot live inside a <pre>.
+    pre: (props) => {
+        const first = Array.isArray(props.children) ? props.children[0] : props.children;
+        if (hasCompareClass(first)) return <>{props.children}</>;
+        return (
+            <Box
+                as="pre"
+                overflowX="auto"
+                bg="whiteAlpha.100"
+                borderRadius="md"
+                p={4}
+                mb={5}
+                fontSize="sm"
+            >
+                {props.children}
+            </Box>
+        );
+    },
     hr: () => (
         <Box
             as="hr"

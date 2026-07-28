@@ -9,6 +9,18 @@ summary: A much more compact node design, inserting a node onto an existing conn
 
 The first thing you might notice in this version is a bit of a redesign. Nodes have been majorly overhauled to be much more compact. It might be a shock how different it looks at first, but I guarantee you'll quickly get used to it and prefer this new look. The compactness gives you much more space to fill out your chains with, and there is a lot less wasted space overall.
 
+```compare
+{
+  "before": "/images/blog/v0-16-0-nodes-before.jpg",
+  "after": "/images/blog/v0-16-0-nodes-after.jpg",
+  "beforeLabel": "Before",
+  "afterLabel": "After",
+  "width": 1161,
+  "height": 816,
+  "alt": "The same chain before and after the redesign."
+}
+```
+
 With that change also came a change to sliders. In my opinion they are now a lot easier to see and interact with, and closer to something you'd see in Blender.
 
 There have also been changes to pop-up boxes. Settings had a bit of an overhaul to fix some scrolling issues, and all pop-ups now have a darker color. Alerts also got icons representing the type of alert.
