@@ -233,7 +233,7 @@ function Page(pageProps: PageProps) {
                                         fontSize="lg"
                                         textAlign="center"
                                     >
-                                        chaiNNer's intuitive node-based interface makes complex image processing simple
+                                        chaiNNer&rsquo;s intuitive node-based interface makes complex image processing simple
                                     </Text>
                                     <Image
                                         src="https://github.com/chaiNNer-org/chaiNNer/raw/main/docs/assets/screenshot.png"

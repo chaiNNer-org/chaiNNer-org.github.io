@@ -74,7 +74,7 @@ function releaseToMarkdown(release: IGithubRelease) {
 function processReleases(allVersions: IGithubRelease[]): NightlyData {
     const ordered = allVersions
         .filter((r) => !r.draft)
-        .sort((a, b) => new Date(b.published_at || b.created_at).getTime() - new Date(a.published_at || a.created_at).getTime());
+        .sort((a, b) => new Date(b.published_at ?? b.created_at).getTime() - new Date(a.published_at ?? a.created_at).getTime());
 
     const latest = ordered[0];
 

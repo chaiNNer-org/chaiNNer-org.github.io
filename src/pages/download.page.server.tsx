@@ -7,7 +7,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
     const allVersions = (await getAllVersions()) ?? [];
     const ordered = allVersions
         .filter((r) => !r.draft)
-        .sort((a, b) => new Date(b.published_at || b.created_at).getTime() - new Date(a.published_at || a.created_at).getTime());
+        .sort((a, b) => new Date(b.published_at ?? b.created_at).getTime() - new Date(a.published_at ?? a.created_at).getTime());
 
     const data = await getLatestVersion();
 

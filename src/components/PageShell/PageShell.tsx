@@ -26,6 +26,12 @@ export const theme = extendTheme({
             800: '#1e40af',
             900: '#1e3a8a',
         },
+        cable: {
+            300: '#fca5a5',
+            400: '#f87171',
+            500: '#ef4444',
+            600: '#dc2626',
+        },
     },
     fonts: {
         heading: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
