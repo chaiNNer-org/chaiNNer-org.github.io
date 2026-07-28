@@ -4,6 +4,7 @@ import { PageContextProvider } from '../../usePageContext';
 import type { PageContext } from '../../types';
 import './PageShell.scss';
 import { Header } from '../Header';
+import { Footer } from '../Footer';
 import { ChakraProvider, VStack, Theme, extendTheme, Box, Center } from '@chakra-ui/react';
 
 const config = {
@@ -46,25 +47,20 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
                 <PageContextProvider pageContext={pageContext}>
                     <VStack
                         w="full"
-                        h="full"
                         spacing={0}
                         minH="100vh"
+                        align="stretch"
                         className="background"
                     >
                         <Header />
-                        <Center
-                            h="100%"
-                            minH="calc(100vh - 7rem)"
+                        <Box
+                            as="main"
                             w="full"
-                            p={2}
+                            flex="1"
                         >
-                            <Center
-                                h="100%"
-                                mt="0.5rem"
-                            >
-                                {children}
-                            </Center>
-                        </Center>
+                            {children}
+                        </Box>
+                        <Footer />
                     </VStack>
                 </PageContextProvider>
             </ChakraProvider>
@@ -74,19 +70,26 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
 
 function ShellWrapper({ children }: { children: React.ReactNode }) {
     return (
-        <Box
-            h="100%"
-            minH="100%"
-            maxW="1200px"
-            minW="380px"
-            borderRadius="2xl"
-            boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5)"
-            position="relative"
-            bgColor="gray.800"
-            p={6}
+        <Center
+            w="full"
+            p={2}
         >
-            {children}
-        </Box>
+            <Center mt="0.5rem">
+                <Box
+                    h="100%"
+                    minH="100%"
+                    maxW="1200px"
+                    minW="380px"
+                    borderRadius="2xl"
+                    boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+                    position="relative"
+                    bgColor="gray.800"
+                    p={6}
+                >
+                    {children}
+                </Box>
+            </Center>
+        </Center>
     );
 }
 
