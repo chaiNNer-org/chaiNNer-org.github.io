@@ -183,9 +183,8 @@ function Hero({ stars }: { stars: number | undefined }) {
                 <Box maxW="40rem">
                     {/*
                      * The mark is sized and spaced in `em`, so it tracks the
-                     * wordmark across every breakpoint. It sits a hair above the
-                     * line box because the text has no descenders to fill the
-                     * space below, which would otherwise ride the circle low.
+                     * wordmark across every breakpoint. At 0.8em the circle comes
+                     * out level with the ascenders, which is where it wants to sit.
                      */}
                     <Flex
                         align="center"
@@ -195,11 +194,9 @@ function Hero({ stars }: { stars: number | undefined }) {
                         <Image
                             src={Logo}
                             alt=""
-                            boxSize="0.86em"
+                            boxSize="0.8em"
                             maxW="none"
                             flexShrink={0}
-                            position="relative"
-                            top="-0.04em"
                         />
                         <Heading
                             as="h1"
