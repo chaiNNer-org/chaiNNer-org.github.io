@@ -57,6 +57,8 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
                             as="main"
                             w="full"
                             flex="1"
+                            display="flex"
+                            flexDirection="column"
                         >
                             {children}
                         </Box>
@@ -73,6 +75,7 @@ function ShellWrapper({ children }: { children: React.ReactNode }) {
         <Center
             w="full"
             p={2}
+            flex="1"
         >
             <Center mt="0.5rem">
                 <Box
