@@ -26,8 +26,28 @@ const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
         ),
     },
     {
+        title: 'Face restoration',
+        body: 'Upscale Face finds the faces in an image, restores each one with a dedicated face model — GFPGAN, RestoreFormer, or CodeFormer — and pastes them back in. Hand it your general upscale as the background so the face model only has to deal with the faces.',
+    },
+    {
+        title: 'Color correction after an upscale',
+        body: 'Upscaling models drift the color of their output. Average Color Fix and Wavelet Color Fix match the result back to the original, and Color Transfer moves the look of one image onto another. Wavelet usually looks better and costs more time.',
+    },
+    {
+        title: 'Model interpolation',
+        body: 'Interpolate Models blends two models into a new one you can run or save to disk, so you can make your own without training anything. The two have to share a pretrained ancestor — chaiNNer test-blends them and refuses the pair if the result comes out degenerate.',
+    },
+    {
         title: 'Textures and normal maps',
         body: 'Normal Map Generator builds a normal map from a diffuse texture. Add Normals, Scale Normals, and Balance Normals combine and correct them, and Metal to Specular converts between PBR workflows.',
+    },
+    {
+        title: 'Shipping game textures',
+        body: 'Save Image writes DDS with BC1 through BC7, sRGB or linear, and mipmaps, including the two-channel BC5 formats that pair with the normal map nodes. Split Spritesheet takes a sheet apart, the chain runs on every tile, and Merge Spritesheet puts it back together.',
+    },
+    {
+        title: 'Pixel art',
+        body: 'Resize Pixel Art upscales with HQ2x, Eagle, and AdvMAME instead of a model. Palette from Image extracts a palette that Apply Palette and Dither (Palette) consume, and Quantize to Reference re-quantizes an upscale using colors sampled locally from the original rather than globally.',
     },
     {
         title: 'Batch processing',
