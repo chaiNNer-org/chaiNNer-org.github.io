@@ -6,9 +6,25 @@ import { AiFillGithub } from 'react-icons/ai/index.js';
 import Logo from '../assets/128x128.png';
 import { discordLink, githubLink, kofiLink } from '../utils/links';
 import { SiDiscord, SiKofi } from 'react-icons/si/index.js';
+import { usePageContext } from '../usePageContext';
 
 export const Header = memo(() => {
     const bg = 'gray.800';
+
+    const { urlPathname } = usePageContext();
+    const isHome = urlPathname === '/';
+
+    const navLinks = isHome
+        ? [
+              { label: 'What it is', href: '#what' },
+              { label: 'Use cases', href: '#usecases' },
+              { label: 'How it works', href: '#how' },
+          ]
+        : [
+              { label: 'Home', href: '/' },
+              { label: 'Download', href: '/download' },
+              { label: 'Nightly', href: '/nightly' },
+          ];
 
     return (
         <Box
@@ -54,58 +70,28 @@ export const Header = memo(() => {
                                         </HStack>
                                     </Link>
                                 </chakra.div>
-                                <Button
-                                    bg="transparent"
-                                    color="gray.300"
-                                    display="inline-flex"
-                                    alignItems="center"
-                                    fontSize="md"
-                                    fontWeight="500"
-                                    borderRadius="lg"
-                                    px={{ base: 3, sm: 6 }}
-                                    py={2}
-                                    transition="all 0.2s ease"
-                                    _hover={{
-                                        color: 'white',
-                                        transform: 'translateY(-1px)',
-                                    }}
-                                    _focus={{
-                                        boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.3)',
-                                    }}
-                                    _active={{
-                                        transform: 'translateY(0)',
-                                    }}
-                                    as={Link}
-                                    href="/"
-                                >
-                                    Home
-                                </Button>
-                                <Button
-                                    bg="transparent"
-                                    color="gray.300"
-                                    display="inline-flex"
-                                    alignItems="center"
-                                    fontSize="md"
-                                    fontWeight="500"
-                                    borderRadius="lg"
-                                    px={{ base: 3, sm: 6 }}
-                                    py={2}
-                                    transition="all 0.2s ease"
-                                    _hover={{
-                                        color: 'white',
-                                        transform: 'translateY(-1px)',
-                                    }}
-                                    _focus={{
-                                        boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.3)',
-                                    }}
-                                    _active={{
-                                        transform: 'translateY(0)',
-                                    }}
-                                    as={Link}
-                                    href="/download"
-                                >
-                                    Download
-                                </Button>
+                                {navLinks.map((link) => (
+                                    <Button
+                                        key={link.href}
+                                        as={Link}
+                                        href={link.href}
+                                        bg="transparent"
+                                        color="gray.300"
+                                        display={{ base: 'none', md: 'inline-flex' }}
+                                        alignItems="center"
+                                        fontSize="md"
+                                        fontWeight="500"
+                                        borderRadius="lg"
+                                        px={{ base: 3, sm: 5 }}
+                                        py={2}
+                                        transition="all 0.2s ease"
+                                        _hover={{ color: 'white', transform: 'translateY(-1px)', textDecoration: 'none' }}
+                                        _focus={{ boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.3)' }}
+                                        _active={{ transform: 'translateY(0)' }}
+                                    >
+                                        {link.label}
+                                    </Button>
+                                ))}
                             </HStack>
                         </Flex>
 
@@ -117,6 +103,22 @@ export const Header = memo(() => {
                             color="gray.400"
                         >
                             <HStack spacing="4">
+                                <Button
+                                    as={Link}
+                                    href="/download"
+                                    bg="brand.500"
+                                    color="white"
+                                    size="sm"
+                                    px={5}
+                                    borderRadius="lg"
+                                    fontWeight="600"
+                                    mr={2}
+                                    transition="all 0.2s ease"
+                                    _hover={{ bg: 'brand.400', transform: 'translateY(-1px)', textDecoration: 'none' }}
+                                    _active={{ transform: 'translateY(0)' }}
+                                >
+                                    Download
+                                </Button>
                                 <Link
                                     isExternal
                                     aria-label="Go to the chaiNNer GitHub page"
