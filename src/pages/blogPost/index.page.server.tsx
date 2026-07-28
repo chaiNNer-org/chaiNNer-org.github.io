@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { PageContextServer } from '../../types';
-import { findPost, POSTS } from '../../content/posts';
+import { findPost, POSTS } from '../../content/loadPosts';
 
 async function onBeforeRender(pageContext: PageContextServer) {
     const slug = (pageContext.routeParams as { slug?: string } | undefined)?.slug;

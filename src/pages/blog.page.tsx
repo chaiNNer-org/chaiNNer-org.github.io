@@ -3,12 +3,12 @@ import { Box, Heading, Link, Text, VStack } from '@chakra-ui/react';
 import '../index.scss';
 import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink } from '../utils/links';
-import { formatPostDate, POSTS } from '../content/posts';
+import { formatPostDate, PostMeta } from '../content/post';
 
-function PostList() {
+function PostList({ posts }: { posts: PostMeta[] }) {
     return (
         <Box maxW="42rem">
-            {POSTS.map((post) => (
+            {posts.map((post) => (
                 <Box
                     as="article"
                     key={post.slug}
@@ -111,7 +111,7 @@ function NothingYet() {
     );
 }
 
-function Page() {
+function Page({ posts }: { posts: PostMeta[] }) {
     return (
         <Box w="100%">
             <Section
@@ -122,7 +122,7 @@ function Page() {
                 <Prose>
                     <p>Release announcements, and the occasional longer explanation of how something in chaiNNer works.</p>
                 </Prose>
-                <Box mt={10}>{POSTS.length > 0 ? <PostList /> : <NothingYet />}</Box>
+                <Box mt={10}>{posts.length > 0 ? <PostList posts={posts} /> : <NothingYet />}</Box>
             </Section>
         </Box>
     );

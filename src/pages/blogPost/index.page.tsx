@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import '../../index.scss';
 import ChakraUIRenderer from '../../utils/chakra-ui-markdown-renderer';
 import { postMarkdownTheme } from '../../components/postMarkdownTheme';
-import { formatPostDate, Post, releaseUrl } from '../../content/posts';
+import { formatPostDate, Post, releaseUrl } from '../../content/post';
 
 function Page({ post }: { post: Post }) {
     return (
