@@ -73,6 +73,16 @@ body {
     }
 }
 
+@keyframes scrollCueBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
 .cable-path {
     fill: none;
     stroke: currentColor;
@@ -99,6 +109,10 @@ body {
     .node-tile {
         animation: fadeUp 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: var(--delay, 0ms);
+    }
+
+    .scroll-cue {
+        animation: scrollCueBounce 2s ease-in-out infinite;
     }
 }
 
