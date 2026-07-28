@@ -5,6 +5,7 @@ import '../index.scss';
 import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink, kofiLink, openModelDbLink, spandrelLink, templatesLink } from '../utils/links';
 import Screenshot from '../assets/screenshot.png';
+import Logo from '../assets/128x128.png';
 
 /** A link sitting inside a sentence rather than standing on its own. */
 function InlineLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -180,14 +181,35 @@ function Hero({ stars }: { stars: number | undefined }) {
                 py={{ base: 20, md: 28 }}
             >
                 <Box maxW="40rem">
-                    <Heading
-                        as="h1"
+                    {/*
+                     * The mark is sized and spaced in `em`, so it tracks the
+                     * wordmark across every breakpoint. It sits a hair above the
+                     * line box because the text has no descenders to fill the
+                     * space below, which would otherwise ride the circle low.
+                     */}
+                    <Flex
+                        align="center"
+                        gap="0.26em"
                         fontSize={{ base: '3.5rem', sm: '4.5rem', md: '5.5rem' }}
-                        lineHeight="0.95"
-                        letterSpacing="-0.035em"
                     >
-                        chaiNNer
-                    </Heading>
+                        <Image
+                            src={Logo}
+                            alt=""
+                            boxSize="0.86em"
+                            maxW="none"
+                            flexShrink={0}
+                            position="relative"
+                            top="-0.04em"
+                        />
+                        <Heading
+                            as="h1"
+                            fontSize="1em"
+                            lineHeight="0.95"
+                            letterSpacing="-0.035em"
+                        >
+                            chaiNNer
+                        </Heading>
+                    </Flex>
                     <Text
                         fontSize={{ base: 'xl', md: '2xl' }}
                         fontWeight="500"
