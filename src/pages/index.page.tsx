@@ -58,15 +58,15 @@ const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
     },
     {
         title: 'Batch processing',
-        body: 'Point Load Images at a folder or Load Video at a clip, and the chain runs over every image or frame into Save Image or Save Video. The run is a sequence you can program: Limit Sequence takes ten files for a test pass, Skip Sequence starts partway in, Filter Sequence drops the ones that fail a condition, and Text Pattern and Regex Replace build output names from the input names. One iterator per chain, though the collector nodes mix freely.',
+        body: 'Point Load Images at a folder or Load Video at a clip, and the chain runs over every image or frame. Save Image collects the results at the other end, and Save Video re-encodes frames back into a file as H.264, H.265, VP9, or lossless FFV1. Text Pattern and Regex Replace build output filenames out of the input names.',
     },
     {
         title: 'Color and adjustments',
-        body: 'Color Levels, Brightness & Contrast, Hue & Saturation, Gamma, and Stretch Contrast cover the usual corrections. Unsharp Mask and High Pass sharpen, while Gaussian, box, median, surface, and lens blur soften. Add, Multiply, and Divide do arithmetic between two images, and Threshold cuts to black and white.',
+        body: 'Color Levels, Brightness & Contrast, Hue & Saturation, and Gamma cover the usual corrections, with Stretch Contrast for automatic levels. Unsharp Mask and High Boost Filter sharpen, while Gaussian, box, median, surface, and lens blur soften. Add, Multiply, and Divide scale every channel by a value, and Threshold cuts an image to black and white.',
     },
     {
         title: 'Resize, crop, rotate, blend',
-        body: 'Resize by ratio or to a target side, crop by border or down to content, then Pad, Rotate, and Flip. Blend Images composites two layers with the usual modes — normal, multiply, screen, overlay — Stack Images tiles several into one, and Get Dimensions and Get Bounding Box feed measurements back into the chain for later nodes to act on.',
+        body: 'Resize by ratio or to a target side length, crop to the visible content or strip a flat border automatically, then Pad, Rotate, and Flip. Blend Images lays an overlay onto a base with the usual modes — normal, multiply, screen, overlay — Stack Images concatenates several horizontally or vertically, and Get Dimensions reads height, width, and channel count back out for later nodes to use.',
     },
 ];
 
