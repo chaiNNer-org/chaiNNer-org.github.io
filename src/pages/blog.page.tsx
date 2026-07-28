@@ -3,7 +3,7 @@ import { Box, Heading, Link, Text, VStack } from '@chakra-ui/react';
 import '../index.scss';
 import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink } from '../utils/links';
-import { formatPostDate, PostMeta, SOURCE_SHORT } from '../content/post';
+import { formatPostDate, KIND_LABEL, PostMeta, SOURCE_SHORT } from '../content/post';
 
 function PostList({ posts }: { posts: PostMeta[] }) {
     return (
@@ -26,6 +26,12 @@ function PostList({ posts }: { posts: PostMeta[] }) {
                         color="inkFaint"
                     >
                         {formatPostDate(post.date)}
+                        {KIND_LABEL[post.kind] !== '' && (
+                            <Text
+                                as="span"
+                                color="whiteAlpha.500"
+                            >{` · ${KIND_LABEL[post.kind]}`}</Text>
+                        )}
                         {post.source !== undefined && (
                             <Text
                                 as="span"

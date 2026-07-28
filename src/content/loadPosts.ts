@@ -1,4 +1,4 @@
-import { Post, POST_SOURCES, PostMeta, PostSource } from './post';
+import { Post, POST_KINDS, POST_SOURCES, PostKind, PostMeta, PostSource } from './post';
 
 /**
  * Every post is a markdown file in `./posts`. Adding one is adding a file — no
@@ -15,7 +15,7 @@ const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
 const FIELD = /^([a-zA-Z][\w-]*):\s*(.*)$/;
 
 const REQUIRED = ['title', 'date', 'summary'] as const;
-const OPTIONAL = ['tag', 'source'] as const;
+const OPTIONAL = ['tag', 'source', 'kind'] as const;
 const KNOWN = new Set<string>([...REQUIRED, ...OPTIONAL]);
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -50,8 +50,14 @@ function parse(path: string, raw: string): Post {
         throw new Error(`${path}: source must be one of ${POST_SOURCES.join(', ')}, got "${source}"`);
     }
 
+    const kind = fields.get('kind') ?? 'release';
+    if (!POST_KINDS.includes(kind as PostKind)) {
+        throw new Error(`${path}: kind must be one of ${POST_KINDS.join(', ')}, got "${kind}"`);
+    }
+
     return {
         slug,
+        kind: kind as PostKind,
         title: fields.get('title') ?? '',
         date,
         summary: fields.get('summary') ?? '',

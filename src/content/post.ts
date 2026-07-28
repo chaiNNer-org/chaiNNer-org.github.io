@@ -11,7 +11,9 @@ export interface PostMeta {
     date: string;
     /** One or two sentences. Shown on the index and used as the page description. */
     summary: string;
-    /** Release this post announces, linked at the end of it. */
+    /** What sort of post this is. Defaults to `release` when the frontmatter omits it. */
+    kind: PostKind;
+    /** Release this post announces, linked at the end of it. Releases only. */
     tag?: string;
     /**
      * Where the post was originally written, when that was not this site. The
@@ -23,6 +25,18 @@ export interface PostMeta {
 
 export const POST_SOURCES = ['discord'] as const;
 export type PostSource = (typeof POST_SOURCES)[number];
+
+/**
+ * `release` announces a version and links its GitHub release. `devlog` is
+ * progress written up between releases, tied to no version.
+ */
+export const POST_KINDS = ['release', 'devlog'] as const;
+export type PostKind = (typeof POST_KINDS)[number];
+
+export const KIND_LABEL: Record<PostKind, string> = {
+    release: '',
+    devlog: 'Devlog',
+};
 
 export const SOURCE_LABEL: Record<PostSource, string> = {
     discord: 'Originally posted in the chaiNNer Discord',
