@@ -6,20 +6,16 @@ summary: Video support rebuilt on a full FFmpeg build, and auto-tiling reworked 
 source: discord
 ---
 
+Revamped video support, auto-tiling changes, and more!
+
 After a long wait, 0.14.0 is finally here. This update brings a couple of pretty important changes.
 
-## Video support, rebuilt on FFmpeg
+## Revamped video support
 
-One of the biggest changes is improved video support. Many of you have found that the current video support isn't great, as it has limited encoding options which tend to not work depending on the machine. This is due to how OpenCV's video support works — or, I guess, doesn't work — which I won't go into detail about here.
+One of the biggest changes is improved video support. Many of you have found that the current video support isn't great, as it has limited encoding options which tend to not work depending on the machine. This is due to how OpenCV's video support works (or I guess, doesn't work), which I won't go into detail about here. As of this update, the video support has been revamped to use a fully-featured FFMPEG build. This means that now we are able to have many more encoding options compared to before, so it gives you a lot more flexibility. It also means that it's pretty much guaranteed to work on any system now. This is a huge improvement that is long overdue.
 
-As of this update, video support has been revamped to use a fully featured FFmpeg build. That means many more encoding options than before, so it gives you a lot more flexibility, and it also means it's pretty much guaranteed to work on any system now. A huge improvement, and long overdue.
+## Auto-tiling changes
 
-## Tiling by actual tile size
+Another long overdue change is a revamp of how auto-tiling works. For a long time, chaiNNer hid tiling options from users, and just automatically handled it behind the scenes. If you don't know, tiling is something that many upscaling applications implement to get around VRAM limitations when an upscale would use more VRAM than your GPU physically has. We eventually decided to expose manual tiling options to the users, but this still used our internal "split factor" system, leading to the option being called "number of tiles". This was temporary but stuck around longer than we thought it would, and it rightfully confused users.
 
-Another long overdue change is a revamp of how auto-tiling works. For a long time chaiNNer hid tiling options from users and just handled it behind the scenes. If you don't know, tiling is something many upscaling applications implement to get around VRAM limitations, for when an upscale would use more VRAM than your GPU physically has.
-
-We eventually decided to expose manual tiling options, but that still used our internal "split factor" system, which led to the option being called "number of tiles". It was meant to be temporary, stuck around longer than we thought it would, and rightfully confused users.
-
-Thanks to Michael's tiling changes, we now have a similar but much better implementation that uses actual tile sizes. This is much more in line with other upscaling applications and is easier to comprehend and plan around. There are also more options in the dropdown, plus new VRAM estimation for NCNN. You'll see these as "Auto (estimate)" and "Maximum".
-
-Picking "Maximum" works similarly to how it did previously, while "Auto" pre-determines a tile size based on available VRAM. PyTorch has been using this method for a while, and now NCNN has it as well. And of course, with real tile sizes you can use the same one across multiple images without having to change it all the time, if you need to set it manually at all. We still generally recommend Auto or Maximum.
+Thanks to Michael's tiling changes, we now have a similar but much better implementation that uses actual tile sizes. This is much more in line with other upscaling applications and is a bit easier to comprehend and plan around. We also have more options in the dropdown, as well as new VRAM estimation for NCNN. You'll see this as "Auto (estimate)" and "Maximum". Picking "Maximum" will function similarly to how it did previously, while "Auto" will function by pre-determining a tile size to use based on available VRAM. PyTorch has been using this method for a while, but now NCNN has it as well. And of course, now we have better options for picking actual tile sizes, meaning you can use the same tile size on multiple images and not have to worry about changing it all the time (if you need to set it manually, that is). We still generally recommend you use the Auto or Maximum modes though.

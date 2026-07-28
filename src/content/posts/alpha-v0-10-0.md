@@ -6,26 +6,24 @@ summary: The Navi type system, colored handles that show you what connects to wh
 source: discord
 ---
 
-This is a pretty exciting update for chaiNNer. The first thing you might notice is all the new colors, but it's a lot more than just a new look, so I'll go over this changelog in a bit more detail than usual.
+Huge improvements! This might be the biggest update yet.
 
-## A new type system
+This is a pretty exciting update for chaiNNer! The first thing you might notice is all the new colors, but it's a lot more than just a new look. As a result, I will be going over this changelog in a bit more detail than usual.
 
-This update features a major overhaul of types. If you aren't a programmer, or just aren't familiar with types, they're the reason chaiNNer doesn't let you connect an image output to a model input. Models and images are different types, so they aren't compatible.
+## New Type System
 
-Previously types were extremely simple. Without getting too technical, a type was just a name — model, or image — and two types were compatible if they had the same name. Now chaiNNer has a brand new type system called Navi, with set-theory-based types. These are much more powerful and enable lots of things that would have been impossible before. Inputs can accept multiple types, and image inputs can require the connected image to have a certain number of channels, like RGB or RGBA. Per-node validation has also been improved, and we can now show you the output size of almost every image output without running anything.
+This update features a major overhaul of types. If you aren't a programmer or just aren't familiar with types, they're the reason chaiNNer doesn't let you connect an image output to a model input. Model and images are different types, so they aren't compatible. Previously, types were extemely simple. Without getting too technical, types were simply the name of the type (e.g. model or image) and types were compatible if they had the same name. Now, chaiNNer has a brand new type system called "Navi" with set-theorey-based types. These types are much more powerful and enable lots of things that would have been impossible before. E.g. inputs can now accept multiple types, and image inputs can now require the connected image to have a certain number of channels (e.g. RGB or RGBA). Per-node validation has also been improved, and now we are able to show you the output size of almost every image output without even having to run anything.
 
-So you might be wondering: "I didn't even know types were a thing before, I just kept trying to connect things and guessing what went where. How exactly does this make anything better for me?"
+So you might be wondering to yourself: "I didn't even know types were a thing before, I just kept trying to connect things and guessing what went where. How exactly does this make anything better for me?"
 
-Well, wonder no more. Each handle now has a dedicated color for each main type. With a quick glance you can see what connects to what — images are yellow, numbers are blue, PyTorch models are orange. Furthermore, as soon as you start dragging a connection out, any incompatible connections turn gray and slightly transparent. You will always know exactly what is connectable and what isn't.
+Well, wonder no more. Each handle now has a dedicated color for each main type. This means that with a quick glance, you can now see what can be connected to what. E.g. images are yellow, numbers are blue, PyTorch models are orange. It should be pretty easy now to be able to see what can be connected where. Furthermore, as soon as you start dragging a connection out, any incompatible connections turn gray and slightly transparent. This way, you will always 100% know what is connectable and what isn't.
 
-And speaking of connecting things easily.
+And speaking of connecting things easily...
 
-## The node selector context menu
+## Node Selector Context Menu
 
-A highly requested feature: chaiNNer now has a context menu that shows up both when right-clicking blank space in the editor, and when dragging a connection out to blank space. It lets you quickly find a node to place at that position and connect it automatically, in the case of dragging a connection to the canvas. It also filters the node list based on the type of the input or output you dragged from.
+A highly requested feature, chaiNNer now has a context menu that will show up both when right-clicking in the blank space of the editor, as well as when dragging a connection from a node to the blank space. This context menu allows you to quickly find a node to place at that position, and automatically connect it (in the case of dragging a connection to the canvas). It also filters the node list automatically based on the type of the input or output you dragged from! It makes setting up chains far easier than before, to the point where I've been told by someone it makes the regular node selection panel obsolete for them. I highly recommend you play around with this, as it really can speed up making a chain.
 
-It makes setting up chains far easier than before, to the point where someone told me it makes the regular node selection panel obsolete for them. I highly recommend playing around with it, because it really can speed up building a chain.
+## Disabling Nodes
 
-## Disabling nodes
-
-Another big new feature is the ability to disable nodes. Every node now has a little toggle in the bottom left corner, as well as an entry in the right-click context menu, for disabling and enabling it. A disabled node won't run in the chain, so you can now have floating nodes that aren't connected to anything without worrying about errors. Disabling a node also disables anything connected downstream from it, so it's easy to temporarily turn off part of a large chain.
+Another big new feature is the ability to disable nodes. You may notice now that every node has a little toggle in the bottom left corner (as well as an entry in the right-click context menu) for disabling/enabling a node. Disabling a node will prevent it from running in the chain, so now you can have floating nodes not connected to anything without worrying about getting errors. Disabling a node will also disable any nodes connected downstream from it, so it should be pretty easy now to temporarily turn off parts of a large chain.
