@@ -1,48 +1,44 @@
-// Colors
-$bg-color: var(--chakra-colors-gray-900);
-$dot-color: var(--chakra-colors-gray-600);
+// The three steps in "How it works" are wired together the way nodes are wired
+// together in the editor: a thin red cable running between hollow port rings.
 
-// Dimensions
-$dot-size: 2px;
-$dot-space: 22px;
-
-body {
-    background: $bg-color;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+.chain {
+    --rail-x: 0.5rem;
+    --port-top: 0.6rem;
+    position: relative;
 }
 
-.background {
-    background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
-    background-size: $dot-space $dot-space;
-    animation: moveDots 4s linear infinite;
-}
+.chain-step {
+    position: relative;
 
-@keyframes moveDots {
-    from {
-        background-position: 0 0, 0 0, 0 0, 0 0;
+    // The cable itself.
+    &::before {
+        content: '';
+        position: absolute;
+        left: var(--rail-x);
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        transform: translateX(-50%);
+        background: rgba(239, 68, 68, 0.35);
     }
-    to {
-        background-position: 0 0, 0 0, $dot-space $dot-space, $dot-space $dot-space;
-    }
-}
 
-@keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 0%, 100% 100%, 0 0, 0 0;
+    // The cable starts at the first port and ends at the last one.
+    &:first-of-type::before {
+        top: var(--port-top);
     }
-    50% {
-        background-position: 100% 100%, 0% 0%, $dot-space $dot-space, $dot-space $dot-space;
+    &:last-of-type::before {
+        bottom: calc(100% - var(--port-top));
     }
 }
 
-@media screen and (max-width: 62em) {
-    .external-link-button {
-        p {
-            display: none;
-        }
-        .chakra-button__icon {
-            margin-right: 0;
-        }
-    }
+.chain-port {
+    position: absolute;
+    left: var(--rail-x);
+    top: var(--port-top);
+    width: 11px;
+    height: 11px;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(239, 68, 68, 0.55);
+    border-radius: 50%;
+    background: var(--chakra-colors-gray-900);
 }

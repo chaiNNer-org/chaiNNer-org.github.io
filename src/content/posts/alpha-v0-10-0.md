@@ -1,0 +1,29 @@
+---
+title: Alpha v0.10.0
+date: 2022-07-14
+tag: v0.10.0
+summary: The Navi type system, colored handles that show you what connects to what, a node search context menu, and the ability to disable nodes.
+source: discord
+---
+
+Huge improvements! This might be the biggest update yet.
+
+This is a pretty exciting update for chaiNNer! The first thing you might notice is all the new colors, but it's a lot more than just a new look. As a result, I will be going over this changelog in a bit more detail than usual.
+
+## New Type System
+
+This update features a major overhaul of types. If you aren't a programmer or just aren't familiar with types, they're the reason chaiNNer doesn't let you connect an image output to a model input. Model and images are different types, so they aren't compatible. Previously, types were extemely simple. Without getting too technical, types were simply the name of the type (e.g. model or image) and types were compatible if they had the same name. Now, chaiNNer has a brand new type system called "Navi" with set-theorey-based types. These types are much more powerful and enable lots of things that would have been impossible before. E.g. inputs can now accept multiple types, and image inputs can now require the connected image to have a certain number of channels (e.g. RGB or RGBA). Per-node validation has also been improved, and now we are able to show you the output size of almost every image output without even having to run anything.
+
+So you might be wondering to yourself: "I didn't even know types were a thing before, I just kept trying to connect things and guessing what went where. How exactly does this make anything better for me?"
+
+Well, wonder no more. Each handle now has a dedicated color for each main type. This means that with a quick glance, you can now see what can be connected to what. E.g. images are yellow, numbers are blue, PyTorch models are orange. It should be pretty easy now to be able to see what can be connected where. Furthermore, as soon as you start dragging a connection out, any incompatible connections turn gray and slightly transparent. This way, you will always 100% know what is connectable and what isn't.
+
+And speaking of connecting things easily...
+
+## Node Selector Context Menu
+
+A highly requested feature, chaiNNer now has a context menu that will show up both when right-clicking in the blank space of the editor, as well as when dragging a connection from a node to the blank space. This context menu allows you to quickly find a node to place at that position, and automatically connect it (in the case of dragging a connection to the canvas). It also filters the node list automatically based on the type of the input or output you dragged from! It makes setting up chains far easier than before, to the point where I've been told by someone it makes the regular node selection panel obsolete for them. I highly recommend you play around with this, as it really can speed up making a chain.
+
+## Disabling Nodes
+
+Another big new feature is the ability to disable nodes. You may notice now that every node has a little toggle in the bottom left corner (as well as an entry in the right-click context menu) for disabling/enabling a node. Disabling a node will prevent it from running in the chain, so now you can have floating nodes not connected to anything without worrying about getting errors. Disabling a node will also disable any nodes connected downstream from it, so it should be pretty easy now to temporarily turn off parts of a large chain.

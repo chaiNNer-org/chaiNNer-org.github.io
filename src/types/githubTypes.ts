@@ -35,6 +35,14 @@ export interface IReleaseAsset {
     url: string;
 }
 
+export interface IGithubRepo {
+    full_name: string;
+    html_url: string;
+    stargazers_count: number;
+    forks_count: number;
+    open_issues_count: number;
+}
+
 export interface IGithubRelease {
     assets: IReleaseAsset[];
     assets_url: string;
