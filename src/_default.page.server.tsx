@@ -36,31 +36,28 @@ async function render(pageContext: PageContextServer) {
         <meta property="og:url" content="${url}" />
         <meta property="twitter:url" content="${url}" />`;
 
-    // Describes the application, so it only belongs on pages that represent it.
-    const structuredData = noindex
-        ? ''
-        : `        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "chaiNNer",
-          "description": "${desc}",
-          "url": "https://chainner.app",
-          "applicationCategory": "MultimediaApplication",
-          "operatingSystem": ["Windows", "macOS", "Linux"],
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "softwareVersion": "latest",
-          "image": "${image}",
-          "author": {
-            "@type": "Organization",
-            "name": "chaiNNer-org"
-          }
-        }
-        </script>`;
+    /*
+     * Describes the application, unless the page says it is something else.
+     * A blog post is a BlogPosting with its own author and date, which is what
+     * lets a search engine attribute it rather than reading every post as
+     * another copy of the app listing.
+     */
+    const schema = documentProps?.jsonLd ?? {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'chaiNNer',
+        description: desc,
+        url: 'https://chainner.app',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: ['Windows', 'macOS', 'Linux'],
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        softwareVersion: 'latest',
+        image,
+        author: { '@type': 'Organization', name: 'chaiNNer-org' },
+    };
+
+    // Escaping `<` keeps a stray `</script>` in any string from closing the tag.
+    const structuredData = noindex ? '' : `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
 
     const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">

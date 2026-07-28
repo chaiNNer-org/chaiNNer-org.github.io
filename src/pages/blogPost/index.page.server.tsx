@@ -1,6 +1,42 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { PageContextServer } from '../../types';
+import { AUTHORS, Post } from '../../content/post';
 import { findPost, POSTS } from '../../content/loadPosts';
+
+const SITE = 'https://chainner.app';
+
+/** Marks the page as an article by a person on a date, rather than another copy of the app listing. */
+function blogPosting(post: Post): Record<string, unknown> {
+    const author = AUTHORS[post.author];
+    const url = `${SITE}/blog/${post.slug}`;
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.summary,
+        datePublished: post.date,
+        dateModified: post.date,
+        url,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        image: `${SITE}/banner.png`,
+        author: {
+            '@type': 'Person',
+            name: author.name,
+            url: author.url,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'chaiNNer',
+            url: SITE,
+        },
+        isPartOf: {
+            '@type': 'Blog',
+            '@id': `${SITE}/blog`,
+            name: 'chaiNNer Blog',
+        },
+    };
+}
 
 async function onBeforeRender(pageContext: PageContextServer) {
     const slug = (pageContext.routeParams as { slug?: string } | undefined)?.slug;
@@ -19,7 +55,8 @@ async function onBeforeRender(pageContext: PageContextServer) {
                 title: `${post.title} - chaiNNer`,
                 description: post.summary,
                 keywords: `chaiNNer ${post.title}, chaiNNer release notes, image processing, node editor`,
-                image: 'https://chainner.app/banner.png',
+                image: `${SITE}/banner.png`,
+                jsonLd: blogPosting(post),
             },
         },
     };

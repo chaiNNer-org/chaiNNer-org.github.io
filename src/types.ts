@@ -13,6 +13,11 @@ interface DocumentProps {
     image?: string;
     /** Keeps the page out of search indexes, and out of canonical and structured data. */
     noindex?: boolean;
+    /**
+     * Schema.org data for this page, serialised into the ld+json block. Omit to
+     * describe the application, which is right for every page that is about it.
+     */
+    jsonLd?: Record<string, unknown>;
 }
 
 export interface PageContextCustom {
