@@ -3,25 +3,32 @@ import { Box, Button, Container, Flex, Grid, GridItem, Heading, HStack, Icon, Im
 import { BsStarFill } from 'react-icons/bs/index.js';
 import '../index.scss';
 import { Prose, Section } from '../components/Section';
-import { discordLink, githubLink, kofiLink, openModelDbLink, templatesLink } from '../utils/links';
+import { discordLink, githubLink, kofiLink, openModelDbLink, spandrelLink, templatesLink } from '../utils/links';
 import Screenshot from '../assets/screenshot.png';
+
+/** A link sitting inside a sentence rather than standing on its own. */
+function InlineLink({ href, children }: { href: string; children: React.ReactNode }) {
+    return (
+        <Link
+            isExternal
+            href={href}
+            color="brand.300"
+            textUnderlineOffset="2px"
+            _hover={{ color: 'brand.200' }}
+        >
+            {children}
+        </Link>
+    );
+}
 
 const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
     {
         title: 'Upscaling',
         body: (
             <>
-                Load a super-resolution model — ESRGAN, SPAN, OmniSR, Real-ESRGAN — and run it on your image. Most of the models people use come from{' '}
-                <Link
-                    isExternal
-                    href={openModelDbLink}
-                    color="brand.300"
-                    textUnderlineOffset="2px"
-                    _hover={{ color: 'brand.200' }}
-                >
-                    OpenModelDB
-                </Link>
-                .
+                Load a super-resolution model and run it on your image. ESRGAN, SPAN, OmniSR, and Real-ESRGAN are the familiar names, and{' '}
+                <InlineLink href={spandrelLink}>Spandrel</InlineLink>, the architecture-support package chaiNNer maintains, handles dozens more. Most of the
+                models people use come from <InlineLink href={openModelDbLink}>OpenModelDB</InlineLink>.
             </>
         ),
     },
@@ -51,19 +58,15 @@ const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
     },
     {
         title: 'Batch processing',
-        body: 'Point Load Images or Load Video at a folder and chaiNNer iterates over it. Pair it with a Save node to run a whole directory through a chain.',
+        body: 'Point Load Images at a folder or Load Video at a clip, and the chain runs over every image or frame into Save Image or Save Video. The run is a sequence you can program: Limit Sequence takes ten files for a test pass, Skip Sequence starts partway in, Filter Sequence drops the ones that fail a condition, and Text Pattern and Regex Replace build output names from the input names. One iterator per chain, though the collector nodes mix freely.',
     },
     {
         title: 'Color and adjustments',
-        body: 'Levels, curves, color balance, brightness and contrast, hue and saturation, sharpen, blur.',
+        body: 'Color Levels, Brightness & Contrast, Hue & Saturation, Gamma, and Stretch Contrast cover the usual corrections. Unsharp Mask and High Pass sharpen, while Gaussian, box, median, surface, and lens blur soften. Add, Multiply, and Divide do arithmetic between two images, and Threshold cuts to black and white.',
     },
     {
         title: 'Resize, crop, rotate, blend',
-        body: 'Stack transforms, composite layers, pad images, and route different branches of a chain different ways.',
-    },
-    {
-        title: 'Background removal',
-        body: 'u2net, isnet, and similar networks through ONNX. Feed it a photo, get back a mask or a cutout.',
+        body: 'Resize by ratio or to a target side, crop by border or down to content, then Pad, Rotate, and Flip. Blend Images composites two layers with the usual modes — normal, multiply, screen, overlay — Stack Images tiles several into one, and Get Dimensions and Get Bounding Box feed measurements back into the chain for later nodes to act on.',
     },
 ];
 
