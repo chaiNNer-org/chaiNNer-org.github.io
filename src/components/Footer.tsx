@@ -40,7 +40,7 @@ export const Footer = memo(() => {
                             fontSize="sm"
                             color="inkFaint"
                         >
-                            chaiNNer — a node-based image processing editor
+                            chaiNNer, a node-based image processing editor
                         </Text>
                     </HStack>
                     <HStack

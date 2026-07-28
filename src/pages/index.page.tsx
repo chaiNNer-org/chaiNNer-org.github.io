@@ -22,52 +22,53 @@ function InlineLink({ href, children }: { href: string; children: React.ReactNod
     );
 }
 
+/** What the nodes do to an image. */
 const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
     {
         title: 'Upscaling',
         body: (
             <>
-                Load a super-resolution model and run it on your image. ESRGAN, SPAN, OmniSR, and Real-ESRGAN are the familiar names, and{' '}
-                <InlineLink href={spandrelLink}>Spandrel</InlineLink>, the architecture-support package chaiNNer maintains, handles dozens more. Most of the
-                models people use come from <InlineLink href={openModelDbLink}>OpenModelDB</InlineLink>.
+                Load a super-resolution model and run it on an image. <InlineLink href={spandrelLink}>Spandrel</InlineLink>, the architecture-support package
+                chaiNNer maintains, covers ESRGAN, SPAN, OmniSR, and dozens of other architectures, and most of the models people use come from{' '}
+                <InlineLink href={openModelDbLink}>OpenModelDB</InlineLink>. Upscale Face restores faces with a dedicated model on the way through, and Average
+                Color Fix and Wavelet Color Fix pull the color back where the model drifted it.
             </>
         ),
     },
     {
-        title: 'Face restoration',
-        body: 'Upscale Face finds the faces in an image, restores each one with a dedicated face model — GFPGAN, RestoreFormer, or CodeFormer — and pastes them back in. Hand it your general upscale as the background so the face model only has to deal with the faces.',
-    },
-    {
-        title: 'Color correction after an upscale',
-        body: 'Upscaling models drift the color of their output. Average Color Fix and Wavelet Color Fix match the result back to the original, and Color Transfer moves the look of one image onto another. Wavelet usually looks better and costs more time.',
-    },
-    {
-        title: 'Model interpolation',
-        body: 'Interpolate Models blends two models into a new one you can run or save to disk, so you can make your own without training anything. The two have to share a pretrained ancestor — chaiNNer test-blends them and refuses the pair if the result comes out degenerate.',
-    },
-    {
         title: 'Textures and normal maps',
-        body: 'Normal Map Generator builds a normal map from a diffuse texture. Add Normals, Scale Normals, and Balance Normals combine and correct them, and Metal to Specular converts between PBR workflows.',
-    },
-    {
-        title: 'Shipping game textures',
-        body: 'Save Image writes DDS with BC1 through BC7, sRGB or linear, and mipmaps, including the two-channel BC5 formats that pair with the normal map nodes. Split Spritesheet takes a sheet apart, the chain runs on every tile, and Merge Spritesheet puts it back together.',
+        body: 'Normal Map Generator builds a normal map from a diffuse texture. Add Normals, Scale Normals, and Balance Normals combine and correct them, and Metal to Specular converts between PBR workflows. Save Image writes DDS with BC1, BC3, and BC7 in sRGB or linear, with mipmaps, plus the two-channel BC5 formats that pair with the normal map nodes. Split Spritesheet takes a sheet apart, the chain runs on every tile, and Merge Spritesheet puts it back together.',
     },
     {
         title: 'Pixel art',
         body: 'Resize Pixel Art upscales with HQ2x, Eagle, and AdvMAME instead of a model. Palette from Image extracts a palette that Apply Palette and Dither (Palette) consume, and Quantize to Reference re-quantizes an upscale using colors sampled locally from the original rather than globally.',
     },
     {
-        title: 'Batch processing',
-        body: 'Point Load Images at a folder or Load Video at a clip, and the chain runs over every image or frame. Save Image collects the results at the other end, and Save Video re-encodes frames back into a file as H.264, H.265, VP9, or lossless FFV1. Text Pattern and Regex Replace build output filenames out of the input names.',
+        title: 'Editing',
+        body: 'Color Levels, Brightness & Contrast, Hue & Saturation, and Gamma cover the usual corrections, with Stretch Contrast for automatic levels. Unsharp Mask and High Boost Filter sharpen, while Gaussian, box, median, surface, and lens blur soften. Resize by ratio or to a target side length, crop to the visible content or strip a flat border, then Pad, Rotate, and Flip. Blend Images lays an overlay onto a base with the usual modes: normal, multiply, screen, and overlay.',
+    },
+];
+
+/**
+ * What the nodes do to each other. A node list says chaiNNer has a lot of
+ * nodes; only this says what a chain is for.
+ */
+const COMPOSITION: Array<{ title: string; body: React.ReactNode }> = [
+    {
+        title: 'Branch on a condition',
+        body: "Compare tests two numbers, Logic Operation combines the results, and Conditional passes one of two inputs through based on that. The branch that isn't taken never runs, so a chain can read a size with Get Dimensions and skip the upscale on images that are already big enough.",
     },
     {
-        title: 'Color and adjustments',
-        body: 'Color Levels, Brightness & Contrast, Hue & Saturation, and Gamma cover the usual corrections, with Stretch Contrast for automatic levels. Unsharp Mask and High Boost Filter sharpen, while Gaussian, box, median, surface, and lens blur soften. Add, Multiply, and Divide scale every channel by a value, and Threshold cuts an image to black and white.',
+        title: 'Run a chain over a sequence',
+        body: 'Load Images points at a folder, Load Video at a clip, Load Models at a folder of models, Range at a span of numbers. Each one turns everything downstream into a loop. Save Image collects the results at the other end, Save Video re-encodes frames into H.264, H.265, VP9, or lossless FFV1, and Merge Spritesheet reassembles a sheet. Running one image through every model in a folder, each output captioned with the model it came from, is about five nodes.',
     },
     {
-        title: 'Resize, crop, rotate, blend',
-        body: 'Resize by ratio or to a target side length, crop to the visible content or strip a flat border automatically, then Pad, Rotate, and Flip. Blend Images lays an overlay onto a base with the usual modes — normal, multiply, screen, overlay — Stack Images concatenates several horizontally or vertically, and Get Dimensions reads height, width, and channel count back out for later nodes to use.',
+        title: 'Compute values',
+        body: 'Math adds, multiplies, and takes logs, minimums, maximums, and moduli, with Round and Percent for the rest. Get Dimensions reads width, height, and channel count back out of an image. Together they let a chain size its own output instead of you typing a number.',
+    },
+    {
+        title: 'Build text and filenames',
+        body: 'Text Pattern assembles strings out of other values and Regex Find pulls fields out of them. Save Image takes its filename as an input, so output names can be built from the input name, the model name, or anything else in the chain.',
     },
 ];
 
@@ -306,41 +307,73 @@ function WhatItIs() {
     );
 }
 
+function UseCaseGrid({
+    items,
+    /** `h4` under the second group, which has a heading of its own above it. */
+    titleAs = 'h3',
+}: {
+    items: Array<{ title: string; body: React.ReactNode }>;
+    titleAs?: 'h3' | 'h4';
+}) {
+    return (
+        <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            columnGap={10}
+            rowGap={0}
+        >
+            {items.map((item) => (
+                <Box
+                    key={item.title}
+                    borderTop="1px solid"
+                    borderTopColor="line"
+                    py={5}
+                >
+                    <Heading
+                        as={titleAs}
+                        fontSize="md"
+                    >
+                        {item.title}
+                    </Heading>
+                    <Text
+                        mt={2}
+                        fontSize="sm"
+                        color="inkFaint"
+                        lineHeight="1.65"
+                    >
+                        {item.body}
+                    </Text>
+                </Box>
+            ))}
+        </SimpleGrid>
+    );
+}
+
 function UseCases() {
     return (
         <Section
             id="usecases"
             heading="What you can do with it"
         >
-            <SimpleGrid
-                columns={{ base: 1, md: 2 }}
-                columnGap={10}
-                rowGap={0}
+            <UseCaseGrid items={USE_CASES} />
+
+            {/*
+             * The second group needs a label where the first does not: the first
+             * is what the section already promised, the second is a change of
+             * subject. Spaced well clear of the cards so the heading reads as a
+             * break rather than as another entry in the grid.
+             */}
+            <Heading
+                as="h3"
+                fontSize="lg"
+                mt={14}
+                mb={6}
             >
-                {USE_CASES.map((useCase) => (
-                    <Box
-                        key={useCase.title}
-                        borderTop="1px solid"
-                        borderTopColor="line"
-                        py={5}
-                    >
-                        <Heading
-                            as="h3"
-                            fontSize="md"
-                        >
-                            {useCase.title}
-                        </Heading>
-                        <Text
-                            mt={2}
-                            fontSize="sm"
-                            color="inkFaint"
-                            lineHeight="1.65"
-                        >
-                            {useCase.body}
-                        </Text>
-                    </Box>
-                ))}
-            </SimpleGrid>
+                Combining nodes
+            </Heading>
+            <UseCaseGrid
+                items={COMPOSITION}
+                titleAs="h4"
+            />
         </Section>
     );
 }
@@ -353,8 +386,9 @@ function HowItWorks() {
         >
             <Prose>
                 <p>
-                    The interface looks busy the first time you open it, because there is a lot it can do. The workflow is short, though. A three-node chain —
-                    load image, upscale, save — is about the simplest thing you can build, and a twenty-node chain is not much harder.
+                    A chain does the things you would otherwise write a script for: run a model, loop over a folder, branch on a condition, build output names.
+                    In chaiNNer you connect nodes instead, and the graph is the whole program. There is no layer of code beneath it. A three-node chain of load
+                    image, upscale, save is about the simplest thing you can build, and a twenty-node chain is not much harder.
                 </p>
             </Prose>
 
