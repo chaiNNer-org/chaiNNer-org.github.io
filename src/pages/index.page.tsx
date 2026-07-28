@@ -5,14 +5,32 @@ import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink, kofiLink, openModelDbLink, templatesLink } from '../utils/links';
 import Screenshot from '../assets/screenshot.png';
 
-const USE_CASES = [
+const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
     {
         title: 'Upscaling',
-        body: 'Load a super-resolution model — ESRGAN, SPAN, OmniSR, Real-ESRGAN — and run it on your image. Most of the models people use come from OpenModelDB.',
+        body: (
+            <>
+                Load a super-resolution model — ESRGAN, SPAN, OmniSR, Real-ESRGAN — and run it on your image. Most of the models people use come from{' '}
+                <Link
+                    isExternal
+                    href={openModelDbLink}
+                    color="brand.300"
+                    textUnderlineOffset="2px"
+                    _hover={{ color: 'brand.200' }}
+                >
+                    OpenModelDB
+                </Link>
+                .
+            </>
+        ),
     },
     {
-        title: 'Background removal',
-        body: 'u2net, isnet, and similar networks through ONNX. Feed it a photo, get back a mask or a cutout.',
+        title: 'Textures and normal maps',
+        body: 'Normal Map Generator builds a normal map from a diffuse texture. Add Normals, Scale Normals, and Balance Normals combine and correct them, and Metal to Specular converts between PBR workflows.',
+    },
+    {
+        title: 'Working with models',
+        body: 'Interpolate Models blends two models of the same kind into one, as long as they share a pretrained ancestor. Convert To ONNX and Convert To NCNN re-target a PyTorch model at hardware it would not otherwise run on.',
     },
     {
         title: 'Batch processing',
@@ -20,7 +38,7 @@ const USE_CASES = [
     },
     {
         title: 'Color and adjustments',
-        body: 'Levels, curves, color balance, brightness and contrast, hue and saturation, sharpen, blur. Each one is a node you can slot in wherever you need it.',
+        body: 'Levels, curves, color balance, brightness and contrast, hue and saturation, sharpen, blur.',
     },
     {
         title: 'Resize, crop, rotate, blend',
@@ -29,6 +47,10 @@ const USE_CASES = [
     {
         title: 'Format conversion',
         body: 'Read and write PNG, JPEG, WebP, and other common formats as part of the same run that does the processing.',
+    },
+    {
+        title: 'Background removal',
+        body: 'u2net, isnet, and similar networks through ONNX. Feed it a photo, get back a mask or a cutout.',
     },
 ];
 
@@ -209,7 +231,7 @@ function WhatItIs() {
                     how they combine.
                 </p>
                 <p>
-                    It was written for AI upscaling, and that is still what most people install it for. There is a large library of community-trained
+                    It was originally written for AI upscaling, and that is still what most people install it for. There is a large library of community-trained
                     super-resolution models, and chaiNNer runs them through PyTorch, NCNN, ONNX, or TensorRT. It has since grown into a general-purpose image
                     editor: color work, blending, format conversion, batch runs, and video frames.
                 </p>
@@ -284,8 +306,6 @@ function HowItWorks() {
                         className="chain-step"
                         as="li"
                         key={step.title}
-                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-                        style={{ '--i': i } as React.CSSProperties}
                         pl={9}
                         pb={i === STEPS.length - 1 ? 0 : 9}
                     >
@@ -333,7 +353,7 @@ function HowItWorks() {
                 color="brand.300"
                 _hover={{ color: 'brand.200' }}
             >
-                Starter templates by Kim →
+                Upscaling templates by Kim2091 →
             </Link>
         </Section>
     );

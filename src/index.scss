@@ -1,14 +1,5 @@
-// One authored moment on the site: a pulse travelling the connection rail in
-// "How it works", lighting each port as it passes. It is the thing chaiNNer
-// does when you press run, so it explains the copy next to it rather than
-// decorating it. Everything else on the page holds still.
-
-$cable-bright: #fca5a5;
-$cable-core: #fee2e2;
-
-$pulse-cycle: 6s;
-$pulse-step: 0.8s;
-$pulse-len: 3.5rem;
+// The three steps in "How it works" are wired together the way nodes are wired
+// together in the editor: a thin red cable running between hollow port rings.
 
 .chain {
     --rail-x: 0.5rem;
@@ -50,68 +41,4 @@ $pulse-len: 3.5rem;
     border: 2px solid rgba(239, 68, 68, 0.55);
     border-radius: 50%;
     background: var(--chakra-colors-gray-900);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .chain-step::after {
-        content: '';
-        position: absolute;
-        left: var(--rail-x);
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        transform: translateX(-50%);
-        background-image: linear-gradient(
-            to bottom,
-            rgba(239, 68, 68, 0) 0%,
-            rgba(248, 113, 113, 0.55) 32%,
-            $cable-core 52%,
-            rgba(248, 113, 113, 0.55) 72%,
-            rgba(239, 68, 68, 0) 100%
-        );
-        background-size: 1px $pulse-len;
-        background-repeat: no-repeat;
-        background-position: 0 (-$pulse-len);
-        filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.75));
-        animation: chainPulse $pulse-cycle linear infinite;
-        animation-delay: calc(var(--i) * #{$pulse-step});
-        pointer-events: none;
-    }
-
-    .chain-step:first-of-type::after {
-        top: var(--port-top);
-    }
-    .chain-step:last-of-type::after {
-        bottom: calc(100% - var(--port-top));
-    }
-
-    .chain-port {
-        animation: portFlash $pulse-cycle linear infinite;
-        animation-delay: calc(var(--i) * #{$pulse-step});
-    }
-}
-
-@keyframes chainPulse {
-    0% {
-        background-position: 0 (-$pulse-len);
-    }
-    13.33% {
-        background-position: 0 calc(100% + #{$pulse-len});
-    }
-    100% {
-        background-position: 0 calc(100% + #{$pulse-len});
-    }
-}
-
-@keyframes portFlash {
-    0%,
-    12%,
-    100% {
-        border-color: rgba(239, 68, 68, 0.55);
-        box-shadow: none;
-    }
-    2% {
-        border-color: $cable-bright;
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.16);
-    }
 }
