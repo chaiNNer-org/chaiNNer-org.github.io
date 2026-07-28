@@ -50,7 +50,7 @@ export const Header = memo(() => {
                     <Flex
                         w="full"
                         h="full"
-                        px="6"
+                        px="4"
                         align="center"
                         justify="space-between"
                     >
@@ -60,12 +60,16 @@ export const Header = memo(() => {
                                 as={'nav'}
                             >
                                 <chakra.div mr={{ base: 3, sm: 9 }}>
-                                    <Link href="/">
+                                    <Link
+                                        href="/"
+                                        aria-label="chaiNNer home"
+                                    >
                                         <HStack>
                                             <Image
                                                 src={Logo}
                                                 boxSize="48px"
                                                 maxW="none"
+                                                alt=""
                                             />
                                         </HStack>
                                     </Link>
@@ -106,7 +110,7 @@ export const Header = memo(() => {
                                 <Button
                                     as={Link}
                                     href="/download"
-                                    bg="brand.500"
+                                    bg="brand.600"
                                     color="white"
                                     size="sm"
                                     px={5}
@@ -114,7 +118,7 @@ export const Header = memo(() => {
                                     fontWeight="600"
                                     mr={2}
                                     transition="all 0.2s ease"
-                                    _hover={{ bg: 'brand.400', transform: 'translateY(-1px)', textDecoration: 'none' }}
+                                    _hover={{ bg: 'brand.500', transform: 'translateY(-1px)', textDecoration: 'none' }}
                                     _active={{ transform: 'translateY(0)' }}
                                 >
                                     Download

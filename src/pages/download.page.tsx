@@ -73,6 +73,7 @@ function Page(pageProps: {
                     <Spacer display={{ base: 'block', sm: 'none' }} />
                     <Image
                         src={banner}
+                        alt="chaiNNer"
                         w={{
                             base: '240px',
                             md: '360px',
@@ -93,7 +94,7 @@ function Page(pageProps: {
                     mb={6}
                 >
                     <Button
-                        bg="brand.500"
+                        bg="brand.600"
                         color="white"
                         borderRadius="2xl"
                         onClick={() => {
@@ -110,7 +111,7 @@ function Page(pageProps: {
                         _hover={{
                             transform: 'translateY(-2px)',
                             boxShadow: '0 8px 20px -4px rgba(59, 130, 246, 0.45)',
-                            bg: 'brand.400',
+                            bg: 'brand.500',
                         }}
                         _active={{
                             transform: 'translateY(0)',

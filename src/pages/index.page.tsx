@@ -6,8 +6,7 @@ import { Section } from '../components/Section';
 import { Card } from '../components/Card';
 import { NodeFlow } from '../components/NodeFlow';
 import { discordLink, githubLink, kofiLink, openModelDbLink, templatesLink } from '../utils/links';
-
-const SCREENSHOT_URL = 'https://github.com/chaiNNer-org/chaiNNer/raw/main/docs/assets/screenshot.png';
+import Screenshot from '../assets/screenshot.png';
 
 const STATS = [
     { label: 'Platforms', value: 'Windows · macOS · Linux' },
@@ -19,7 +18,7 @@ const USE_CASES = [
     {
         title: 'Upscaling',
         tag: 'most common',
-        body: 'Load a model — ESRGAN, SPAN, OmniSR, Real-ESRGAN — and run it on your image, through PyTorch, NCNN, ONNX, or TensorRT depending on your hardware. Most of the models people use come from OpenModelDB.',
+        body: 'Load a model — ESRGAN, SPAN, OmniSR, Real-ESRGAN — and run it on your image. Most of the models people use come from OpenModelDB.',
     },
     {
         title: 'Background removal',
@@ -98,7 +97,7 @@ function Hero() {
             >
                 <Image
                     className="hero-screenshot"
-                    src={SCREENSHOT_URL}
+                    src={Screenshot}
                     alt="The chaiNNer node editor with an image processing chain on the canvas"
                     w="100%"
                     h="100%"
@@ -137,7 +136,7 @@ function Hero() {
                         fontFamily="mono"
                         fontSize="xs"
                         textTransform="uppercase"
-                        letterSpacing="0.2em"
+                        letterSpacing="0.15em"
                         color="brand.300"
                     >
                         Node-based image processing
@@ -186,7 +185,7 @@ function Hero() {
                         <Button
                             as={Link}
                             href="/download"
-                            bg="brand.500"
+                            bg="brand.600"
                             color="white"
                             size="lg"
                             px={8}
@@ -194,7 +193,7 @@ function Hero() {
                             fontWeight="600"
                             boxShadow="0 4px 12px -2px rgba(59, 130, 246, 0.35)"
                             transition="all 0.2s ease"
-                            _hover={{ bg: 'brand.400', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                            _hover={{ bg: 'brand.500', transform: 'translateY(-2px)', textDecoration: 'none' }}
                             _active={{ transform: 'translateY(0)' }}
                         >
                             Download
@@ -226,7 +225,6 @@ function Hero() {
                         spacing={6}
                         mt={12}
                         w="100%"
-                        maxW="36rem"
                     >
                         {STATS.map((stat) => (
                             <VStack
@@ -311,13 +309,6 @@ function WhatItIs() {
                         community-trained super-resolution models, and chaiNNer runs them through PyTorch, NCNN, ONNX, or TensorRT. It has since grown into a
                         general-purpose image processing editor: color work, blending, format conversion, batch processing, and video frames.
                     </Text>
-                    <Text
-                        fontSize="md"
-                        color="gray.400"
-                        lineHeight="1.7"
-                    >
-                        Cross-platform (Windows, macOS, Linux), self-contained (no Python install required), GPLv3.
-                    </Text>
                 </VStack>
             }
         >
@@ -340,7 +331,6 @@ function UseCases() {
                 {USE_CASES.map((useCase) => (
                     <Card
                         key={useCase.title}
-                        hoverAccent
                         p={5}
                     >
                         <HStack
@@ -447,7 +437,7 @@ function HowItWorks() {
                                 top={{ base: '0', md: '1.25rem' }}
                                 boxSize="24px"
                                 borderRadius="full"
-                                bg="brand.500"
+                                bg="brand.600"
                                 color="white"
                                 fontFamily="mono"
                                 fontSize="xs"
@@ -557,7 +547,7 @@ function UnderTheHood() {
                     <Text
                         mt={4}
                         fontSize="xs"
-                        color="gray.500"
+                        color="gray.400"
                     >
                         All of them fall back to CPU.
                     </Text>
@@ -569,7 +559,7 @@ function UnderTheHood() {
                         size="sm"
                         color="white"
                     >
-                        Batch &amp; CLI
+                        Command line
                     </Heading>
                     <Text
                         mt={2}
@@ -577,8 +567,7 @@ function UnderTheHood() {
                         color="gray.400"
                         lineHeight="1.7"
                     >
-                        The Load Images and Load Video nodes iterate over folders. Saved chains can also be run from the command line, so chaiNNer can be one
-                        step in a larger pipeline.
+                        Saved chains can be run from the command line, so chaiNNer can be one step in a larger pipeline.
                     </Text>
                 </Card>
 
@@ -641,6 +630,7 @@ function OpenSource() {
                         key={link.title}
                         isExternal
                         href={link.href}
+                        aria-label={`${link.title} — ${link.sub}`}
                         display="block"
                         _hover={{ textDecoration: 'none' }}
                     >
@@ -658,7 +648,7 @@ function OpenSource() {
                             </Text>
                             <Text
                                 fontSize="xs"
-                                color="gray.500"
+                                color="gray.400"
                             >
                                 {link.sub}
                             </Text>
@@ -719,7 +709,7 @@ function DownloadCTA() {
                         <Button
                             as={Link}
                             href="/download"
-                            bg="brand.500"
+                            bg="brand.600"
                             color="white"
                             size="lg"
                             px={8}
@@ -727,7 +717,7 @@ function DownloadCTA() {
                             fontWeight="600"
                             boxShadow="0 4px 12px -2px rgba(59, 130, 246, 0.35)"
                             transition="all 0.2s ease"
-                            _hover={{ bg: 'brand.400', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                            _hover={{ bg: 'brand.500', transform: 'translateY(-2px)', textDecoration: 'none' }}
                             _active={{ transform: 'translateY(0)' }}
                         >
                             Download

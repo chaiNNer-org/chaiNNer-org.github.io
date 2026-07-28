@@ -79,8 +79,6 @@ function ShellWrapper({ children }: { children: React.ReactNode }) {
         >
             <Center mt="0.5rem">
                 <Box
-                    h="100%"
-                    minH="100%"
                     maxW="1200px"
                     minW="380px"
                     borderRadius="2xl"

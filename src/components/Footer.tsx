@@ -38,7 +38,7 @@ export const Footer = memo(() => {
                         />
                         <Text
                             fontSize="sm"
-                            color="gray.500"
+                            color="gray.400"
                         >
                             chaiNNer — a node-based image processing editor
                         </Text>
@@ -53,7 +53,7 @@ export const Footer = memo(() => {
                                 isExternal
                                 href={link.href}
                                 fontSize="sm"
-                                color="gray.500"
+                                color="gray.400"
                                 transition="color 0.2s ease"
                                 _hover={{ color: 'brand.300' }}
                             >

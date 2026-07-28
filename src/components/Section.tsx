@@ -7,13 +7,12 @@ interface SectionProps {
     eyebrow: string;
     heading: string;
     lede?: React.ReactNode;
-    maxW?: string;
     /** Draws a hairline rule along the top edge. Off for the first section after the hero. */
     divider?: boolean;
     children?: React.ReactNode;
 }
 
-export const Section = memo(({ id, eyebrow, heading, lede, maxW = '1200px', divider = true, children }: SectionProps) => {
+export const Section = memo(({ id, eyebrow, heading, lede, divider = true, children }: SectionProps) => {
     return (
         <Box
             as="section"
@@ -24,7 +23,7 @@ export const Section = memo(({ id, eyebrow, heading, lede, maxW = '1200px', divi
             borderTopColor={divider ? 'whiteAlpha.100' : undefined}
             scrollMarginTop="4.5rem"
         >
-            <Container maxW={maxW}>
+            <Container maxW="1200px">
                 <VStack
                     align="start"
                     spacing={4}

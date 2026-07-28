@@ -19,8 +19,6 @@ export const NodeFlow = memo(() => {
             <Box
                 as="svg"
                 aria-hidden="true"
-                viewBox="0 0 1200 200"
-                preserveAspectRatio="none"
                 position="absolute"
                 inset={0}
                 w="100%"
@@ -29,23 +27,18 @@ export const NodeFlow = memo(() => {
                 pointerEvents="none"
                 display={{ base: 'none', md: 'block' }}
             >
-                <path
+                <line
                     className="cable-path"
-                    d="M280 100 C320 60 350 60 390 100"
-                />
-                <path
-                    className="cable-path"
-                    d="M580 100 C620 140 650 140 690 100"
-                />
-                <path
-                    className="cable-path"
-                    d="M880 100 C920 60 950 60 990 100"
+                    x1="0"
+                    y1="50%"
+                    x2="100%"
+                    y2="50%"
                 />
             </Box>
 
             <SimpleGrid
                 columns={{ base: 1, sm: 2, md: 4 }}
-                spacing={4}
+                spacing={6}
                 position="relative"
             >
                 {NODES.map((node, index) => (
@@ -58,28 +51,34 @@ export const NodeFlow = memo(() => {
                         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                         style={{ '--delay': `${index * 0.12}s` } as React.CSSProperties}
                     >
-                        <Box
-                            position="absolute"
-                            right="-6px"
-                            top="1.5rem"
-                            boxSize="12px"
-                            borderRadius="full"
-                            bg="gray.900"
-                            border="2px solid"
-                            borderColor="brand.400"
-                            display={{ base: 'none', md: 'block' }}
-                        />
-                        <Box
-                            position="absolute"
-                            left="-6px"
-                            bottom="1.5rem"
-                            boxSize="12px"
-                            borderRadius="full"
-                            bg="gray.900"
-                            border="2px solid"
-                            borderColor="cable.400"
-                            display={{ base: 'none', md: 'block' }}
-                        />
+                        {index < NODES.length - 1 && (
+                            <Box
+                                position="absolute"
+                                right="-6px"
+                                top="50%"
+                                transform="translateY(-50%)"
+                                boxSize="12px"
+                                borderRadius="full"
+                                bg="gray.900"
+                                border="2px solid"
+                                borderColor="brand.400"
+                                display={{ base: 'none', md: 'block' }}
+                            />
+                        )}
+                        {index > 0 && (
+                            <Box
+                                position="absolute"
+                                left="-6px"
+                                top="50%"
+                                transform="translateY(-50%)"
+                                boxSize="12px"
+                                borderRadius="full"
+                                bg="gray.900"
+                                border="2px solid"
+                                borderColor="cable.400"
+                                display={{ base: 'none', md: 'block' }}
+                            />
+                        )}
                         <VStack
                             align="start"
                             spacing={3}

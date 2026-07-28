@@ -187,6 +187,7 @@ function Page() {
                     <Spacer display={{ base: 'block', sm: 'none' }} />
                     <Image
                         src={banner}
+                        alt="chaiNNer"
                         w={{
                             base: '240px',
                             md: '360px',
