@@ -13,6 +13,8 @@ export interface PostMeta {
     summary: string;
     /** What sort of post this is. Defaults to `release` when the frontmatter omits it. */
     kind: PostKind;
+    /** Who wrote it. Defaults to `joey` when the frontmatter omits it. */
+    author: AuthorId;
     /** Release this post announces, linked at the end of it. Releases only. */
     tag?: string;
     /**
@@ -51,6 +53,30 @@ export interface Post extends PostMeta {
     /** Markdown, with the frontmatter stripped. */
     body: string;
 }
+
+export interface Author {
+    name: string;
+    /** Avatar, served from this repo rather than hotlinked, so it cannot go stale. */
+    avatar: string;
+    url: string;
+}
+
+/**
+ * Who writes here. Keyed by the `author` in a post's frontmatter, which defaults
+ * to `joey` — the only writer so far, but a second one is a line in this map
+ * rather than a change to the byline.
+ */
+export const AUTHORS = {
+    joey: {
+        name: 'Joey',
+        avatar: '/images/joey.png',
+        url: 'https://github.com/joeyballentine',
+    },
+} as const satisfies Record<string, Author>;
+
+export type AuthorId = keyof typeof AUTHORS;
+export const AUTHOR_IDS = Object.keys(AUTHORS) as AuthorId[];
+export const DEFAULT_AUTHOR: AuthorId = 'joey';
 
 const RELEASES = 'https://github.com/chaiNNer-org/chaiNNer/releases/tag';
 

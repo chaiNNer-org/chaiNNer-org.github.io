@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Box, Container, Divider, Grid, GridItem, Heading, Link, Text } from '@chakra-ui/react';
+import { Box, Container, Divider, Grid, GridItem, Heading, HStack, Image, Link, Text } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
 import '../../index.scss';
 import ChakraUIRenderer from '../../utils/chakra-ui-markdown-renderer';
 import { postMarkdownTheme } from '../../components/postMarkdownTheme';
-import { formatPostDate, Post, releaseUrl, SOURCE_LABEL } from '../../content/post';
+import { AUTHORS, formatPostDate, Post, releaseUrl, SOURCE_LABEL } from '../../content/post';
 import { discordLink } from '../../utils/links';
 
 function Page({ post }: { post: Post }) {
+    const author = AUTHORS[post.author];
+
     return (
         <Box
             as="article"
@@ -20,20 +22,46 @@ function Page({ post }: { post: Post }) {
                     columnGap={16}
                     rowGap={{ base: 6, lg: 0 }}
                 >
-                    {/* The date holds the left rail the section headings hold elsewhere. */}
+                    {/* The byline holds the left rail the section headings hold elsewhere. */}
                     <GridItem>
-                        <Text
-                            as="time"
-                            dateTime={post.date}
-                            display="block"
-                            fontFamily="mono"
-                            fontSize="sm"
-                            color="inkFaint"
+                        <Box
                             position={{ lg: 'sticky' }}
                             top={{ lg: '7rem' }}
                         >
-                            {formatPostDate(post.date)}
-                        </Text>
+                            <HStack spacing={3}>
+                                <Image
+                                    src={author.avatar}
+                                    alt=""
+                                    boxSize="2rem"
+                                    maxW="none"
+                                    flexShrink={0}
+                                    borderRadius="full"
+                                    bg="panel"
+                                />
+                                <Link
+                                    isExternal
+                                    href={author.url}
+                                    rel="author noopener noreferrer"
+                                    fontSize="sm"
+                                    fontWeight="600"
+                                    color="ink"
+                                    _hover={{ color: 'brand.300', textDecoration: 'none' }}
+                                >
+                                    {author.name}
+                                </Link>
+                            </HStack>
+                            <Text
+                                as="time"
+                                dateTime={post.date}
+                                display="block"
+                                mt={3}
+                                fontFamily="mono"
+                                fontSize="sm"
+                                color="inkFaint"
+                            >
+                                {formatPostDate(post.date)}
+                            </Text>
+                        </Box>
                     </GridItem>
 
                     <GridItem minW={0}>
