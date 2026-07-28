@@ -1,267 +1,29 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import banner from '../assets/banner.png';
 import '../index.scss';
-import { Box, Button, HStack, Icon, Image, Link, Spacer, Text, VStack } from '@chakra-ui/react';
-import { IGithubRelease, IReleaseAsset } from '../types/githubTypes';
-import { OS, isSupportedOS } from '../utils';
-import { BsWindows, BsApple, BsFillQuestionDiamondFill } from 'react-icons/bs/index.js';
-import { FaLinux } from 'react-icons/fa/index.js';
-import { MdDownload } from 'react-icons/md/index.js';
-import ReactMarkdown from 'react-markdown';
-import { GitHubButton } from '../components/buttons/GitHubButton';
-import { DiscordButton } from '../components/buttons/DiscordButton';
-import { KofiButton } from '../components/buttons/KofiButton';
-import { Card } from '../components/Card';
-import { ShellWrapper } from '../components/PageShell/PageShell';
-import ChakraUIRenderer from '../utils/chakra-ui-markdown-renderer';
+import { ReleasePage } from '../components/ReleasePage';
+import { PlatformBuild, ReleaseNote } from '../utils/releases';
 
-function Page(pageProps: {
-    latestVersion: IGithubRelease | undefined;
-    dmgBuild: IReleaseAsset | undefined;
-    exeBuild: IReleaseAsset | undefined;
-    debBuild: IReleaseAsset | undefined;
-    rpmBuild: IReleaseAsset | undefined;
-    winZip: IReleaseAsset | undefined;
-    macZip: IReleaseAsset | undefined;
-    linuxZip: IReleaseAsset | undefined;
-    computedChangelog: string;
-}) {
-    const { latestVersion, dmgBuild, exeBuild, debBuild, rpmBuild, winZip, macZip, linuxZip, computedChangelog } = pageProps;
+interface DownloadPageProps {
+    versionLabel: string | undefined;
+    versionDate: string | undefined;
+    builds: PlatformBuild[];
+    notes: ReleaseNote[];
+}
 
-    let currentBuild: IReleaseAsset | undefined;
-    let zipBuild: IReleaseAsset | undefined;
-    let icon: React.ComponentType;
-    switch (OS.name) {
-        case 'Windows':
-            currentBuild = exeBuild;
-            zipBuild = winZip;
-            icon = BsWindows;
-            break;
-        case 'Mac OS':
-            currentBuild = dmgBuild;
-            zipBuild = macZip;
-            icon = BsApple;
-            break;
-        case 'Debian':
-            currentBuild = debBuild;
-            zipBuild = linuxZip;
-            icon = FaLinux;
-            break;
-        case 'RedHat':
-            currentBuild = rpmBuild;
-            zipBuild = linuxZip;
-            icon = FaLinux;
-            break;
-        case 'Linux':
-            currentBuild = debBuild;
-            zipBuild = linuxZip;
-            icon = FaLinux;
-            break;
-        default:
-            icon = BsFillQuestionDiamondFill;
-            break;
-    }
-
+function Page({ versionLabel, versionDate, builds, notes }: DownloadPageProps) {
     return (
-        <ShellWrapper>
-            <VStack
-                spacing={10}
-                mb="auto"
-                py={4}
-            >
-                <HStack w="full">
-                    <Spacer display={{ base: 'block', sm: 'none' }} />
-                    <Image
-                        src={banner}
-                        alt="chaiNNer"
-                        w={{
-                            base: '240px',
-                            md: '360px',
-                        }}
-                    />
-                    <Spacer />
-                    <HStack
-                        spacing={{ base: 2, lg: 6 }}
-                        display={{ base: 'none', sm: 'flex' }}
-                    >
-                        <GitHubButton />
-                        <DiscordButton />
-                        <KofiButton />
-                    </HStack>
-                </HStack>
-                <VStack
-                    spacing={4}
-                    mb={6}
-                >
-                    <Button
-                        bg="brand.600"
-                        color="white"
-                        borderRadius="2xl"
-                        onClick={() => {
-                            if (currentBuild != null && isSupportedOS) {
-                                window.location.href = currentBuild?.browser_download_url;
-                            }
-                        }}
-                        height="auto"
-                        px={10}
-                        py={8}
-                        disabled={!isSupportedOS || currentBuild == null}
-                        boxShadow="0 4px 12px -2px rgba(59, 130, 246, 0.35)"
-                        transition="all 0.3s ease"
-                        _hover={{
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 8px 20px -4px rgba(59, 130, 246, 0.45)',
-                            bg: 'brand.500',
-                        }}
-                        _active={{
-                            transform: 'translateY(0)',
-                        }}
-                        _disabled={{
-                            bg: 'gray.600',
-                            color: 'gray.400',
-                            cursor: 'not-allowed',
-                            _hover: {
-                                transform: 'none',
-                                boxShadow: 'none',
-                            },
-                        }}
-                    >
-                        <VStack spacing={2}>
-                            <HStack spacing={3}>
-                                <Icon
-                                    boxSize={8}
-                                    as={MdDownload}
-                                />
-                                <Text
-                                    fontSize={{
-                                        base: 20,
-                                        sm: 26,
-                                        md: 36,
-                                    }}
-                                    fontWeight="bold"
-                                    letterSpacing="tight"
-                                >
-                                    {latestVersion != null ? `Download ${latestVersion?.name}` : 'No stable release found'}
-                                </Text>
-                            </HStack>
-                            <HStack spacing={2}>
-                                <Icon
-                                    as={icon}
-                                    boxSize={5}
-                                />
-                                <Text
-                                    fontSize={18}
-                                    fontWeight="500"
-                                    opacity={0.9}
-                                >
-                                    {isSupportedOS ? OS.name : 'Unsupported OS'}
-                                </Text>
-                            </HStack>
-                        </VStack>
-                    </Button>
-                    <VStack spacing={2}>
-                        {zipBuild != null && isSupportedOS && (
-                            <Text
-                                color="gray.300"
-                                fontSize="lg"
-                                textAlign="center"
-                            >
-                                Or download the{' '}
-                                <Link
-                                    color="brand.400"
-                                    href={zipBuild?.browser_download_url}
-                                    fontWeight="600"
-                                    textDecoration="underline"
-                                    textDecorationColor="brand.400"
-                                    textUnderlineOffset="3px"
-                                    transition="all 0.2s ease"
-                                    _hover={{
-                                        color: 'brand.300',
-                                        textDecorationColor: 'brand.300',
-                                    }}
-                                >
-                                    portable version (zip)
-                                </Link>
-                            </Text>
-                        )}
-                        <Text
-                            color="gray.300"
-                            fontSize="lg"
-                            textAlign="center"
-                        >
-                            Want cutting-edge features?{' '}
-                            <Link
-                                color="brand.400"
-                                href="/nightly"
-                                fontWeight="600"
-                                textDecoration="underline"
-                                textDecorationColor="brand.400"
-                                textUnderlineOffset="3px"
-                                transition="all 0.2s ease"
-                                _hover={{
-                                    color: 'brand.300',
-                                    textDecorationColor: 'brand.300',
-                                }}
-                            >
-                                Try Nightly builds
-                            </Link>
-                        </Text>
-                    </VStack>
-                </VStack>
-                <Card
-                    color="white"
-                    w="full"
-                    overflow="hidden"
-                >
-                    <Box
-                        bg="gray.900"
-                        px={6}
-                        py={4}
-                        borderBottom="1px solid"
-                        borderBottomColor="rgba(255, 255, 255, 0.1)"
-                    >
-                        <Text
-                            fontFamily="mono"
-                            fontSize="xs"
-                            textTransform="uppercase"
-                            letterSpacing="0.15em"
-                            color="brand.300"
-                        >
-                            Release notes
-                        </Text>
-                    </Box>
-                    <Box
-                        p={6}
-                        h="49rem"
-                        w="full"
-                        overflowY="scroll"
-                        css={{
-                            '&::-webkit-scrollbar': {
-                                width: '8px',
-                            },
-                            '&::-webkit-scrollbar-track': {
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                borderRadius: '4px',
-                            },
-                            '&::-webkit-scrollbar-thumb': {
-                                background: 'rgba(59, 130, 246, 0.5)',
-                                borderRadius: '4px',
-                            },
-                            '&::-webkit-scrollbar-thumb:hover': {
-                                background: 'rgba(59, 130, 246, 0.7)',
-                            },
-                        }}
-                    >
-                        <ReactMarkdown
-                            components={ChakraUIRenderer()}
-                            skipHtml
-                        >
-                            {computedChangelog}
-                        </ReactMarkdown>
-                    </Box>
-                </Card>
-            </VStack>
-        </ShellWrapper>
+        <ReleasePage
+            builds={builds}
+            notes={notes}
+            versionDate={versionDate}
+            versionLabel={versionLabel}
+            archiveHref="https://github.com/chaiNNer-org/chaiNNer/releases"
+            archiveLabel="Every release on GitHub"
+            crossLink={{ label: 'Nightly builds', href: '/nightly' }}
+            intro="The current stable build. chaiNNer sets up its own Python environment the first time you open it, so there is nothing to install beforehand."
+            notesHeading="Release notes"
+            title="Download"
+        />
     );
 }
 

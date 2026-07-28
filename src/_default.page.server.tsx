@@ -28,6 +28,15 @@ async function render(pageContext: PageContextServer) {
         <meta charset="UTF-8" />
         <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#1a202c" />
+
+        <!-- Inter and JetBrains Mono. The theme asks for both; without this they silently fall back to system faces. -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        />
 
         <!-- Primary Meta Tags -->
         <title>${title}</title>

@@ -8,8 +8,8 @@ const FOOTER_LINKS = [
     { label: 'GitHub', href: githubLink },
     { label: 'Discord', href: discordLink },
     { label: 'OpenModelDB', href: openModelDbLink },
-    { label: 'GPLv3 License', href: licenseLink },
     { label: 'Releases', href: releasesLink },
+    { label: 'GPLv3', href: licenseLink },
 ];
 
 export const Footer = memo(() => {
@@ -17,9 +17,9 @@ export const Footer = memo(() => {
         <Box
             as="footer"
             w="100%"
-            bg="gray.900"
+            bg="canvas"
             borderTop="1px solid"
-            borderTopColor="whiteAlpha.100"
+            borderTopColor="line"
             py={8}
         >
             <Container maxW="1200px">
@@ -27,24 +27,26 @@ export const Footer = memo(() => {
                     direction={{ base: 'column', md: 'row' }}
                     align={{ base: 'start', md: 'center' }}
                     justify="space-between"
-                    gap={4}
+                    gap={5}
                 >
                     <HStack spacing={3}>
                         <Image
                             src={Logo}
-                            boxSize="24px"
+                            boxSize="22px"
                             maxW="none"
                             alt=""
                         />
                         <Text
                             fontSize="sm"
-                            color="gray.400"
+                            color="inkFaint"
                         >
                             chaiNNer — a node-based image processing editor
                         </Text>
                     </HStack>
                     <HStack
-                        spacing={5}
+                        as="nav"
+                        aria-label="Elsewhere"
+                        spacing={6}
                         wrap="wrap"
                     >
                         {FOOTER_LINKS.map((link) => (
@@ -53,8 +55,8 @@ export const Footer = memo(() => {
                                 isExternal
                                 href={link.href}
                                 fontSize="sm"
-                                color="gray.400"
-                                transition="color 0.2s ease"
+                                color="inkFaint"
+                                transition="color 0.15s ease"
                                 _hover={{ color: 'brand.300' }}
                             >
                                 {link.label}

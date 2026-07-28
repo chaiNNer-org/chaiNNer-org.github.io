@@ -1,14 +1,15 @@
-// Colors
-$bg-color: var(--chakra-colors-gray-900);
-$dot-color: var(--chakra-colors-gray-600);
+// The page sits on the same dot grid the node editor draws its canvas on, and
+// it drifts the way the canvas does when you pan it.
 
-// Dimensions
+$canvas: var(--chakra-colors-gray-900);
+$dot: #2b3446;
+
 $dot-size: 2px;
 $dot-space: 22px;
 
-.background {
-    background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
+.canvas {
+    background: linear-gradient(90deg, $canvas ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($canvas ($dot-space - $dot-size), transparent 1%) center, $dot;
     background-size: $dot-space $dot-space;
     animation: moveDots 4s linear infinite;
 }
@@ -19,5 +20,11 @@ $dot-space: 22px;
     }
     to {
         background-position: $dot-space $dot-space;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .canvas {
+        animation: none;
     }
 }

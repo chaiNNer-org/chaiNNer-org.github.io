@@ -1,100 +1,117 @@
-// Colors
-$bg-color: var(--chakra-colors-gray-900);
-$dot-color: var(--chakra-colors-gray-600);
+// One authored moment on the site: a pulse travelling the connection rail in
+// "How it works", lighting each port as it passes. It is the thing chaiNNer
+// does when you press run, so it explains the copy next to it rather than
+// decorating it. Everything else on the page holds still.
 
-// Dimensions
-$dot-size: 2px;
-$dot-space: 22px;
+$cable-bright: #fca5a5;
+$cable-core: #fee2e2;
 
-body {
-    background: $bg-color;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$pulse-cycle: 6s;
+$pulse-step: 0.8s;
+$pulse-len: 3.5rem;
+
+.chain {
+    --rail-x: 0.5rem;
+    --port-top: 0.6rem;
+    position: relative;
 }
 
-.background {
-    background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
-    background-size: $dot-space $dot-space;
-    animation: moveDots 4s linear infinite;
-}
+.chain-step {
+    position: relative;
 
-@keyframes moveDots {
-    from {
-        background-position: 0 0, 0 0, 0 0, 0 0;
+    // The cable itself.
+    &::before {
+        content: '';
+        position: absolute;
+        left: var(--rail-x);
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        transform: translateX(-50%);
+        background: rgba(239, 68, 68, 0.35);
     }
-    to {
-        background-position: 0 0, 0 0, $dot-space $dot-space, $dot-space $dot-space;
-    }
-}
 
-@keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 0%, 100% 100%, 0 0, 0 0;
+    // The cable starts at the first port and ends at the last one.
+    &:first-of-type::before {
+        top: var(--port-top);
     }
-    50% {
-        background-position: 100% 100%, 0% 0%, $dot-space $dot-space, $dot-space $dot-space;
-    }
-}
-
-@media screen and (max-width: 62em) {
-    .external-link-button {
-        p {
-            display: none;
-        }
-        .chakra-button__icon {
-            margin-right: 0;
-        }
+    &:last-of-type::before {
+        bottom: calc(100% - var(--port-top));
     }
 }
 
-@keyframes heroDrift {
-    from {
-        transform: scale(1.06) translate3d(0, 0, 0);
-    }
-    to {
-        transform: scale(1.14) translate3d(-2.5rem, -1.5rem, 0);
-    }
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(22px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes scrollCueBounce {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(8px);
-    }
+.chain-port {
+    position: absolute;
+    left: var(--rail-x);
+    top: var(--port-top);
+    width: 11px;
+    height: 11px;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(239, 68, 68, 0.55);
+    border-radius: 50%;
+    background: var(--chakra-colors-gray-900);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .hero-screenshot {
-        animation: heroDrift 26s ease-in-out infinite alternate;
-        transform-origin: center;
+    .chain-step::after {
+        content: '';
+        position: absolute;
+        left: var(--rail-x);
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        transform: translateX(-50%);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(239, 68, 68, 0) 0%,
+            rgba(248, 113, 113, 0.55) 32%,
+            $cable-core 52%,
+            rgba(248, 113, 113, 0.55) 72%,
+            rgba(239, 68, 68, 0) 100%
+        );
+        background-size: 1px $pulse-len;
+        background-repeat: no-repeat;
+        background-position: 0 (-$pulse-len);
+        filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.75));
+        animation: chainPulse $pulse-cycle linear infinite;
+        animation-delay: calc(var(--i) * #{$pulse-step});
+        pointer-events: none;
     }
 
-    .hero-copy > * {
-        animation: fadeUp 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
-        animation-delay: var(--delay, 0ms);
+    .chain-step:first-of-type::after {
+        top: var(--port-top);
+    }
+    .chain-step:last-of-type::after {
+        bottom: calc(100% - var(--port-top));
     }
 
-    .scroll-cue {
-        animation: scrollCueBounce 2s ease-in-out infinite;
+    .chain-port {
+        animation: portFlash $pulse-cycle linear infinite;
+        animation-delay: calc(var(--i) * #{$pulse-step});
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .background {
-        animation: none;
+@keyframes chainPulse {
+    0% {
+        background-position: 0 (-$pulse-len);
+    }
+    13.33% {
+        background-position: 0 calc(100% + #{$pulse-len});
+    }
+    100% {
+        background-position: 0 calc(100% + #{$pulse-len});
+    }
+}
+
+@keyframes portFlash {
+    0%,
+    12%,
+    100% {
+        border-color: rgba(239, 68, 68, 0.55);
+        box-shadow: none;
+    }
+    2% {
+        border-color: $cable-bright;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.16);
     }
 }
