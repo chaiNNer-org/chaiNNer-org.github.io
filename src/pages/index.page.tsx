@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Box, Button, Container, Flex, Grid, GridItem, Heading, HStack, Image, Link, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Grid, GridItem, Heading, HStack, Icon, Image, Link, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { BsStarFill } from 'react-icons/bs/index.js';
 import '../index.scss';
 import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink, kofiLink, openModelDbLink, templatesLink } from '../utils/links';
@@ -29,10 +30,6 @@ const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
         body: 'Normal Map Generator builds a normal map from a diffuse texture. Add Normals, Scale Normals, and Balance Normals combine and correct them, and Metal to Specular converts between PBR workflows.',
     },
     {
-        title: 'Working with models',
-        body: 'Interpolate Models blends two models of the same kind into one, as long as they share a pretrained ancestor. Convert To ONNX and Convert To NCNN re-target a PyTorch model at hardware it would not otherwise run on.',
-    },
-    {
         title: 'Batch processing',
         body: 'Point Load Images or Load Video at a folder and chaiNNer iterates over it. Pair it with a Save node to run a whole directory through a chain.',
     },
@@ -43,10 +40,6 @@ const USE_CASES: Array<{ title: string; body: React.ReactNode }> = [
     {
         title: 'Resize, crop, rotate, blend',
         body: 'Stack transforms, composite layers, pad images, and route different branches of a chain different ways.',
-    },
-    {
-        title: 'Format conversion',
-        body: 'Read and write PNG, JPEG, WebP, and other common formats as part of the same run that does the processing.',
     },
     {
         title: 'Background removal',
@@ -100,7 +93,12 @@ const ELSEWHERE = [
 
 const CANVAS = '26, 32, 44';
 
-function Hero() {
+/** `12143` reads as `12.1k`, the way GitHub itself writes it. */
+function formatStars(count: number): string {
+    return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(count).toLowerCase();
+}
+
+function Hero({ stars }: { stars: number | undefined }) {
     return (
         <Box
             as="section"
@@ -209,6 +207,32 @@ function Hero() {
                             px={8}
                         >
                             View on GitHub
+                            {stars != null && (
+                                <>
+                                    <Box
+                                        aria-hidden
+                                        w="1px"
+                                        h="1.35rem"
+                                        mx={5}
+                                        bg="lineStrong"
+                                    />
+                                    <Icon
+                                        as={BsStarFill}
+                                        boxSize={3}
+                                        mr={2}
+                                        color="inkFaint"
+                                    />
+                                    <Text
+                                        as="span"
+                                        fontFamily="mono"
+                                        fontSize="sm"
+                                        fontWeight="500"
+                                        color="inkMuted"
+                                    >
+                                        {formatStars(stars)}
+                                    </Text>
+                                </>
+                            )}
                         </Button>
                     </Flex>
                 </Box>
@@ -452,8 +476,8 @@ function OpenSource() {
         <Section heading="Open source">
             <Prose>
                 <p>
-                    chaiNNer is a hobby project under the GPLv3. There is a small group of maintainers, a number of contributors, and a Discord where people
-                    share chains and models. Bug reports go in GitHub issues, and if you know TypeScript, React, or Python, pull requests are welcome.
+                    chaiNNer is a hobby project under the GPLv3 license. There is a small group of maintainers, a number of contributors, and a Discord where
+                    people share chains and models. Bug reports go in GitHub issues, and if you know TypeScript, React, or Python, pull requests are welcome.
                 </p>
                 <p>There is a Ko-fi if you want to support the project. Nothing is gated behind it.</p>
             </Prose>
@@ -568,10 +592,10 @@ function GetIt() {
     );
 }
 
-function Page() {
+function Page({ stars }: { stars?: number }) {
     return (
         <Box w="100%">
-            <Hero />
+            <Hero stars={stars} />
             <WhatItIs />
             <UseCases />
             <HowItWorks />

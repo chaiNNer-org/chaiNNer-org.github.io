@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import fetch from 'cross-fetch';
-import { IGithubRelease } from '../types/githubTypes';
+import { IGithubRelease, IGithubRepo } from '../types/githubTypes';
 
 const cache = new Map<string, Promise<unknown>>();
 async function fetchCached<T>(url: string): Promise<T | undefined> {
@@ -33,8 +33,8 @@ export const getAllVersions = async (): Promise<IGithubRelease[] | undefined> =>
     return await fetchCached('https://api.github.com/repos/chaiNNer-org/chaiNNer/releases');
 };
 
-export const getRepoInfo = async (): Promise<any | undefined> => {
-    return await fetchCached('https://api.github.com/repos/chaiNNer-org/chaiNNer');
+export const getRepoInfo = async (): Promise<IGithubRepo | undefined> => {
+    return await fetchCached<IGithubRepo>('https://api.github.com/repos/chaiNNer-org/chaiNNer');
 };
 
 // Nightly (separate repository)
