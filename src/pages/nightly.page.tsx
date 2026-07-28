@@ -5,90 +5,40 @@ import { HStack, Icon, Text } from '@chakra-ui/react';
 import { MdWarningAmber } from 'react-icons/md/index.js';
 import { IGithubRelease } from '../types/githubTypes';
 import { ReleasePage } from '../components/ReleasePage';
-import { formatReleaseDate, linkifyReleaseBody, listBuilds, PlatformBuild, ReleaseNote } from '../utils/releases';
+import { NightlyData, processNightlyReleases } from '../utils/releases';
 
 /** How many past nightlies the page prints in full before linking out to GitHub. */
 const NOTES_SHOWN = 10;
 
-interface NightlyData {
-    versionLabel: string | undefined;
-    versionDate: string | undefined;
-    builds: PlatformBuild[];
-    notes: ReleaseNote[];
-}
-
 /**
- * Nightly bodies are a loose dump of commit lines rather than a written
- * changelog, with the build date repeated inside them and stray quotes from the
- * workflow that generates them. Turn that into one clean bullet list.
+ * Starts from the data baked in at build time so the page has content on first
+ * paint and in the pre-rendered HTML, then refreshes from GitHub on mount
+ * because nightlies land far more often than this site is rebuilt.
  */
-function cleanNightlyBody(release: IGithubRelease): string {
-    const dateLabel = formatReleaseDate(release);
-    const body = release.body;
-    if (body == null) return '';
-
-    const lines = body
-        .replace(/\r\n/g, '\n')
-        .replace(/'\s+'/g, '\n')
-        .replace(/'\s*\n/g, '\n')
-        .replace(/\n\s*'/g, '\n')
-        .split('\n')
-        .map((line) =>
-            line
-                .replace(/Built on\s+\d{4}-\d{2}-\d{2}/gi, '')
-                .replace(/\s{2,}/g, ' ')
-                .trim()
-        )
-        .filter((line) => line.length > 0)
-        .filter((line) => line !== dateLabel);
-
-    return lines.map((line) => `- ${line}`).join('\n');
-}
-
-function toNightlyNote(release: IGithubRelease): ReleaseNote {
-    const date = formatReleaseDate(release);
-    return {
-        title: date ?? release.tag_name ?? 'Nightly build',
-        date: undefined,
-        body: linkifyReleaseBody(cleanNightlyBody(release)),
-        href: release.html_url,
-    };
-}
-
-function processReleases(allVersions: IGithubRelease[]): NightlyData {
-    const ordered = allVersions
-        .filter((release) => !release.draft)
-        .sort((a, b) => new Date(b.published_at ?? b.created_at).getTime() - new Date(a.published_at ?? a.created_at).getTime());
-
-    const latest = ordered[0];
-
-    return {
-        versionLabel: formatReleaseDate(latest) ?? latest?.tag_name,
-        versionDate: undefined,
-        builds: listBuilds(latest),
-        notes: ordered.slice(0, NOTES_SHOWN).map(toNightlyNote),
-    };
-}
-
-function useNightlyData() {
-    const [data, setData] = useState<NightlyData | null>(null);
-    const [error, setError] = useState(false);
+function useNightlyData(initialData: NightlyData): { data: NightlyData; stale: boolean } {
+    const [data, setData] = useState(initialData);
+    const [stale, setStale] = useState(false);
 
     useEffect(() => {
+        let cancelled = false;
         fetch('https://api.github.com/repos/chaiNNer-org/chaiNNer-nightly/releases')
             .then(async (res) => {
                 if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
                 return (await res.json()) as IGithubRelease[];
             })
             .then((releases) => {
-                setData(processReleases(releases));
+                if (!cancelled) setData(processNightlyReleases(releases, NOTES_SHOWN));
             })
             .catch(() => {
-                setError(true);
+                // Keep whatever the build produced; only say so if that is empty too.
+                if (!cancelled) setStale(true);
             });
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
-    return { data, error };
+    return { data, stale };
 }
 
 function Callout({ tone, children }: { tone: 'warning' | 'error'; children: React.ReactNode }) {
@@ -116,27 +66,26 @@ function Callout({ tone, children }: { tone: 'warning' | 'error'; children: Reac
     );
 }
 
-function Page() {
-    const { data, error } = useNightlyData();
-    const isLoading = data === null && !error;
+function Page({ initialData }: { initialData: NightlyData }) {
+    const { data, stale } = useNightlyData(initialData);
+    const hasNothing = stale && data.builds.length === 0;
 
     return (
         <ReleasePage
             archiveHref="https://github.com/chaiNNer-org/chaiNNer-nightly/releases"
             archiveLabel="Every nightly on GitHub"
-            builds={data?.builds ?? []}
+            builds={data.builds}
             crossLink={{ label: 'Stable downloads', href: '/download' }}
-            error={error ? <Callout tone="error">Could not reach the GitHub API. The nightly releases are still listed on GitHub.</Callout> : undefined}
+            error={hasNothing ? <Callout tone="error">Could not reach the GitHub API. The nightly releases are still listed on GitHub.</Callout> : undefined}
             intro="Builds made from the latest commit on main. They get whatever has just landed, including whatever has just broken."
-            isLoading={isLoading}
-            notes={data?.notes ?? []}
+            notes={data.notes}
             notesHeading="Build log"
             notice={
                 <Callout tone="warning">Nightlies are not tested before release. Keep a stable install around if you rely on chaiNNer for anything.</Callout>
             }
             title="Nightly builds"
-            versionDate={data?.versionDate}
-            versionLabel={data?.versionLabel}
+            versionDate={undefined}
+            versionLabel={data.versionLabel}
         />
     );
 }

@@ -22,6 +22,44 @@ async function render(pageContext: PageContextServer) {
     const url = `https://chainner.app${pageContext.urlPathname}`;
     const keywords = documentProps?.keywords ?? 'chaiNNer, image processing, node editor, batch processing, visual programming, workflow automation';
 
+    /*
+     * The error page is pre-rendered against a placeholder URL, so a canonical
+     * link would point somewhere that does not exist. Send crawlers away from
+     * it instead, and leave the canonical, og:url, and structured data off.
+     */
+    const noindex = documentProps?.noindex === true;
+    const indexTags = noindex
+        ? '<meta name="robots" content="noindex, follow" />'
+        : `<link rel="canonical" href="${url}" />
+        <meta property="og:url" content="${url}" />
+        <meta property="twitter:url" content="${url}" />`;
+
+    // Describes the application, so it only belongs on pages that represent it.
+    const structuredData = noindex
+        ? ''
+        : `        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "chaiNNer",
+          "description": "${desc}",
+          "url": "https://chainner.app",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": ["Windows", "macOS", "Linux"],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "softwareVersion": "latest",
+          "image": "${image}",
+          "author": {
+            "@type": "Organization",
+            "name": "chaiNNer-org"
+          }
+        }
+        </script>`;
+
     const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
       <head>
@@ -43,11 +81,10 @@ async function render(pageContext: PageContextServer) {
         <meta name="title" content="${title}" />
         <meta name="description" content="${desc}" />
         <meta name="keywords" content="${keywords}" />
-        <link rel="canonical" href="${url}" />
+        ${dangerouslySkipEscape(indexTags)}
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="${url}" />
         <meta property="og:title" content="${title}" />
         <meta property="og:description" content="${desc}" />
         <meta property="og:image" content="${image}" />
@@ -55,34 +92,11 @@ async function render(pageContext: PageContextServer) {
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="${url}" />
         <meta property="twitter:title" content="${title}" />
         <meta property="twitter:description" content="${desc}" />
         <meta property="twitter:image" content="${image}" />
 
-        <!-- Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "chaiNNer",
-          "description": "${desc}",
-          "url": "https://chainner.app",
-          "applicationCategory": "MultimediaApplication",
-          "operatingSystem": ["Windows", "macOS", "Linux"],
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "softwareVersion": "latest",
-          "image": "${image}",
-          "author": {
-            "@type": "Organization",
-            "name": "chaiNNer-org"
-          }
-        }
-        </script>
+        ${dangerouslySkipEscape(structuredData)}
       </head>
       <body>
         <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>

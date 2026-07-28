@@ -111,6 +111,67 @@ export function linkifyReleaseBody(markdown: string): string {
     ].reduce((text, pass) => outsideLinks(text, pass), markdown);
 }
 
+export interface NightlyData {
+    versionLabel: string | undefined;
+    builds: PlatformBuild[];
+    notes: ReleaseNote[];
+}
+
+/**
+ * Nightly bodies are a loose dump of commit lines rather than a written
+ * changelog, with the build date repeated inside them and stray quotes from the
+ * workflow that generates them. Turn that into one clean bullet list.
+ */
+function cleanNightlyBody(release: IGithubRelease): string {
+    const dateLabel = formatReleaseDate(release);
+    const body = release.body;
+    if (body == null) return '';
+
+    const lines = body
+        .replace(/\r\n/g, '\n')
+        .replace(/'\s+'/g, '\n')
+        .replace(/'\s*\n/g, '\n')
+        .replace(/\n\s*'/g, '\n')
+        .split('\n')
+        .map((line) =>
+            line
+                .replace(/Built on\s+\d{4}-\d{2}-\d{2}/gi, '')
+                .replace(/\s{2,}/g, ' ')
+                .trim()
+        )
+        .filter((line) => line.length > 0)
+        .filter((line) => line !== dateLabel);
+
+    return lines.map((line) => `- ${line}`).join('\n');
+}
+
+function toNightlyNote(release: IGithubRelease): ReleaseNote {
+    return {
+        title: formatReleaseDate(release) ?? release.tag_name ?? 'Nightly build',
+        date: undefined,
+        body: linkifyReleaseBody(cleanNightlyBody(release)),
+        href: release.html_url,
+    };
+}
+
+/**
+ * Shared by the nightly page's build-time render and its client-side refresh,
+ * so a crawler and a visitor are looking at the same thing.
+ */
+export function processNightlyReleases(allVersions: IGithubRelease[], notesShown: number): NightlyData {
+    const ordered = allVersions
+        .filter((release) => !release.draft)
+        .sort((a, b) => new Date(b.published_at ?? b.created_at).getTime() - new Date(a.published_at ?? a.created_at).getTime());
+
+    const latest = ordered[0];
+
+    return {
+        versionLabel: formatReleaseDate(latest) ?? latest?.tag_name,
+        builds: listBuilds(latest),
+        notes: ordered.slice(0, notesShown).map(toNightlyNote),
+    };
+}
+
 /** Turns a GitHub release into the shape the release page renders. */
 export function toReleaseNote(release: IGithubRelease): ReleaseNote {
     return {

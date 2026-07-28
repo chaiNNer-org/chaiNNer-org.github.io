@@ -13,21 +13,13 @@ const ICON_LINKS = [
     { label: 'Go to the chaiNNer Ko-fi page', href: kofiLink, icon: SiKofi, hover: 'pink.300' },
 ];
 
+const NAV_LINKS = [
+    { label: 'Home', href: '/' },
+    { label: 'Blog', href: '/blog' },
+];
+
 export const Header = memo(() => {
     const { urlPathname } = usePageContext();
-    const isHome = urlPathname === '/';
-
-    const navLinks = isHome
-        ? [
-              { label: 'What it is', href: '#what' },
-              { label: 'Use cases', href: '#usecases' },
-              { label: 'How it works', href: '#how' },
-          ]
-        : [
-              { label: 'Home', href: '/' },
-              { label: 'Download', href: '/download' },
-              { label: 'Nightly', href: '/nightly' },
-          ];
 
     return (
         <chakra.header
@@ -73,19 +65,24 @@ export const Header = memo(() => {
                     ml={{ base: 0, sm: 4 }}
                     display={{ base: 'none', md: 'flex' }}
                 >
-                    {navLinks.map((link) => (
-                        <Button
-                            key={link.href}
-                            as={Link}
-                            href={link.href}
-                            variant="quiet"
-                            size="sm"
-                            px={3}
-                            fontSize="md"
-                        >
-                            {link.label}
-                        </Button>
-                    ))}
+                    {NAV_LINKS.map((link) => {
+                        const isCurrent = urlPathname === link.href;
+                        return (
+                            <Button
+                                key={link.href}
+                                as={Link}
+                                href={link.href}
+                                aria-current={isCurrent ? 'page' : undefined}
+                                variant="quiet"
+                                size="sm"
+                                px={3}
+                                fontSize="md"
+                                color={isCurrent ? 'ink' : undefined}
+                            >
+                                {link.label}
+                            </Button>
+                        );
+                    })}
                 </HStack>
 
                 <HStack

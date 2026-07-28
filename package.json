@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "add-domain": "echo \"chainner.app\" > dist/CNAME"
+    "add-domain": "echo \"chainner.app\" > dist/client/CNAME"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.8",

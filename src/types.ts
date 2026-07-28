@@ -16,6 +16,8 @@ export interface PageContextCustom {
             description?: string;
             keywords?: string;
             image?: string;
+            /** Keeps the page out of search indexes, and out of canonical and structured data. */
+            noindex?: boolean;
         };
     };
 }

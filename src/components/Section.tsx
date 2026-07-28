@@ -9,6 +9,8 @@ interface SectionProps {
      * kicker above it, because a label on every section is grammar, not design.
      */
     heading: string;
+    /** `h1` when the section titles the whole page, `h2` when it sits inside one. */
+    as?: 'h1' | 'h2';
     /** Draws a hairline along the top edge. Off for the first section after the hero. */
     divider?: boolean;
     children: React.ReactNode;
@@ -19,7 +21,7 @@ interface SectionProps {
  * the right. The heading sticks while its content scrolls, so you always know
  * which part of the page you are in.
  */
-export const Section = memo(({ id, heading, divider = true, children }: SectionProps) => {
+export const Section = memo(({ id, heading, as = 'h2', divider = true, children }: SectionProps) => {
     return (
         <Box
             as="section"
@@ -38,8 +40,8 @@ export const Section = memo(({ id, heading, divider = true, children }: SectionP
                 >
                     <GridItem>
                         <Heading
-                            as="h2"
-                            fontSize={{ base: '1.5rem', md: '1.75rem' }}
+                            as={as}
+                            fontSize={as === 'h1' ? { base: '1.75rem', md: '2rem' } : { base: '1.5rem', md: '1.75rem' }}
                             lineHeight="1.2"
                             position={{ lg: 'sticky' }}
                             top={{ lg: '7rem' }}
