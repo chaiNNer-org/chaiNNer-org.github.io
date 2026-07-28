@@ -12,6 +12,7 @@ import ReactMarkdown from 'react-markdown';
 import { GitHubButton } from '../components/buttons/GitHubButton';
 import { DiscordButton } from '../components/buttons/DiscordButton';
 import { KofiButton } from '../components/buttons/KofiButton';
+import { Card } from '../components/Card';
 import { ShellWrapper } from '../components/PageShell/PageShell';
 import ChakraUIRenderer from '../utils/chakra-ui-markdown-renderer';
 
@@ -359,13 +360,9 @@ function Page() {
                                 </Text>
                             </VStack>
                         </VStack>
-                        <Box
+                        <Card
                             color="white"
                             w="full"
-                            bg="gray.800"
-                            border="1px solid"
-                            borderColor="rgba(255, 255, 255, 0.1)"
-                            borderRadius="xl"
                             overflow="hidden"
                         >
                             <Box
@@ -376,11 +373,13 @@ function Page() {
                                 borderBottomColor="rgba(255, 255, 255, 0.1)"
                             >
                                 <Text
-                                    fontSize="lg"
-                                    fontWeight="600"
-                                    color="white"
+                                    fontFamily="mono"
+                                    fontSize="xs"
+                                    textTransform="uppercase"
+                                    letterSpacing="0.15em"
+                                    color="brand.300"
                                 >
-                                    Nightly Release Notes
+                                    Nightly release notes
                                 </Text>
                             </Box>
                             <Box
@@ -430,7 +429,7 @@ function Page() {
                                     </ReactMarkdown>
                                 )}
                             </Box>
-                        </Box>
+                        </Card>
                     </>
                 )}
             </VStack>

@@ -11,6 +11,7 @@ import ReactMarkdown from 'react-markdown';
 import { GitHubButton } from '../components/buttons/GitHubButton';
 import { DiscordButton } from '../components/buttons/DiscordButton';
 import { KofiButton } from '../components/buttons/KofiButton';
+import { Card } from '../components/Card';
 import { ShellWrapper } from '../components/PageShell/PageShell';
 import ChakraUIRenderer from '../utils/chakra-ui-markdown-renderer';
 
@@ -92,7 +93,7 @@ function Page(pageProps: {
                     mb={6}
                 >
                     <Button
-                        bg="linear-gradient(135deg, #10b981 0%, #059669 100%)"
+                        bg="brand.500"
                         color="white"
                         borderRadius="2xl"
                         onClick={() => {
@@ -104,12 +105,12 @@ function Page(pageProps: {
                         px={10}
                         py={8}
                         disabled={!isSupportedOS || currentBuild == null}
-                        boxShadow="0 4px 12px -2px rgba(16, 185, 129, 0.3)"
+                        boxShadow="0 4px 12px -2px rgba(59, 130, 246, 0.35)"
                         transition="all 0.3s ease"
                         _hover={{
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.4)',
-                            bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                            boxShadow: '0 8px 20px -4px rgba(59, 130, 246, 0.45)',
+                            bg: 'brand.400',
                         }}
                         _active={{
                             transform: 'translateY(0)',
@@ -206,13 +207,9 @@ function Page(pageProps: {
                         </Text>
                     </VStack>
                 </VStack>
-                <Box
+                <Card
                     color="white"
                     w="full"
-                    bg="gray.800"
-                    border="1px solid"
-                    borderColor="rgba(255, 255, 255, 0.1)"
-                    borderRadius="xl"
                     overflow="hidden"
                 >
                     <Box
@@ -223,11 +220,13 @@ function Page(pageProps: {
                         borderBottomColor="rgba(255, 255, 255, 0.1)"
                     >
                         <Text
-                            fontSize="lg"
-                            fontWeight="600"
-                            color="white"
+                            fontFamily="mono"
+                            fontSize="xs"
+                            textTransform="uppercase"
+                            letterSpacing="0.15em"
+                            color="brand.300"
                         >
-                            Release Notes
+                            Release notes
                         </Text>
                     </Box>
                     <Box
@@ -259,7 +258,7 @@ function Page(pageProps: {
                             {computedChangelog}
                         </ReactMarkdown>
                     </Box>
-                </Box>
+                </Card>
             </VStack>
         </ShellWrapper>
     );
