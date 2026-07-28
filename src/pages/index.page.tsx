@@ -604,12 +604,6 @@ function UnderTheHood() {
     );
 }
 
-// `Card` is a plain memoized component (not a polymorphic chakra factory component), so passing
-// `as={Link}` doesn't widen its accepted props to include `Link`-only props like `isExternal`.
-// The `as` override still works fine at runtime (`Card` spreads extra props onto its underlying `Box`,
-// which does support `as`); this only teaches the type checker about the props this specific usage needs.
-const CardLink = Card as unknown as React.FC<{ href: string; isExternal?: boolean } & React.ComponentProps<typeof Card>>;
-
 function OpenSource() {
     return (
         <Section
@@ -643,29 +637,33 @@ function OpenSource() {
                 spacing={3}
             >
                 {COMMUNITY_LINKS.map((link) => (
-                    <CardLink
+                    <Link
                         key={link.title}
-                        as={Link}
                         isExternal
                         href={link.href}
                         display="block"
-                        p={4}
-                        _hover={{ borderColor: 'brand.400', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                        _hover={{ textDecoration: 'none' }}
                     >
-                        <Text
-                            fontSize="sm"
-                            fontWeight="600"
-                            color="white"
+                        <Card
+                            hoverAccent
+                            p={4}
+                            h="100%"
                         >
-                            {link.title}
-                        </Text>
-                        <Text
-                            fontSize="xs"
-                            color="gray.500"
-                        >
-                            {link.sub}
-                        </Text>
-                    </CardLink>
+                            <Text
+                                fontSize="sm"
+                                fontWeight="600"
+                                color="white"
+                            >
+                                {link.title}
+                            </Text>
+                            <Text
+                                fontSize="xs"
+                                color="gray.500"
+                            >
+                                {link.sub}
+                            </Text>
+                        </Card>
+                    </Link>
                 ))}
             </SimpleGrid>
         </Section>
