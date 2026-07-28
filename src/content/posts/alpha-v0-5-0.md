@@ -6,7 +6,7 @@ summary: Batch upscaling arrives, through a new kind of node called an iterator,
 source: discord
 ---
 
-This is chaiNNer's biggest update yet, with this long overdue, highly requested feature being the centre of attention.
+This is chaiNNer's biggest update yet, with this long overdue, highly requested feature being the center of attention.
 
 Batch upscaling is performed using an Image File Iterator node. Iterators are a new type of node in chaiNNer that let you run the nodes inside them on multiple items. Right now the only one is the Image File Iterator, which takes a folder as input and runs the sub-nodes on each image file in that folder and its sub-folders. That means you can finally do batch upscaling in chaiNNer.
 

@@ -27,15 +27,15 @@ export const POST_SOURCES = ['discord'] as const;
 export type PostSource = (typeof POST_SOURCES)[number];
 
 /**
- * `release` announces a version and links its GitHub release. `devlog` is
- * progress written up between releases, tied to no version.
+ * `release` announces a version and links its GitHub release. `announcement` is
+ * everything else worth saying, tied to no version.
  */
-export const POST_KINDS = ['release', 'devlog'] as const;
+export const POST_KINDS = ['release', 'announcement'] as const;
 export type PostKind = (typeof POST_KINDS)[number];
 
 export const KIND_LABEL: Record<PostKind, string> = {
     release: '',
-    devlog: 'Devlog',
+    announcement: 'Announcement',
 };
 
 export const SOURCE_LABEL: Record<PostSource, string> = {
