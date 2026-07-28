@@ -5,7 +5,7 @@ import '../index.scss';
 import { Section } from '../components/Section';
 import { Card } from '../components/Card';
 import { NodeFlow } from '../components/NodeFlow';
-import { githubLink, templatesLink } from '../utils/links';
+import { discordLink, githubLink, kofiLink, openModelDbLink, templatesLink } from '../utils/links';
 
 const SCREENSHOT_URL = 'https://github.com/chaiNNer-org/chaiNNer/raw/main/docs/assets/screenshot.png';
 
@@ -64,6 +64,20 @@ const STEPS = [
         title: 'Press run.',
         body: 'The connections light up as data flows through the chain. You can pause or stop at any time, and errors show up inline rather than after ten minutes of processing.',
     },
+];
+
+const FRAMEWORKS = [
+    { name: 'PyTorch', note: 'CUDA on Nvidia, ROCm on Linux AMD, MPS on Apple Silicon.' },
+    { name: 'NCNN', note: "Runs on AMD, Intel, Nvidia, and Apple — covers hardware PyTorch doesn't." },
+    { name: 'ONNX', note: 'Broad model support, including background removal networks.' },
+    { name: 'TensorRT', note: 'Fastest on Nvidia, once the model is converted.' },
+];
+
+const COMMUNITY_LINKS = [
+    { title: 'Source code', sub: 'GitHub', href: githubLink },
+    { title: 'Discord', sub: 'Community chat', href: discordLink },
+    { title: 'OpenModelDB', sub: 'Community models', href: openModelDbLink },
+    { title: 'Ko-fi', sub: 'Optional tips', href: kofiLink },
 ];
 
 function Hero() {
@@ -468,6 +482,282 @@ function HowItWorks() {
     );
 }
 
+function UnderTheHood() {
+    return (
+        <Section
+            eyebrow="Under the hood"
+            heading="Self-contained. Runs on what you have."
+        >
+            <SimpleGrid
+                columns={{ base: 1, md: 2 }}
+                spacing={4}
+            >
+                <Card p={6}>
+                    <Heading
+                        as="h3"
+                        size="sm"
+                        color="white"
+                    >
+                        No Python install needed
+                    </Heading>
+                    <Text
+                        mt={2}
+                        fontSize="sm"
+                        color="gray.400"
+                        lineHeight="1.7"
+                    >
+                        On first launch, chaiNNer downloads an isolated Python build into its own folder and manages dependencies through a built-in Dependency
+                        Manager. You can point it at a system Python instead if you prefer.
+                    </Text>
+                </Card>
+
+                <Card p={6}>
+                    <Heading
+                        as="h3"
+                        size="sm"
+                        color="white"
+                    >
+                        GPU frameworks
+                    </Heading>
+                    <VStack
+                        align="start"
+                        spacing={2.5}
+                        mt={3}
+                    >
+                        {FRAMEWORKS.map((framework) => (
+                            <HStack
+                                key={framework.name}
+                                align="start"
+                                spacing={3}
+                            >
+                                <Box
+                                    mt="7px"
+                                    boxSize="6px"
+                                    flexShrink={0}
+                                    borderRadius="full"
+                                    bg="brand.400"
+                                />
+                                <Text
+                                    fontSize="sm"
+                                    color="gray.400"
+                                    lineHeight="1.6"
+                                >
+                                    <Text
+                                        as="span"
+                                        fontFamily="mono"
+                                        color="white"
+                                    >
+                                        {framework.name}
+                                    </Text>
+                                    {` — ${framework.note}`}
+                                </Text>
+                            </HStack>
+                        ))}
+                    </VStack>
+                    <Text
+                        mt={4}
+                        fontSize="xs"
+                        color="gray.500"
+                    >
+                        All of them fall back to CPU.
+                    </Text>
+                </Card>
+
+                <Card p={6}>
+                    <Heading
+                        as="h3"
+                        size="sm"
+                        color="white"
+                    >
+                        Batch &amp; CLI
+                    </Heading>
+                    <Text
+                        mt={2}
+                        fontSize="sm"
+                        color="gray.400"
+                        lineHeight="1.7"
+                    >
+                        The Load Images and Load Video nodes iterate over folders. Saved chains can also be run from the command line, so chaiNNer can be one
+                        step in a larger pipeline.
+                    </Text>
+                </Card>
+
+                <Card p={6}>
+                    <Heading
+                        as="h3"
+                        size="sm"
+                        color="white"
+                    >
+                        Type-checked chains
+                    </Heading>
+                    <Text
+                        mt={2}
+                        fontSize="sm"
+                        color="gray.400"
+                        lineHeight="1.7"
+                    >
+                        Every node input has a type. The editor validates the chain in real time and rejects incompatible connections before you run anything.
+                    </Text>
+                </Card>
+            </SimpleGrid>
+        </Section>
+    );
+}
+
+// `Card` is a plain memoized component (not a polymorphic chakra factory component), so passing
+// `as={Link}` doesn't widen its accepted props to include `Link`-only props like `isExternal`.
+// The `as` override still works fine at runtime (`Card` spreads extra props onto its underlying `Box`,
+// which does support `as`); this only teaches the type checker about the props this specific usage needs.
+const CardLink = Card as unknown as React.FC<{ href: string; isExternal?: boolean } & React.ComponentProps<typeof Card>>;
+
+function OpenSource() {
+    return (
+        <Section
+            eyebrow="Open source"
+            heading="Free, GPLv3, and built by people who use it."
+            lede={
+                <VStack
+                    align="start"
+                    spacing={4}
+                >
+                    <Text
+                        fontSize="lg"
+                        color="gray.300"
+                        lineHeight="1.7"
+                    >
+                        chaiNNer is a hobby project. There&apos;s a small group of maintainers, a number of contributors, and a Discord where people share
+                        chains and models. Bug reports go in GitHub issues. If you know TypeScript, React, or Python, pull requests are welcome.
+                    </Text>
+                    <Text
+                        fontSize="md"
+                        color="gray.400"
+                        lineHeight="1.7"
+                    >
+                        There&apos;s a Ko-fi if you want to support the project. Nothing is gated behind it.
+                    </Text>
+                </VStack>
+            }
+        >
+            <SimpleGrid
+                columns={{ base: 1, sm: 2, lg: 4 }}
+                spacing={3}
+            >
+                {COMMUNITY_LINKS.map((link) => (
+                    <CardLink
+                        key={link.title}
+                        as={Link}
+                        isExternal
+                        href={link.href}
+                        display="block"
+                        p={4}
+                        _hover={{ borderColor: 'brand.400', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                    >
+                        <Text
+                            fontSize="sm"
+                            fontWeight="600"
+                            color="white"
+                        >
+                            {link.title}
+                        </Text>
+                        <Text
+                            fontSize="xs"
+                            color="gray.500"
+                        >
+                            {link.sub}
+                        </Text>
+                    </CardLink>
+                ))}
+            </SimpleGrid>
+        </Section>
+    );
+}
+
+function DownloadCTA() {
+    return (
+        <Box
+            as="section"
+            w="100%"
+            borderTop="1px solid"
+            borderTopColor="whiteAlpha.100"
+            py={{ base: 16, md: 24 }}
+            position="relative"
+            overflow="hidden"
+        >
+            <Box
+                position="absolute"
+                inset={0}
+                bgImage="radial-gradient(800px 300px at 50% 100%, rgba(59, 130, 246, 0.16), transparent 70%)"
+                pointerEvents="none"
+            />
+            <Container
+                maxW="1200px"
+                position="relative"
+            >
+                <VStack
+                    spacing={5}
+                    textAlign="center"
+                >
+                    <Heading
+                        as="h2"
+                        size="xl"
+                        color="white"
+                    >
+                        Download chaiNNer
+                    </Heading>
+                    <Text
+                        fontSize="lg"
+                        color="gray.300"
+                        maxW="34rem"
+                        lineHeight="1.7"
+                    >
+                        Installers and portable builds for Windows, macOS, and Linux. chaiNNer sets up its Python environment on first launch.
+                    </Text>
+                    <HStack
+                        spacing={4}
+                        pt={3}
+                        flexWrap="wrap"
+                        justify="center"
+                    >
+                        <Button
+                            as={Link}
+                            href="/download"
+                            bg="brand.500"
+                            color="white"
+                            size="lg"
+                            px={8}
+                            borderRadius="lg"
+                            fontWeight="600"
+                            boxShadow="0 4px 12px -2px rgba(59, 130, 246, 0.35)"
+                            transition="all 0.2s ease"
+                            _hover={{ bg: 'brand.400', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                            _active={{ transform: 'translateY(0)' }}
+                        >
+                            Download
+                        </Button>
+                        <Button
+                            as={Link}
+                            href="/nightly"
+                            bg="transparent"
+                            color="white"
+                            border="1px solid"
+                            borderColor="whiteAlpha.400"
+                            size="lg"
+                            px={8}
+                            borderRadius="lg"
+                            fontWeight="600"
+                            transition="all 0.2s ease"
+                            _hover={{ borderColor: 'brand.400', bg: 'whiteAlpha.100', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                            _active={{ transform: 'translateY(0)' }}
+                        >
+                            Nightly builds
+                        </Button>
+                    </HStack>
+                </VStack>
+            </Container>
+        </Box>
+    );
+}
+
 function Page() {
     return (
         <Box w="100%">
@@ -475,6 +765,9 @@ function Page() {
             <WhatItIs />
             <UseCases />
             <HowItWorks />
+            <UnderTheHood />
+            <OpenSource />
+            <DownloadCTA />
         </Box>
     );
 }
