@@ -15,7 +15,9 @@ async function render(pageContext: PageContextServer) {
     );
 
     // See https://vite-plugin-ssr.com/head
-    const { documentProps } = pageContext.exports;
+    // A page with a dynamic route sets documentProps in onBeforeRender, since a
+    // static export cannot vary by URL. That wins over the static one.
+    const documentProps = pageContext.documentProps ?? pageContext.exports.documentProps;
     const title = documentProps?.title ?? 'chaiNNer';
     const desc = documentProps?.description ?? "chaiNNer's website";
     const image = documentProps?.image ?? 'https://chainner.app/banner.png';

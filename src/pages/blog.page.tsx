@@ -3,29 +3,7 @@ import { Box, Heading, Link, Text, VStack } from '@chakra-ui/react';
 import '../index.scss';
 import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink } from '../utils/links';
-
-interface Post {
-    /** Path this post lives at, e.g. `/blog/first-post`. */
-    href: string;
-    title: string;
-    /** ISO date (YYYY-MM-DD) the post was published. */
-    date: string;
-    /** One or two sentences describing what the post covers. */
-    summary: string;
-}
-
-/**
- * Posts, newest first. The page renders the list when there is one and an
- * empty state when there is not, so adding the first post is a matter of
- * writing it and putting an entry here.
- */
-const POSTS: Post[] = [];
-
-function formatDate(iso: string): string {
-    const date = new Date(`${iso}T00:00:00Z`);
-    if (Number.isNaN(date.getTime())) return iso;
-    return date.toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-}
+import { formatPostDate, POSTS } from '../content/posts';
 
 function PostList() {
     return (
@@ -33,7 +11,7 @@ function PostList() {
             {POSTS.map((post) => (
                 <Box
                     as="article"
-                    key={post.href}
+                    key={post.slug}
                     borderTop="1px solid"
                     borderTopColor="line"
                     pt={5}
@@ -47,7 +25,7 @@ function PostList() {
                         fontSize="xs"
                         color="inkFaint"
                     >
-                        {formatDate(post.date)}
+                        {formatPostDate(post.date)}
                     </Text>
                     <Heading
                         as="h2"
@@ -55,7 +33,7 @@ function PostList() {
                         mt={2}
                     >
                         <Link
-                            href={post.href}
+                            href={`/blog/${post.slug}`}
                             _hover={{ color: 'brand.300', textDecoration: 'none' }}
                         >
                             {post.title}
@@ -142,7 +120,7 @@ function Page() {
                 heading="Blog"
             >
                 <Prose>
-                    <p>Notes on releases, and on how chaiNNer works when that is worth explaining at more length than a changelog allows.</p>
+                    <p>Release announcements, and the occasional longer explanation of how something in chaiNNer works.</p>
                 </Prose>
                 <Box mt={10}>{POSTS.length > 0 ? <PostList /> : <NothingYet />}</Box>
             </Section>
