@@ -3,7 +3,7 @@ import { Box, Heading, Link, Text, VStack } from '@chakra-ui/react';
 import '../index.scss';
 import { Prose, Section } from '../components/Section';
 import { discordLink, githubLink } from '../utils/links';
-import { formatPostDate, PostMeta } from '../content/post';
+import { formatPostDate, PostMeta, SOURCE_SHORT } from '../content/post';
 
 function PostList({ posts }: { posts: PostMeta[] }) {
     return (
@@ -26,6 +26,12 @@ function PostList({ posts }: { posts: PostMeta[] }) {
                         color="inkFaint"
                     >
                         {formatPostDate(post.date)}
+                        {post.source !== undefined && (
+                            <Text
+                                as="span"
+                                color="whiteAlpha.400"
+                            >{` · ${SOURCE_SHORT[post.source]}`}</Text>
+                        )}
                     </Text>
                     <Heading
                         as="h2"
@@ -120,7 +126,7 @@ function Page({ posts }: { posts: PostMeta[] }) {
                 heading="Blog"
             >
                 <Prose>
-                    <p>Release announcements, and the occasional longer explanation of how something in chaiNNer works.</p>
+                    <p>Release announcements. These get written when a release needs more explaining than its changelog gives it.</p>
                 </Prose>
                 <Box mt={10}>{posts.length > 0 ? <PostList posts={posts} /> : <NothingYet />}</Box>
             </Section>

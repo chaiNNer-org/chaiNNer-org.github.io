@@ -3,6 +3,7 @@ title: Alpha v0.5.0
 date: 2022-04-05
 tag: v0.5.0
 summary: Batch upscaling arrives, through a new kind of node called an iterator, along with DDS and TGA support via Pillow.
+source: discord
 ---
 
 This is chaiNNer's biggest update yet, with this long overdue, highly requested feature being the centre of attention.

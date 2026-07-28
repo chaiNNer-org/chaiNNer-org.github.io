@@ -13,7 +13,25 @@ export interface PostMeta {
     summary: string;
     /** Release this post announces, linked at the end of it. */
     tag?: string;
+    /**
+     * Where the post was originally written, when that was not this site. The
+     * back catalogue was announced in the Discord years before there was a blog
+     * to put it on, and saying so is more honest than dating it here silently.
+     */
+    source?: PostSource;
 }
+
+export const POST_SOURCES = ['discord'] as const;
+export type PostSource = (typeof POST_SOURCES)[number];
+
+export const SOURCE_LABEL: Record<PostSource, string> = {
+    discord: 'Originally posted in the chaiNNer Discord',
+};
+
+/** Short form, for sitting beside a date in a list. */
+export const SOURCE_SHORT: Record<PostSource, string> = {
+    discord: 'from Discord',
+};
 
 export interface Post extends PostMeta {
     /** Markdown, with the frontmatter stripped. */

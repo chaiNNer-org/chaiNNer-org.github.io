@@ -3,6 +3,7 @@ title: Alpha v0.12.0
 date: 2022-09-04
 tag: v0.12.0
 summary: Direct PyTorch to NCNN conversion, SwinIR support, faster PyTorch auto-tiling, and lower RAM overhead on large chains.
+source: discord
 ---
 
 ## PyTorch to NCNN conversion

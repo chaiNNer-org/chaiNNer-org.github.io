@@ -4,7 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import '../../index.scss';
 import ChakraUIRenderer from '../../utils/chakra-ui-markdown-renderer';
 import { postMarkdownTheme } from '../../components/postMarkdownTheme';
-import { formatPostDate, Post, releaseUrl } from '../../content/post';
+import { formatPostDate, Post, releaseUrl, SOURCE_LABEL } from '../../content/post';
+import { discordLink } from '../../utils/links';
 
 function Page({ post }: { post: Post }) {
     return (
@@ -77,6 +78,31 @@ function Page({ post }: { post: Post }) {
                                 mt={12}
                                 pt={6}
                             >
+                                {post.source !== undefined && (
+                                    <Text
+                                        fontSize="sm"
+                                        color="inkFaint"
+                                        lineHeight="1.6"
+                                        mb={4}
+                                    >
+                                        {SOURCE_LABEL[post.source]}
+                                        {post.source === 'discord' && (
+                                            <>
+                                                {', '}
+                                                <Link
+                                                    isExternal
+                                                    href={discordLink}
+                                                    color="brand.300"
+                                                    textUnderlineOffset="2px"
+                                                    _hover={{ color: 'brand.200' }}
+                                                >
+                                                    which you can still join
+                                                </Link>
+                                            </>
+                                        )}
+                                        .
+                                    </Text>
+                                )}
                                 {post.tag != null && (
                                     <Link
                                         isExternal

@@ -3,6 +3,7 @@ title: Alpha v0.13.0
 date: 2022-09-29
 tag: v0.13.0
 summary: GFPGAN face restoration arrives as the Face Upscale node, and the repository moves to the chaiNNer-org organization.
+source: discord
 ---
 
 Before we begin, you might notice chaiNNer has a new home. The repository now lives in an organization, chaiNNer-org, rather than my personal GitHub account, so the URL is now github.com/chaiNNer-org/chaiNNer. The old one should still redirect, but you should update any links you have — in descriptions, tutorials, and so on — just in case.

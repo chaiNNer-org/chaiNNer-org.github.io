@@ -1,4 +1,4 @@
-import { Post, PostMeta } from './post';
+import { Post, POST_SOURCES, PostMeta, PostSource } from './post';
 
 /**
  * Every post is a markdown file in `./posts`. Adding one is adding a file — no
@@ -15,7 +15,7 @@ const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
 const FIELD = /^([a-zA-Z][\w-]*):\s*(.*)$/;
 
 const REQUIRED = ['title', 'date', 'summary'] as const;
-const OPTIONAL = ['tag'] as const;
+const OPTIONAL = ['tag', 'source'] as const;
 const KNOWN = new Set<string>([...REQUIRED, ...OPTIONAL]);
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -45,12 +45,18 @@ function parse(path: string, raw: string): Post {
     const date = fields.get('date') ?? '';
     if (!ISO_DATE.test(date)) throw new Error(`${path}: date must be YYYY-MM-DD, got "${date}"`);
 
+    const source = fields.get('source');
+    if (source !== undefined && !POST_SOURCES.includes(source as PostSource)) {
+        throw new Error(`${path}: source must be one of ${POST_SOURCES.join(', ')}, got "${source}"`);
+    }
+
     return {
         slug,
         title: fields.get('title') ?? '',
         date,
         summary: fields.get('summary') ?? '',
         tag: fields.get('tag'),
+        source: source as PostSource | undefined,
         body: body.trim(),
     };
 }

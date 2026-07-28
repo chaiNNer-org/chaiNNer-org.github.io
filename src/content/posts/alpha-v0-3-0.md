@@ -3,6 +3,7 @@ title: Alpha v0.3.0
 date: 2022-03-07
 tag: v0.3.0
 summary: NCNN support brings upscaling to AMD and Intel GPUs, and every node gets renamed and recategorized around what it does rather than what implements it.
+source: discord
 ---
 
 It might not seem like it, but this is my biggest update yet, with a few pretty big features and changes.

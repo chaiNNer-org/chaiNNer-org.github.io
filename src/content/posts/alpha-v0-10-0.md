@@ -3,6 +3,7 @@ title: Alpha v0.10.0
 date: 2022-07-14
 tag: v0.10.0
 summary: The Navi type system, colored handles that show you what connects to what, a node search context menu, and the ability to disable nodes.
+source: discord
 ---
 
 This is a pretty exciting update for chaiNNer. The first thing you might notice is all the new colors, but it's a lot more than just a new look, so I'll go over this changelog in a bit more detail than usual.

@@ -3,6 +3,7 @@ title: Alpha v0.25.0
 date: 2025-10-19
 tag: v0.25.0
 summary: The first stable release in over a year. Two iterators can now be used together, as long as they are the same length.
+source: discord
 ---
 
 Hey everyone, long time no see. You may have noticed it has been over a year since there was a new stable version of chaiNNer. Sorry about that. Life got in the way a bit, and we ultimately lost our motivation to work on it. For the time being at least, I am back working on chaiNNer, just not at full capacity.

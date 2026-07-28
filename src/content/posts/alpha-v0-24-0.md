@@ -3,6 +3,7 @@ title: Alpha v0.24.0
 date: 2024-06-01
 tag: v0.24.0
 summary: Conditional branching, a skipped state for nodes, selectable themes, and PyTorch upscaling roughly 1.25x faster than before.
+source: discord
 ---
 
 Conditional branching, node passthrough and skipping, new themes, PyTorch optimizations, and many more fixes and quality of life improvements all around.

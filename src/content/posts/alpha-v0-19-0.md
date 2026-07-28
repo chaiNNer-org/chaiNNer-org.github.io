@@ -3,6 +3,7 @@ title: Alpha v0.19.0
 date: 2023-07-31
 tag: v0.19.0
 summary: Searchable documentation for every node, a rewritten update screen, backend setup changes, and the first Rust code in chaiNNer.
+source: discord
 ---
 
 Hey everyone. It's been a while since the last update, and in my opinion it's been worth the wait. We have a lot of interesting improvements and new features to share with all of you.

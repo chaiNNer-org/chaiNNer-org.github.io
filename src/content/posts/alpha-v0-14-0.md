@@ -3,6 +3,7 @@ title: Alpha v0.14.0
 date: 2022-10-27
 tag: v0.14.0
 summary: Video support rebuilt on a full FFmpeg build, and auto-tiling reworked to use real tile sizes instead of a split factor.
+source: discord
 ---
 
 After a long wait, 0.14.0 is finally here. This update brings a couple of pretty important changes.

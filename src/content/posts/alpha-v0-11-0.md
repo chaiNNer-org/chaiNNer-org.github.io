@@ -3,6 +3,7 @@ title: Alpha v0.11.0
 date: 2022-08-14
 tag: v0.11.0
 summary: Image previews inside the editor, via a new View Image node and a rework of how previews and starting nodes work.
+source: discord
 ---
 
 This update took a lot longer than expected, but I think it will be worth the wait.

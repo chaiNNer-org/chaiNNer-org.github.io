@@ -3,6 +3,7 @@ title: Alpha v0.16.0
 date: 2022-12-08
 tag: v0.16.0
 summary: A much more compact node design, inserting a node onto an existing connection, explanations for invalid connections, sharper previews, and DDS support on Windows.
+source: discord
 ---
 
 ## Major UI improvements

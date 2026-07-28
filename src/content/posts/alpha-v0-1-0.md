@@ -3,6 +3,7 @@ title: Alpha v0.1.0
 date: 2022-01-17
 tag: v0.1.0
 summary: The initial alpha release, and the first day of chaiNNer being public.
+source: discord
 ---
 
 chaiNNer is now public. You can find the release on GitHub.
