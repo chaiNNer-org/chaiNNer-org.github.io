@@ -1,297 +1,276 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Button, Center, HStack, Image, Link, VStack, Box, Text, Heading, SimpleGrid, Icon, Container } from '@chakra-ui/react';
-import { FaCogs, FaRocket, FaImage, FaDownload, FaMagic, FaDesktop, FaChevronDown, FaPalette, FaCheckCircle } from 'react-icons/fa/index.js';
+import { Box, Button, Container, Heading, HStack, Icon, Image, Link, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { FaChevronDown } from 'react-icons/fa/index.js';
 import '../index.scss';
-import { PageProps } from '../types';
-import Banner from '../assets/banner.png';
+import { Section } from '../components/Section';
+import { NodeFlow } from '../components/NodeFlow';
+import { githubLink } from '../utils/links';
 
-function Page(pageProps: PageProps) {
+const SCREENSHOT_URL = 'https://github.com/chaiNNer-org/chaiNNer/raw/main/docs/assets/screenshot.png';
+
+const STATS = [
+    { label: 'Platforms', value: 'Windows · macOS · Linux' },
+    { label: 'Frameworks', value: 'PyTorch · NCNN · ONNX · TensorRT' },
+    { label: 'License', value: 'GPLv3' },
+];
+
+function Hero() {
     return (
-        <Box w="100%">
-            {/* Hero Section */}
-            <Center
-                h="calc(100vh - 4.5rem)"
-                w="100%"
-                position="relative"
+        <Box
+            as="section"
+            position="relative"
+            w="100%"
+            minH="calc(100vh - 4.5rem)"
+            display="flex"
+            alignItems="center"
+            overflow="hidden"
+        >
+            <Box
+                position="absolute"
+                inset={0}
+                zIndex={0}
             >
-                <VStack spacing={12}>
-                    <Image
-                        src={Banner}
-                        w="738px"
-                        maxW="90vw"
-                        filter="drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))"
-                    />
-                    <HStack spacing={4}>
+                <Image
+                    className="hero-screenshot"
+                    src={SCREENSHOT_URL}
+                    alt="The chaiNNer node editor with an image processing chain on the canvas"
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    opacity={0.7}
+                />
+                <Box
+                    position="absolute"
+                    inset={0}
+                    bgImage="radial-gradient(circle at 74% 26%, rgba(59, 130, 246, 0.22), transparent 40%), linear-gradient(90deg, var(--chakra-colors-gray-900) 0%, rgba(26, 32, 44, 0.88) 46%, rgba(26, 32, 44, 0.4) 100%)"
+                />
+                <Box
+                    position="absolute"
+                    insetX={0}
+                    bottom={0}
+                    h="14rem"
+                    bgGradient="linear(to-t, gray.900, transparent)"
+                />
+            </Box>
+
+            <Container
+                maxW="1200px"
+                position="relative"
+                zIndex={1}
+                py={{ base: 24, md: 32 }}
+            >
+                <VStack
+                    className="hero-copy"
+                    align="start"
+                    spacing={0}
+                    maxW="46rem"
+                >
+                    <Text
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        style={{ '--delay': '120ms' } as React.CSSProperties}
+                        fontFamily="mono"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        letterSpacing="0.2em"
+                        color="brand.300"
+                    >
+                        Node-based image processing
+                    </Text>
+                    <Heading
+                        as="h1"
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        style={{ '--delay': '220ms' } as React.CSSProperties}
+                        fontSize={{ base: '4rem', md: '6rem' }}
+                        lineHeight="1"
+                        letterSpacing="-0.04em"
+                        color="white"
+                        mt={5}
+                    >
+                        chaiNNer
+                    </Heading>
+                    <Text
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        style={{ '--delay': '340ms' } as React.CSSProperties}
+                        fontSize={{ base: 'xl', md: '2xl' }}
+                        fontWeight="600"
+                        color="white"
+                        mt={5}
+                    >
+                        A node-based editor for image processing pipelines.
+                    </Text>
+                    <Text
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        style={{ '--delay': '460ms' } as React.CSSProperties}
+                        fontSize="lg"
+                        color="gray.300"
+                        lineHeight="1.7"
+                        maxW="36rem"
+                        mt={4}
+                    >
+                        Drag nodes onto a canvas, connect them, hit run. Free and open source, for Windows, macOS, and Linux.
+                    </Text>
+
+                    <HStack
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        style={{ '--delay': '580ms' } as React.CSSProperties}
+                        spacing={4}
+                        mt={10}
+                        flexWrap="wrap"
+                    >
                         <Button
                             as={Link}
                             href="/download"
-                            bg="linear-gradient(135deg, #10b981 0%, #059669 100%)"
+                            bg="brand.500"
                             color="white"
                             size="lg"
                             px={8}
-                            py={6}
-                            borderRadius="xl"
+                            borderRadius="lg"
                             fontWeight="600"
-                            fontSize="lg"
-                            boxShadow="0 4px 12px -2px rgba(16, 185, 129, 0.3)"
-                            transition="all 0.3s ease"
-                            _hover={{
-                                transform: 'translateY(-2px)',
-                                boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.4)',
-                                bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
-                            }}
-                            _active={{
-                                transform: 'translateY(0)',
-                            }}
+                            boxShadow="0 4px 12px -2px rgba(59, 130, 246, 0.35)"
+                            transition="all 0.2s ease"
+                            _hover={{ bg: 'brand.400', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                            _active={{ transform: 'translateY(0)' }}
                         >
                             Download
                         </Button>
                         <Button
                             as={Link}
-                            href="/nightly"
-                            bg="rgba(30, 41, 59, 0.8)"
+                            isExternal
+                            href={githubLink}
+                            bg="transparent"
                             color="white"
                             border="1px solid"
-                            borderColor="rgba(255, 255, 255, 0.2)"
+                            borderColor="whiteAlpha.400"
                             size="lg"
                             px={8}
-                            py={6}
-                            borderRadius="xl"
+                            borderRadius="lg"
                             fontWeight="600"
-                            fontSize="lg"
-                            transition="all 0.3s ease"
-                            _hover={{
-                                bg: 'rgba(139, 92, 246, 0.1)',
-                                borderColor: 'purple.400',
-                                transform: 'translateY(-2px)',
-                                boxShadow: '0 4px 12px -2px rgba(139, 92, 246, 0.25)',
-                            }}
-                            _active={{
-                                transform: 'translateY(0)',
-                            }}
+                            transition="all 0.2s ease"
+                            _hover={{ borderColor: 'brand.400', bg: 'whiteAlpha.100', transform: 'translateY(-2px)', textDecoration: 'none' }}
+                            _active={{ transform: 'translateY(0)' }}
                         >
-                            Nightly
+                            View on GitHub
                         </Button>
                     </HStack>
-                </VStack>
-                <VStack
-                    position="absolute"
-                    bottom={16}
-                    spacing={2}
-                >
-                    <Text
-                        color="gray.400"
-                        fontSize="sm"
-                        fontWeight="500"
+
+                    <SimpleGrid
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        style={{ '--delay': '700ms' } as React.CSSProperties}
+                        columns={{ base: 1, sm: 3 }}
+                        spacing={6}
+                        mt={12}
+                        w="100%"
+                        maxW="36rem"
                     >
-                        Scroll to learn more
-                    </Text>
-                    <Icon
-                        as={FaChevronDown}
-                        color="gray.400"
-                        boxSize={6}
-                        sx={{
-                            '@keyframes bounce': {
-                                '0%, 100%': {
-                                    transform: 'translateY(0)',
-                                },
-                                '50%': {
-                                    transform: 'translateY(8px)',
-                                },
-                            },
-                            animation: 'bounce 2s ease-in-out infinite',
-                        }}
-                    />
+                        {STATS.map((stat) => (
+                            <VStack
+                                key={stat.label}
+                                align="start"
+                                spacing={1}
+                            >
+                                <Text
+                                    fontSize="xs"
+                                    textTransform="uppercase"
+                                    letterSpacing="0.12em"
+                                    color="gray.500"
+                                >
+                                    {stat.label}
+                                </Text>
+                                <Text
+                                    fontFamily="mono"
+                                    fontSize="sm"
+                                    color="gray.200"
+                                >
+                                    {stat.value}
+                                </Text>
+                            </VStack>
+                        ))}
+                    </SimpleGrid>
                 </VStack>
-            </Center>
+            </Container>
 
-            {/* Feature Overview Section */}
-            <Box
-                w="100%"
-                bg="transparent"
-                py={20}
+            <VStack
+                position="absolute"
+                bottom={8}
+                left="50%"
+                transform="translateX(-50%)"
+                spacing={2}
+                zIndex={1}
+                display={{ base: 'none', md: 'flex' }}
             >
-                <Container maxW="1400px">
-                    <VStack spacing={16}>
-                        {/* Introduction */}
-                        <VStack
-                            spacing={6}
-                            textAlign="center"
-                        >
-                            <Heading
-                                size="2xl"
-                                color="white"
-                                fontWeight="700"
-                            >
-                                What is chaiNNer?
-                            </Heading>
-                            <Text
-                                fontSize="xl"
-                                color="gray.300"
-                                maxW="4xl"
-                                lineHeight="1.6"
-                            >
-                                A node-based image processing GUI aimed at making chaining image processing tasks easy and customizable. Born as an AI upscaling
-                                application, chaiNNer has grown into an extremely flexible and powerful programmatic image processing application. ChaiNNer
-                                gives you a level of customization of your image processing workflow that very few others do. Cross-platform for Windows, macOS,
-                                and Linux.
-                            </Text>
-                        </VStack>
-
-                        {/* Key Features */}
-                        <VStack
-                            spacing={12}
-                            w="100%"
-                        >
-                            <Heading
-                                size="xl"
-                                color="white"
-                                textAlign="center"
-                            >
-                                Key Features
-                            </Heading>
-                            <SimpleGrid
-                                columns={{ base: 1, md: 2, lg: 4 }}
-                                spacing={8}
-                                w="100%"
-                            >
-                                <FeatureCard
-                                    icon={FaCogs}
-                                    title="Visual Node Editor"
-                                    description="Build processing pipelines by dragging and connecting nodes in an intuitive visual interface. Full control over your workflow with incredibly complex tasks just by connecting a few nodes together."
-                                    color="brand.500"
-                                />
-                                <FeatureCard
-                                    icon={FaPalette}
-                                    title="Comprehensive Processing"
-                                    description="Full suite of image processing operations including filters, color adjustments, transforms, blending, and effects. Automate any task you can do in traditional image editing software."
-                                    color="pink.400"
-                                />
-                                <FeatureCard
-                                    icon={FaMagic}
-                                    title="AI Upscaling"
-                                    description="Leverage community-trained AI upscaling models with support for PyTorch, NCNN, ONNX, and TensorRT. Use architectures like ESRGAN, SPAN, OmniSR, and many more."
-                                    color="purple.400"
-                                />
-                                <FeatureCard
-                                    icon={FaCheckCircle}
-                                    title="Smart Validation"
-                                    description="Built-in type system and real-time validation ensure your chains are correct. Catch errors before processing while maintaining flexibility."
-                                    color="yellow.400"
-                                />
-                                <FeatureCard
-                                    icon={FaImage}
-                                    title="GPU Accelerated"
-                                    description="Full GPU support for Nvidia (CUDA/TensorRT), AMD (ROCm/NCNN), Apple Silicon (MPS), and Intel (NCNN). CPU fallback for all frameworks."
-                                    color="blue.400"
-                                />
-                                <FeatureCard
-                                    icon={FaRocket}
-                                    title="Batch Processing"
-                                    description="Process entire folders of images or video frames through your chains, or automate with command-line interface (CLI) support for integration into larger workflows."
-                                    color="orange.400"
-                                />
-                                <FeatureCard
-                                    icon={FaDownload}
-                                    title="Self-Contained"
-                                    description="No existing Python installation needed. ChaiNNer downloads an isolated integrated Python build and manages all dependencies automatically."
-                                    color="cyan.400"
-                                />
-                                <FeatureCard
-                                    icon={FaDesktop}
-                                    title="Cross-Platform"
-                                    description="Runs on Windows, macOS, and Linux. Available as an installer or portable zip for all platforms."
-                                    color="green.400"
-                                />
-                            </SimpleGrid>
-                        </VStack>
-
-                        {/* Visual Demo Section */}
-                        <VStack
-                            spacing={12}
-                            w="100%"
-                        >
-                            <Heading
-                                size="xl"
-                                color="white"
-                                textAlign="center"
-                            >
-                                See It In Action
-                            </Heading>
-                            <Box
-                                w="100%"
-                                maxW="4xl"
-                                bg="gray.800"
-                                borderRadius="xl"
-                                p={8}
-                                border="1px solid"
-                                borderColor="rgba(255, 255, 255, 0.1)"
-                            >
-                                <VStack spacing={6}>
-                                    <Text
-                                        color="gray.300"
-                                        fontSize="lg"
-                                        textAlign="center"
-                                    >
-                                        chaiNNer&rsquo;s intuitive node-based interface makes complex image processing simple
-                                    </Text>
-                                    <Image
-                                        src="https://github.com/chaiNNer-org/chaiNNer/raw/main/docs/assets/screenshot.png"
-                                        alt="chaiNNer interface screenshot showing the node editor"
-                                        w="100%"
-                                        maxW="5xl"
-                                        borderRadius="lg"
-                                        border="1px solid"
-                                        borderColor="gray.600"
-                                        filter="drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))"
-                                    />
-                                </VStack>
-                            </Box>
-                        </VStack>
-                    </VStack>
-                </Container>
-            </Box>
+                <Text
+                    color="gray.400"
+                    fontSize="sm"
+                >
+                    Scroll to learn more
+                </Text>
+                <Icon
+                    as={FaChevronDown}
+                    color="gray.400"
+                    boxSize={5}
+                    sx={{
+                        '@keyframes bounce': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(8px)' },
+                        },
+                        animation: 'bounce 2s ease-in-out infinite',
+                    }}
+                />
+            </VStack>
         </Box>
     );
 }
 
-// Feature Card Component
-function FeatureCard({ icon, title, description, color }: { icon: any; title: string; description: string; color: string }) {
+function WhatItIs() {
     return (
-        <Box
-            p={6}
-            bg="gray.800"
-            borderRadius="xl"
-            border="1px solid"
-            borderColor="rgba(255, 255, 255, 0.1)"
-            transition="all 0.3s ease"
-            _hover={{
-                transform: 'translateY(-2px)',
-                borderColor: color,
-            }}
+        <Section
+            id="what"
+            divider={false}
+            eyebrow="What it is"
+            heading="A canvas, some nodes, and wires between them."
+            lede={
+                <VStack
+                    align="start"
+                    spacing={5}
+                >
+                    <Text
+                        fontSize="lg"
+                        color="gray.300"
+                        lineHeight="1.7"
+                    >
+                        chaiNNer is a desktop GUI for building image processing pipelines. Instead of writing scripts or clicking through menus, you drop nodes
+                        onto a canvas and connect them. Each node does one thing — load an image, upscale it, resize it, remove the background, save it — and
+                        you combine them however you want.
+                    </Text>
+                    <Text
+                        fontSize="lg"
+                        color="gray.300"
+                        lineHeight="1.7"
+                    >
+                        It was originally written for AI upscaling, and that&apos;s still what most people open it for. There&apos;s a large library of
+                        community-trained super-resolution models, and chaiNNer runs them through PyTorch, NCNN, ONNX, or TensorRT. It has since grown into a
+                        general-purpose image processing editor: color work, blending, format conversion, batch processing, and video frames.
+                    </Text>
+                    <Text
+                        fontSize="md"
+                        color="gray.400"
+                        lineHeight="1.7"
+                    >
+                        Cross-platform (Windows, macOS, Linux), self-contained (no Python install required), GPLv3.
+                    </Text>
+                </VStack>
+            }
         >
-            <VStack
-                spacing={4}
-                align="start"
-            >
-                <Icon
-                    as={icon}
-                    boxSize={8}
-                    color={color}
-                />
-                <Heading
-                    size="md"
-                    color="white"
-                >
-                    {title}
-                </Heading>
-                <Text
-                    color="gray.300"
-                    lineHeight="1.6"
-                >
-                    {description}
-                </Text>
-            </VStack>
+            <NodeFlow />
+        </Section>
+    );
+}
+
+function Page() {
+    return (
+        <Box w="100%">
+            <Hero />
+            <WhatItIs />
         </Box>
     );
 }
@@ -299,10 +278,9 @@ function FeatureCard({ icon, title, description, color }: { icon: any; title: st
 export { Page };
 
 export const documentProps = {
-    title: 'chaiNNer - Node-Based Image Processing Software',
+    title: 'chaiNNer - Node-Based Image Processing',
     description:
-        'A powerful node-based image processing GUI for batch processing and custom workflows. Features GPU acceleration, visual node editor, and cross-platform support for Windows, macOS, and Linux.',
-    keywords:
-        'chaiNNer, image processing, node editor, batch processing, GPU acceleration, visual programming, workflow automation, cross-platform, Windows, macOS, Linux',
+        'chaiNNer is a node-based editor for image processing pipelines. Drag nodes onto a canvas, connect them, and run them. Free and open source for Windows, macOS, and Linux.',
+    keywords: 'chaiNNer, image processing, node editor, batch processing, AI upscaling, GPU acceleration, Windows, macOS, Linux',
     image: 'https://chainner.app/banner.png',
 };
