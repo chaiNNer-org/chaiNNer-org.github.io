@@ -4,7 +4,6 @@ import { FaChevronDown } from 'react-icons/fa/index.js';
 import '../index.scss';
 import { Section } from '../components/Section';
 import { Card } from '../components/Card';
-import { NodeFlow } from '../components/NodeFlow';
 import { discordLink, githubLink, kofiLink, openModelDbLink, templatesLink } from '../utils/links';
 import Screenshot from '../assets/screenshot.png';
 
@@ -311,9 +310,7 @@ function WhatItIs() {
                     </Text>
                 </VStack>
             }
-        >
-            <NodeFlow />
-        </Section>
+        />
     );
 }
 
